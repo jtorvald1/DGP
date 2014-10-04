@@ -1,0 +1,61 @@
+
+package Model;
+
+import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+/**
+ *
+ * @author jakelhamselv
+ */
+@Entity(name = "INVOICES")
+public class Invoice implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "INVOICE_ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long invoiceId;
+    
+    @Column(name = "TOTAL_PRICE", precision = 2)
+    private double totalPrice;
+    
+    @OneToOne(mappedBy = "invoice")
+    @JoinColumn(name = "ORDER_ID")
+    private CustomerOrder order;
+    
+    @OneToMany(mappedBy = "invoice", targetEntity = OrderLine.class, fetch = FetchType.EAGER)
+    private Collection<OrderLine> orderLines;
+
+    public Long getInvoiceId() {
+        return invoiceId;
+    }
+
+    public void setInvoiceId(Long invoiceId) {
+        this.invoiceId = invoiceId;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public CustomerOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(CustomerOrder order) {
+        this.order = order;
+    }
+}
