@@ -11,4 +11,5 @@
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="MyDB" object-type="user" pool-name="derby_net_MyDB_jaco773hPool"/>
+    <jdbc-resource enabled="true" jndi-name="DalsgaardDB" object-type="user" pool-name="derby_net_MyDB_jaco773hPool"/>
 </resources>

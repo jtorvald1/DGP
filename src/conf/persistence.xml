@@ -31,11 +31,11 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="web-jpaPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>MyDB</jta-data-source>
+    <jta-data-source>DalsgaardDB</jta-data-source>
     <class>Model.Customer</class>
     <class>Model.PayingMember</class>
     <class>Model.CustomerOrder</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!-- use this property if target server is GlassFish V3 with EclipseLink -->
       <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
