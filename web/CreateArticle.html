@@ -1,27 +1,24 @@
-<%-- 
-    Document   : CreatePayingCustomer
-    Created on : 03-10-2014, 15:15:52
-    Author     : Jacob Nørgaard
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Create new article</title>
     </head>
     <body>
-        <form method="post" action="CreatePayingMember">
+        <form method="post" action="CreateArticle">
             Create new article:
             <br>
             <br>
-            Enter headline for article: <input type="text" name="firstName">
+            Enter headline for article: <input type="text" name="headline">
             <br>
-            Enter article category: <input type="text" name="lastName"> 
+            <br>
+            Enter article category: <input type="text" name="category"> 
             <br>
             <br>
             <textarea name="articleContent" style="width:250px;height:150px;"></textarea>
+            <br>
+            <br>
             <input type="submit" value="Create article">
         </form>
     </body>

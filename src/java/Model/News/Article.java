@@ -6,15 +6,12 @@
 
 package Model.News;
 
-import Model.RegisteredCustomer;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -39,10 +36,6 @@ public class Article implements Serializable {
             
     @Column(name = "CATEGORY")
     private String category;
-    
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "CUSTOMER_ID")
-    private RegisteredCustomer customer;
     
     public Long getArticleId() {
         return articleId;
@@ -84,12 +77,8 @@ public class Article implements Serializable {
         this.category = category;
     }
 
-    public RegisteredCustomer getCustomer() {
-        return customer;
+    @Override
+    public String toString() {
+        return "Article{" + "articleId=" + articleId + ", headline=" + headline + ", text=" + text + ", creationDate=" + creationDate + ", category=" + category + '}';
     }
-
-    public void setCustomer(RegisteredCustomer customer) {
-        this.customer = customer;
-    }
-    
 }

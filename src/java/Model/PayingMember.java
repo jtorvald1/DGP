@@ -21,8 +21,8 @@ public class PayingMember extends Customer implements Serializable {
     @Column(name = "MEMBERSHIP_FEE")
     private double membershipFee;
     
-    /*@OneToMany(mappedBy = "payingMember", targetEntity = Discount.class, fetch = FetchType.EAGER)
-    private Collection<Discount> Discount;*/
+    @OneToMany(mappedBy = "payingMember", targetEntity = Discount.class, fetch = FetchType.EAGER)
+    private Collection<Discount> Discount;
 
     public PayingMember() {
     }
@@ -43,11 +43,11 @@ public class PayingMember extends Customer implements Serializable {
         this.membershipFee = membershipFee;
     }
 
-    /*public Collection<Discount> getDiscount() {
+    public Collection<Discount> getDiscount() {
         return Discount;
     }
 
     public void setDiscount(Collection<Discount> Discount) {
         this.Discount = Discount;
-    }*/
+    }
 }

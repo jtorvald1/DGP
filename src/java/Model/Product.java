@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
  *
  * @author jakelhamselv
  */
-@Entity(name = "PRODUCT")
+@Entity(name = "PRODUCTS")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,4 +38,43 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Collection<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Collection<Item> items) {
+        this.items = items;
+    }
 }
