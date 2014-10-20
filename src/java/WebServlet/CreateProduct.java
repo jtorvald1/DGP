@@ -37,7 +37,7 @@ public class CreateProduct extends HttpServlet {
             Product product = getProduct(request);
                         
             product.setImage(image);
-            persist(product, image); 
+            persist(product); 
         }
         catch(Exception e)
         {
@@ -45,7 +45,7 @@ public class CreateProduct extends HttpServlet {
         }
     }
     
-    private void persist(Product product, Image image)
+    private void persist(Product product)
     {
         EntityManager em = null;
         
@@ -55,7 +55,6 @@ public class CreateProduct extends HttpServlet {
 
             em = emf.createEntityManager();
             em.persist(product);
-            em.persist(image);
 
             utx.commit();
         }
@@ -112,8 +111,11 @@ public class CreateProduct extends HttpServlet {
 
             image = new Image(null, fileName, imageBytes);
         }
-        catch(Exception ex)
+        catch(IOException ex)
         {
+            System.out.println(ex.getMessage());
+        }
+        catch (ServletException ex) {
             System.out.println(ex.getMessage());
         }
             return image;

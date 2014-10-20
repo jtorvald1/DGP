@@ -2,10 +2,11 @@
 package WebServlet;
 
 import Bean.ImagesBean;
+import Bean.ProductBean;
+import Bean.ProductsBean;
 import Model.Image;
+import Model.Product;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.codec.binary.Base64;
 
 @WebServlet(name = "AllProducts", urlPatterns = {"/AllProducts"})
 public class AllProducts extends HttpServlet {
@@ -31,48 +33,73 @@ public class AllProducts extends HttpServlet {
         try
         {
             em = emf.createEntityManager();
-        
-            Query findAll = em.createNamedQuery("Image.findAll");
-            Collection<Image> allImages = findAll.getResultList();
+                   
+            Query findAll = em.createNamedQuery("Product.findAll");
+            Collection<Product> allProducts = findAll.getResultList();
 
-            ImagesBean imagesBean = getBean(allImages);
-            sendData(imagesBean, request, response);
+            ProductsBean bean = getBean(allProducts);
+            sendData(bean, request, response);
         }
         catch(Exception ex)
         {
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
         }
         finally
         {
-            em.close();
+            if(em != null)
+                em.close();
         }
     }
     
-    private void sendData(ImagesBean beans, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+    private void sendData(ProductsBean bean, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         try
         {
             RequestDispatcher dispatcher = request.getRequestDispatcher("AllProducts.jsp");
-            request.setAttribute("result", beans);
+            request.setAttribute("result", bean);
             dispatcher.forward(request, response);
         }
         catch(Exception ex)
         {
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
         }
     }
     
-    private ImagesBean getBean(Collection<Image> allImages)
+    private ProductsBean getBean(Collection<Product> allProducts)
     {
+        ProductsBean bean = new ProductsBean();
         
-        ImagesBean imagesBean = new ImagesBean();
-        
-        for(Image image : allImages) {
-            byte[] imageData = image.getContent();
-            imagesBean.setImagesData(imageData);
+        for(Product product : allProducts) {
+
+            byte[] imageData = product.getImage().getContent();
+            String imageDataString = getByteArrayString(imageData);
+            
+            ProductBean productBean = getProductBean(product);
+            productBean.setImage(imageDataString);
+            
+            bean.getAllProducts().add(productBean);
         }
         
-        return imagesBean;
+        return bean;
+    }
+    
+    private ProductBean getProductBean(Product product)
+    {
+        ProductBean productBean = new ProductBean();
+        productBean.setDescription(product.getDescription());
+        productBean.setSize(product.getSize());
+        productBean.setWeight(product.getWeight());
+        productBean.setBrand(product.getBrand());
+        productBean.setCategory(product.getCategory());
+        productBean.setPrice(product.getPrice());
+        productBean.setColor(product.getColor());
+        
+        return productBean;                
+    }
+      
+    private String getByteArrayString(byte[] imageData)
+    {
+        return Base64.encodeBase64String(imageData);
     }
 
     @Override

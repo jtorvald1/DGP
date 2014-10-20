@@ -1,29 +1,20 @@
 
 package Bean;
 
-import org.apache.commons.codec.binary.Base64;
+import java.util.ArrayList;
 
 public class ImagesBean {
     
-    private byte[] imagesData;
+    private ArrayList<String> imagesData = new ArrayList<String>();
 
     public ImagesBean() {
     }
 
-    public ImagesBean(byte[] imagesData) {
-        this.imagesData = imagesData;
-    }
-
-    public byte[] getImagesData() {
+    public ArrayList<String> getImagesData() {
         return imagesData;
     }
 
-    public void setImagesData(byte[] imagesData) {
+    public void setImagesData(ArrayList<String> imagesData) {
         this.imagesData = imagesData;
-    }
-    
-    public String getByteArrayString()
-    {
-        return Base64.encodeBase64String(imagesData);
     }
 }
