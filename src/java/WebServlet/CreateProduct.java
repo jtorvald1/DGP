@@ -3,12 +3,11 @@ package WebServlet;
 
 import Model.Image;
 import Model.Product;
+import SessionBean.ProductSessionFacade;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +22,8 @@ import org.apache.commons.io.IOUtils;
 @MultipartConfig(maxFileSize = 10000000)
 public class CreateProduct extends HttpServlet {
         
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+    @EJB
+    private ProductSessionFacade productSessionFacade;
     
     @Resource
     private UserTransaction utx;
@@ -47,25 +46,18 @@ public class CreateProduct extends HttpServlet {
     
     private void persist(Product product)
     {
-        EntityManager em = null;
         
         try
         {
             utx.begin();
-
-            em = emf.createEntityManager();
-            em.persist(product);
+            
+            productSessionFacade.create(product);
 
             utx.commit();
         }
         catch(Exception ex)
         {
-            System.out.println(ex.getMessage());
-        }
-        finally
-        {
-            if(em != null)
-                em.close();
+            System.out.println(ex);
         }
     }
     
@@ -90,7 +82,7 @@ public class CreateProduct extends HttpServlet {
         }
         catch(Exception ex)
         {
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
         }
 
         return product;

@@ -1,17 +1,13 @@
 
 package WebServlet;
 
-import Bean.ImagesBean;
-import Bean.ProductBean;
-import Bean.ProductsBean;
-import Model.Image;
+import JavaBean.ProductBean;
+import JavaBean.ProductsBean;
 import Model.Product;
+import SessionBean.ProductSessionFacade;
 import java.io.IOException;
 import java.util.Collection;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,20 +19,15 @@ import org.apache.commons.codec.binary.Base64;
 @WebServlet(name = "AllProducts", urlPatterns = {"/AllProducts"})
 public class AllProducts extends HttpServlet {
     
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+    @EJB
+    private ProductSessionFacade productSessionFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        EntityManager em = null;
-        
+
         try
         {
-            em = emf.createEntityManager();
-                   
-            Query findAll = em.createNamedQuery("Product.findAll");
-            Collection<Product> allProducts = findAll.getResultList();
-
+            Collection<Product> allProducts = productSessionFacade.findAll();
+            System.out.println(allProducts);
             ProductsBean bean = getBean(allProducts);
             sendData(bean, request, response);
         }
@@ -46,8 +37,7 @@ public class AllProducts extends HttpServlet {
         }
         finally
         {
-            if(em != null)
-                em.close();
+
         }
     }
     

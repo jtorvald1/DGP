@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Holy crap! It worked!         ... or not</h1>
-        <jsp:useBean id="bean" class="Bean.SearchBean" scope="request" />
+        <jsp:useBean id="bean" class="JavaBean.SearchBean" scope="request" />
         
         Searching by <%= bean.getSearchBy() %>.<br>
         All the products shown for <%= bean.getSearchFor() %>.<br>

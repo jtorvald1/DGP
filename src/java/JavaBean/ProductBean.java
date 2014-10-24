@@ -1,5 +1,5 @@
 
-package Bean;
+package JavaBean;
 
 public class ProductBean {
     

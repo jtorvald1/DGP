@@ -5,30 +5,18 @@
  */
 package WebServlet;
 
-import Bean.SearchBean;
+import JavaBean.SearchBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.sql.*;
-import java.sql.*;
-import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
 /**
  *
  * @author Nicole
@@ -48,14 +36,10 @@ public class Search extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
  
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException,IOException{
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        EntityManager em = null;
-        em = emf.createEntityManager();
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
         
-            try {
+        try {
            
             String searchBy = request.getParameter("SearchBy");
             String searchFor = request.getParameter("SearchFor");
