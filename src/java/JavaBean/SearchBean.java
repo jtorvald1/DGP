@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package JavaBean;
 
 import java.util.ArrayList;
@@ -16,7 +12,7 @@ public class SearchBean {
     
     private String searchBy;
     private String searchFor;
-    private String result;
+    //private String result;
     private ArrayList<ProductBean> searchResult;
     
     public SearchBean() {    
@@ -38,12 +34,39 @@ public class SearchBean {
         this.searchFor = searchFor;
     }
 
-    public String getResult() {
+    /*public String getResult() {
         return result;
-    }
+    }*/
 
-    public void setResult(String result) {
-    }
+    /*public void setResult(String result) throws NoSuchMethodException, IllegalAccessException, 
+            IllegalArgumentException, InvocationTargetException 
+        {
+        // create array list object       
+        //ArrayList resultList = null;
+        ProductsBean pb = new ProductsBean();
+        ArrayList allProdsList = null;
+        allProdsList.add(pb.getAllProducts());
+               
+        ArrayList<String> prodsList = new ArrayList<String>();
+            
+        for( Object object : allProdsList ) {
+            prodsList.addAll(allProdsList);
+        }
+        
+        List <String> resultList = new ArrayList<String>(); 
+           for (String string : prodsList) {
+               if(string.matches(searchFor)){
+                   resultList.add(string);
+               }
+           }
+           StringBuilder sb = new StringBuilder();
+            for (String s : resultList)
+            {
+                sb.append(s);
+                sb.append("\t");
+            }
+            this.result = sb.toString();
+         }*/
                    
     public ArrayList<ProductBean> getSearchResult() {
         return searchResult;

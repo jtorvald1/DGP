@@ -22,8 +22,7 @@ import javax.persistence.OneToOne;
  */
 @Entity(name = "PRODUCTS")
 @NamedQueries({
-    /*@NamedQuery(name = "Product.findAll", query = "SELECT p FROM PRODUCTS p"),
-    @NamedQuery(name = "Image.findById", query = "SELECT i FROM IMAGES WHERE i.imageId = :imageId")*/
+    @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE p.brand = :brand")
 })
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;

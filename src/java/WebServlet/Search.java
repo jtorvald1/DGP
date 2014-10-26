@@ -5,18 +5,23 @@
  */
 package WebServlet;
 
+import JavaBean.ProductBean;
 import JavaBean.SearchBean;
+import Model.Product;
+import SessionBean.ProductSessionFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 /**
  *
  * @author Nicole
@@ -24,17 +29,8 @@ import javax.persistence.PersistenceUnit;
 @WebServlet(name = "Search", urlPatterns = {"/Search"})
 public class Search extends HttpServlet {
 
-    @PersistenceUnit
-    private EntityManagerFactory emf;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @EJB
+    private ProductSessionFacade productSessionFacade;
  
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
@@ -42,37 +38,57 @@ public class Search extends HttpServlet {
         try {
            
             String searchBy = request.getParameter("SearchBy");
-            String searchFor = request.getParameter("SearchFor");
-            String result = new String("SearchResult");
-                
-           // Query query = em.createQuery("select * from PRODUCT order by PRODUCT_ID");
-           // List<AllProducts> products= query.getResultList();
+            String searchFor = request.getParameter("searchText");
+
+            EntityManager em = productSessionFacade.getEntityManager();
+            
+            Query query = em.createNamedQuery("Product.findByBrand");
+            query.setParameter("brand", searchFor);
+            Collection<Product> products = query.getResultList();
+
+            ArrayList<ProductBean> result = getBeans(products);
    
-            SearchBean searchbean= new SearchBean();
+            SearchBean searchbean = new SearchBean();
             searchbean.setSearchBy(searchBy);
             searchbean.setSearchFor(searchFor);
-            searchbean.setResult(result);
+            searchbean.setSearchResult(result);
 
             request.setAttribute("bean", searchbean);
 
-            RequestDispatcher dispatcher =
-            request.getRequestDispatcher("SearchResult.jsp");
-            dispatcher.forward(request, response);   
-
+            RequestDispatcher dispatcher = request.getRequestDispatcher("SearchResult.jsp");
+            dispatcher.forward(request, response);
         }            
             catch(Exception ex)
         {
-            System.out.println(ex.getMessage());
-        }
-            
+            System.out.println(ex);
+        }     
     }
-            /*  Query query = em.createQuery("select * from PRODUCT order by PRODUCT_ID");
-            List<AllProducts> products= query.getResultList();
-            }
-               Query query = em.createQuery("select * from PRODUCT order by PRODUCT_ID");
-            List<AllProducts> products= query.getResultList();
-            }   
-    */
+    
+        private ArrayList<ProductBean> getBeans(Collection<Product> allProducts)
+    {
+        ArrayList<ProductBean> list = new ArrayList<ProductBean>();
+        
+        for(Product product : allProducts) {
+            
+            ProductBean productBean = getProductBean(product);            
+            list.add(productBean);
+        }
+        
+        return list;
+    }
+    
+    private ProductBean getProductBean(Product product)
+    {
+        ProductBean productBean = new ProductBean();
+        productBean.setDescription(product.getDescription());
+        productBean.setSize(product.getSize());
+        productBean.setBrand(product.getBrand());
+        productBean.setPrice(product.getPrice());
+        productBean.setColor(product.getColor());
+        
+        return productBean;                
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -92,7 +108,6 @@ public class Search extends HttpServlet {
             out.close();
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -126,5 +141,4 @@ public class Search extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

@@ -27,7 +27,6 @@ public class AllProducts extends HttpServlet {
         try
         {
             Collection<Product> allProducts = productSessionFacade.findAll();
-            System.out.println(allProducts);
             ProductsBean bean = getBean(allProducts);
             sendData(bean, request, response);
         }

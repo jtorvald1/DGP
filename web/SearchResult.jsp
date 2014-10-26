@@ -17,7 +17,7 @@
         
         Searching by <%= bean.getSearchBy() %>.<br>
         All the products shown for <%= bean.getSearchFor() %>.<br>
-        <%= bean.getResult() %><br>
+        <%= bean.getSearchResult() %><br>
         <br>
         <br>
         <br>
