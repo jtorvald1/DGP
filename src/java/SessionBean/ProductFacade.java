@@ -7,12 +7,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class ProductSessionFacade extends AbstractSessionFacade{
+public class ProductFacade extends AbstractFacade{
     
     @PersistenceContext(unitName = "DalsgaardPU")
     private EntityManager em;
 
-    public ProductSessionFacade() {
+    public ProductFacade() {
         super(Product.class);
     }
     

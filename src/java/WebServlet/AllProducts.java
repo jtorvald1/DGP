@@ -4,7 +4,7 @@ package WebServlet;
 import JavaBean.ProductBean;
 import JavaBean.ProductsBean;
 import Model.Product;
-import SessionBean.ProductSessionFacade;
+import SessionBean.ProductFacade;
 import java.io.IOException;
 import java.util.Collection;
 import javax.ejb.EJB;
@@ -20,7 +20,7 @@ import org.apache.commons.codec.binary.Base64;
 public class AllProducts extends HttpServlet {
     
     @EJB
-    private ProductSessionFacade productSessionFacade;
+    private ProductFacade productSessionFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

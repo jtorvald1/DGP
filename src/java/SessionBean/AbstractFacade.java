@@ -7,15 +7,15 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public abstract class AbstractSessionFacade<T> {
+public abstract class AbstractFacade<T> {
     
     private Class<T> entityClass;
 
-    public AbstractSessionFacade(Class<T> entityClass) {
+    public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
     
-    public abstract EntityManager getEntityManager();
+    protected abstract EntityManager getEntityManager();
     
     public void create(T entity)
     {

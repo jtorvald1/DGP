@@ -8,7 +8,7 @@ package WebServlet;
 import JavaBean.ProductBean;
 import JavaBean.SearchBean;
 import Model.Product;
-import SessionBean.ProductSessionFacade;
+import SessionBean.ProductFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Search extends HttpServlet {
 
     @EJB
-    private ProductSessionFacade productSessionFacade;
+    private ProductFacade productSessionFacade;
  
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) {

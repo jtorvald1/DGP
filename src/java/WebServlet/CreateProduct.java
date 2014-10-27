@@ -3,7 +3,7 @@ package WebServlet;
 
 import Model.Image;
 import Model.Product;
-import SessionBean.ProductSessionFacade;
+import SessionBean.ProductFacade;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.annotation.Resource;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import org.apache.commons.io.IOUtils;
 
@@ -23,7 +24,7 @@ import org.apache.commons.io.IOUtils;
 public class CreateProduct extends HttpServlet {
         
     @EJB
-    private ProductSessionFacade productSessionFacade;
+    private ProductFacade productSessionFacade;
     
     @Resource
     private UserTransaction utx;
@@ -44,7 +45,7 @@ public class CreateProduct extends HttpServlet {
         }
     }
     
-    private void persist(Product product)
+    private void persist(Product product) throws IllegalStateException, SecurityException, SystemException
     {
         
         try
@@ -58,6 +59,7 @@ public class CreateProduct extends HttpServlet {
         catch(Exception ex)
         {
             System.out.println(ex);
+            utx.rollback();
         }
     }
     

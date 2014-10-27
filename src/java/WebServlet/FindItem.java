@@ -1,35 +1,29 @@
 
 package WebServlet;
 
-import JavaBean.CartItem;
-import JavaBean.ShoppingCart;
+import SessionBean.ItemFacade;
 import java.io.IOException;
+import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
-@WebServlet(name = "AddToCart", urlPatterns = {"/AddToCart"})
-public class AddToCart extends HttpServlet {
+@WebServlet(name = "FindItem", urlPatterns = {"/FindItem"})
+public class FindItem extends HttpServlet {
 
+    @EJB
+    private ItemFacade itemFacade;
+    
+
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        HttpSession ShoppingSession = request.getSession();
-        ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
+    }
 
-        CartItem item = new CartItem();
-        cart.getItems().add(item);
-        
-        updateCart();
-    }
-    
-    private void updateCart()
-    {
-        
-    }
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,4 +40,5 @@ public class AddToCart extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

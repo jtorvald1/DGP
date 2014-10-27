@@ -13,14 +13,16 @@
     </head>
     <body>
         <h1>Holy crap! It worked!         ... or not</h1>
-        <jsp:useBean id="bean" class="JavaBean.SearchBean" scope="request" />
+        <jsp:useBean id="bean" class="JavaBean.SearchBean" scope="session" />
         
-        Searching by <%= bean.getSearchBy() %>.<br>
-        All the products shown for <%= bean.getSearchFor() %>.<br>
-        <%= bean.getSearchResult() %><br>
+        Searching by ${bean.searchBy}.<br>
+        All the products shown for ${bean.searchFor}.<br>
+        ${bean.searchResult}<br>
         <br>
         <br>
-        <br>
+        <form method="get" action="FindItem">
+            <input type="submit" value="Add to cart">
+        </form>
         <br>
         Perform a new <a href="Search.html">search</a>.
     </body>
