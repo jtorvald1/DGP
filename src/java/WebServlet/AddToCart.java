@@ -3,7 +3,9 @@ package WebServlet;
 
 import JavaBean.CartItem;
 import JavaBean.ShoppingCart;
+import Model.Item;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,15 +21,26 @@ public class AddToCart extends HttpServlet {
         HttpSession ShoppingSession = request.getSession();
         ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
 
-        CartItem item = new CartItem();
+        CartItem item = getCartItem(request);
         cart.getItems().add(item);
         
-        updateCart();
+        request.setAttribute("bean", cart);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
+        
+        dispatcher.forward(request, response);
     }
     
-    private void updateCart()
+    private CartItem getCartItem(HttpServletRequest request)
     {
+        Item item = (Item)request.getAttribute("item");
+        CartItem cartItem = new CartItem();
         
+        cartItem.setBrand(item.getProduct().getBrand());
+        cartItem.setColor(item.getProduct().getColor());
+        cartItem.setDescription(item.getProduct().getDescription());
+        //.........
+        
+        return cartItem; 
     }
     
     @Override

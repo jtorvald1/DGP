@@ -1,25 +1,29 @@
 
 package WebServlet;
 
-import SessionBean.ItemFacade;
+import JavaBean.ShoppingCart;
 import java.io.IOException;
-import javax.ejb.EJB;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "FindItem", urlPatterns = {"/FindItem"})
-public class FindItem extends HttpServlet {
+/**
+ *
+ * @author Jacob Nørgaard
+ */
+@WebServlet(name = "CheckOut", urlPatterns = {"/CheckOut"})
+public class CheckOut extends HttpServlet {
 
-    @EJB
-    private ItemFacade itemFacade;
-    
-
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+        HttpSession ShoppingSession = request.getSession();
+        ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
+        
+        cart.
     }
 
     @Override
@@ -38,4 +42,5 @@ public class FindItem extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

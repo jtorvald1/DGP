@@ -14,8 +14,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,14 +36,10 @@ public class Search extends HttpServlet {
         try {
            
             String searchBy = request.getParameter("SearchBy");
-            String searchFor = request.getParameter("searchText");
-
-            EntityManager em = productSessionFacade.getEntityManager();
+            String searchFor = request.getParameter("searchText");          
             
-            Query query = em.createNamedQuery("Product.findByBrand");
-            query.setParameter("brand", searchFor);
-            Collection<Product> products = query.getResultList();
-
+            Collection<Product> products = productSessionFacade.findByBrand(searchBy);
+            
             ArrayList<ProductBean> result = getBeans(products);
    
             SearchBean searchbean = new SearchBean();

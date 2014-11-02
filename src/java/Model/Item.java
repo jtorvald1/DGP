@@ -33,13 +33,15 @@ public class Item implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "STOCK_ID")
     private Stock stock;
-    
-    public Long getId() {
-        return itemId;
+
+    public Item() {
     }
 
-    public void setId(Long id) {
-        this.itemId = id;
+    public Item(Long itemId, CustomerOrder order, Product product, Stock stock) {
+        this.itemId = itemId;
+        this.order = order;
+        this.product = product;
+        this.stock = stock;
     }
 
     public Long getItemId() {
@@ -57,4 +59,22 @@ public class Item implements Serializable {
     public void setOrder(CustomerOrder order) {
         this.order = order;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
+
 }

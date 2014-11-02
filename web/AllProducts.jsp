@@ -13,7 +13,6 @@
         <title>Products</title>
     </head>
     <body>
-        <jsp:useBean id="result" class="JavaBean.ProductsBean" scope="session" />
         <center>
             <table>
                 <c:forEach items="${result.allProducts}" var="product" >

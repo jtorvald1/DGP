@@ -18,9 +18,7 @@ public class CartItem {
     private double price;
     
     private double weight;
-    
-    private String category;
-    
+       
     private String image;
 
     public CartItem() {
@@ -88,14 +86,6 @@ public class CartItem {
 
     public void setWeight(double weight) {
         this.weight = weight;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getImage() {

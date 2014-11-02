@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +39,11 @@ public class CreateProduct extends HttpServlet {
             Product product = getProduct(request);
                         
             product.setImage(image);
-            persist(product); 
+            Product productGeneratedId = persist(product);
+            
+            request.setAttribute("productGeneratedId", productGeneratedId);
+            RequestDispatcher dispather = request.getRequestDispatcher("/CreateItems");
+            dispather.forward(request, response);
         }
         catch(Exception e)
         {
@@ -45,14 +51,14 @@ public class CreateProduct extends HttpServlet {
         }
     }
     
-    private void persist(Product product) throws IllegalStateException, SecurityException, SystemException
+    private Product persist(Product product) throws IllegalStateException, SecurityException, SystemException
     {
-        
         try
         {
             utx.begin();
             
             productSessionFacade.create(product);
+            productSessionFacade.getEntityManager().flush();
 
             utx.commit();
         }
@@ -61,6 +67,7 @@ public class CreateProduct extends HttpServlet {
             System.out.println(ex);
             utx.rollback();
         }
+        return product;
     }
     
     private Product getProduct(HttpServletRequest request)

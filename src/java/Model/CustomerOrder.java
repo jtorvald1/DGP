@@ -41,6 +41,9 @@ public class CustomerOrder implements Serializable {
     @JoinColumn(name = "SHIPPING_ID")
     private Shipping shipping;
 
+    public CustomerOrder() {
+    }
+
     public Long getOrderId() {
         return orderId;
     }
