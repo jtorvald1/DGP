@@ -7,11 +7,14 @@
 package Model.News;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -36,6 +39,7 @@ public class Article implements Serializable {
             
     @Column(name = "CATEGORY")
     private String category;
+    
     
     public Long getArticleId() {
         return articleId;
@@ -76,7 +80,7 @@ public class Article implements Serializable {
     public void setCategory(String category) {
         this.category = category;
     }
-
+    
     @Override
     public String toString() {
         return "Article{" + "articleId=" + articleId + ", headline=" + headline + ", text=" + text + ", creationDate=" + creationDate + ", category=" + category + '}';
