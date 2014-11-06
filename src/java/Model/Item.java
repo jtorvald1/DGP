@@ -9,12 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author jakelhamselv
  */
 @Entity(name = "ITEMS")
+@NamedQueries({
+    @NamedQuery(name = "Item.findAvailable", query = "SELECT p FROM ITEMS p WHERE p.order.orderId = :null AND p.product.productId = :productID")
+})
 public class Item implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -17,17 +17,23 @@ import javax.servlet.http.HttpSession;
 public class AddToCart extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        try {
         HttpSession ShoppingSession = request.getSession();
         ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
 
         CartItem item = getCartItem(request);
         cart.getItems().add(item);
+        System.out.println(cart);
         
         request.setAttribute("bean", cart);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
         
         dispatcher.forward(request, response);
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex);
+        }
     }
     
     private CartItem getCartItem(HttpServletRequest request)

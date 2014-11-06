@@ -6,9 +6,13 @@
 package SessionBean;
 
 import Model.Item;
+import Model.Product;
+import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,5 +30,14 @@ public class ItemFacade extends AbstractFacade<Item> {
 
     public ItemFacade() {
         super(Item.class);
+    }
+    
+        public List<Item> findAvailable(String product)
+    {
+        Query query = em.createNamedQuery("Item.findAvailable");
+        query.setParameter("product", product);
+        List<Item> items = query.getResultList();
+        
+        return items;
     }
 }

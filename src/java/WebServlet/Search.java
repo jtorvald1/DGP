@@ -48,6 +48,7 @@ public class Search extends HttpServlet {
             searchbean.setSearchResult(result);
 
             request.setAttribute("bean", searchbean);
+            //request.getSession().setAttribute("bean", searchbean);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("SearchResult.jsp");
             dispatcher.forward(request, response);

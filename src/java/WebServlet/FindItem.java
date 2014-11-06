@@ -1,9 +1,18 @@
 
 package WebServlet;
 
+import JavaBean.CartItem;
+import JavaBean.ProductBean;
+import JavaBean.ProductsBean;
+import JavaBean.SearchBean;
+import Model.Item;
+import Model.Product;
 import SessionBean.ItemFacade;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +40,38 @@ public class FindItem extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try
+        {
+            SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");                 
+            List<Item> items = itemFacade.findAvailable(searchbean.getSearchResult().get(0).getProductId().toString());
+            Item item = items.get(0);
+            
+            CartItem cartItem = getCartItem(item);
+            
+            request.setAttribute("cartItem", cartItem);
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("AddToCart");
+            dispatcher.forward(request, response);
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
+        finally
+        {
+
+        }
+    }
+    
+    private CartItem getCartItem(Item item)
+    {
+        CartItem cartitem = new CartItem();
+        cartitem.setBrand(item.getProduct().getBrand());
+        cartitem.setDescription(item.getProduct().getDescription());
+        cartitem.setColor(item.getProduct().getColor());
+        cartitem.setPrice(item.getProduct().getPrice());
+        
+        return cartitem;                
     }
 
     @Override
