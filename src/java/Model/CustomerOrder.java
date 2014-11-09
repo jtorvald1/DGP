@@ -44,6 +44,10 @@ public class CustomerOrder implements Serializable {
     public CustomerOrder() {
     }
 
+    public CustomerOrder(Collection<Item> items) {
+        this.items = items;
+    }
+
     public Long getOrderId() {
         return orderId;
     }

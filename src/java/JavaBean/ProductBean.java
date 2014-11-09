@@ -107,4 +107,9 @@ public class ProductBean {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "ProductBean{" + "productId=" + productId + ", description=" + description + ", brand=" + brand + ", color=" + color + ", size=" + size + ", price=" + price + ", weight=" + weight + ", category=" + category + ", image=" + image + '}';
+    }
 }

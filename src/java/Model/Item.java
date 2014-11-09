@@ -18,13 +18,13 @@ import javax.persistence.NamedQuery;
  */
 @Entity(name = "ITEMS")
 @NamedQueries({
-    @NamedQuery(name = "Item.findAvailable", query = "SELECT p FROM ITEMS p WHERE p.order.orderId = :null AND p.product.productId = :productID")
+    @NamedQuery(name = "Item.findAvailable", query = "SELECT i FROM ITEMS i WHERE i.order IS NULL AND i.product.productId = :productId")
 })
 public class Item implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ITEM_ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
 
     @ManyToOne(optional = false)
@@ -80,6 +80,4 @@ public class Item implements Serializable {
     public void setStock(Stock stock) {
         this.stock = stock;
     }
-
-
 }

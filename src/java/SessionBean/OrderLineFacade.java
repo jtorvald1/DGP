@@ -5,7 +5,7 @@
  */
 package SessionBean;
 
-import Model.Image;
+import Model.OrderLine;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Jacob Nørgaard
  */
 @Stateless
-public class ImageFacade extends AbstractFacade<Image> {
+public class OrderLineFacade extends AbstractFacade<OrderLine> {
     @PersistenceContext(unitName = "DalsgaardPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class ImageFacade extends AbstractFacade<Image> {
         return em;
     }
 
-    public ImageFacade() {
-        super(Image.class);
+    public OrderLineFacade() {
+        super(OrderLine.class);
     }
     
 }

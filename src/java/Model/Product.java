@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
  * @author jakelhamselv
  */
 @Entity(name = "PRODUCTS")
-@NamedQueries({
+@NamedQueries({                                        
     @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE p.brand = :brand")
 })
 public class Product implements Serializable {

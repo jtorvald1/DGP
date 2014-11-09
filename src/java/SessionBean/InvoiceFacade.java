@@ -5,19 +5,17 @@
  */
 package SessionBean;
 
-import Model.Item;
-import java.util.List;
+import Model.Invoice;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author Jacob Nørgaard
  */
 @Stateless
-public class ItemFacade extends AbstractFacade<Item> {
+public class InvoiceFacade extends AbstractFacade<Invoice> {
     @PersistenceContext(unitName = "DalsgaardPU")
     private EntityManager em;
 
@@ -26,16 +24,8 @@ public class ItemFacade extends AbstractFacade<Item> {
         return em;
     }
 
-    public ItemFacade() {
-        super(Item.class);
+    public InvoiceFacade() {
+        super(Invoice.class);
     }
     
-    public List<Item> findAvailable(Long productId)
-    {
-        Query query = em.createNamedQuery("Item.findAvailable");
-        query.setParameter("productId", productId);
-        List<Item> items = query.getResultList();
-        
-        return items;
-    }
 }

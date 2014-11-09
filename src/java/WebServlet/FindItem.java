@@ -25,8 +25,6 @@ public class FindItem extends HttpServlet {
     @EJB
     private ItemFacade itemFacade;
     
-
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
     }
@@ -42,15 +40,15 @@ public class FindItem extends HttpServlet {
             throws ServletException, IOException {
         try
         {
-            SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");                 
-            List<Item> items = itemFacade.findAvailable(searchbean.getSearchResult().get(0).getProductId().toString());
+            SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");
+            ProductBean productBean = searchbean.getSearchResult().get(0);
+
+            List<Item> items = itemFacade.findAvailable(productBean.getProductId());
             Item item = items.get(0);
             
-            CartItem cartItem = getCartItem(item);
+            request.setAttribute("item", item);
             
-            request.setAttribute("cartItem", cartItem);
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("AddToCart");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/AddToCart");
             dispatcher.forward(request, response);
         }
         catch(Exception ex)
@@ -61,17 +59,6 @@ public class FindItem extends HttpServlet {
         {
 
         }
-    }
-    
-    private CartItem getCartItem(Item item)
-    {
-        CartItem cartitem = new CartItem();
-        cartitem.setBrand(item.getProduct().getBrand());
-        cartitem.setDescription(item.getProduct().getDescription());
-        cartitem.setColor(item.getProduct().getColor());
-        cartitem.setPrice(item.getProduct().getPrice());
-        
-        return cartitem;                
     }
 
     @Override
