@@ -1,8 +1,6 @@
 
 package JavaBean;
 
-import java.util.ArrayList;
-
 public class ArticleBean {
     
     private Long ArticleId; 
@@ -10,7 +8,6 @@ public class ArticleBean {
     private String text;
     private String creation_date;
     private String category;
-    //private ArrayList<ArticleBean> allArticles = new ArrayList<ArticleBean>();
 
     public ArticleBean() {
     }
@@ -62,14 +59,4 @@ public class ArticleBean {
     public void setCategory(String category) {
         this.category = category;
     }
-    
-    //public ArrayList<ArticleBean> getAllArticles() {
-    //    return allArticles;
-    //}
-
-    //public void setArticles(ArrayList<ArticleBean> allArticles) {
-    //    this.allArticles = allArticles;
-    //}
-
-    
 }

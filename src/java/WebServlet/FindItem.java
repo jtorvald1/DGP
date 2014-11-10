@@ -1,16 +1,10 @@
 
 package WebServlet;
 
-import JavaBean.CartItem;
 import JavaBean.ProductBean;
-import JavaBean.ProductsBean;
 import JavaBean.SearchBean;
-import Model.Item;
-import Model.Product;
 import SessionBean.ItemFacade;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,10 +47,6 @@ public class FindItem extends HttpServlet {
         catch(Exception ex)
         {
             System.out.println(ex);
-        }
-        finally
-        {
-
         }
     }
 

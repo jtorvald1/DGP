@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYl>
 <html>
@@ -13,7 +14,7 @@
     </head>
     <body>
             <table>
-                <c:forEach items="${result.allArticles}" var="article" >
+                <c:forEach items="${result.getArticles()}" var="article" >
                     <tr>
                         <td>Headline: ${article.getHeadline()}</td>
                     </tr>

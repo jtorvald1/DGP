@@ -25,10 +25,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "allArticles", urlPatterns = {"/allArticles"})
+@WebServlet(name = "ShowArticles", urlPatterns = {"/ShowArticles"})
 public class ShowArticles extends HttpServlet {
     
-
     @EJB
     private ArticleFacade articleSessionFacade;
 
