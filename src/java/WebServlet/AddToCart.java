@@ -27,9 +27,9 @@ public class AddToCart extends HttpServlet {
             cart.getItems().add(cartItem);
             System.out.println(cart);
             request.setAttribute("bean", cart);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
+            /*RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
 
-            dispatcher.forward(request, response);
+            dispatcher.forward(request, response);*/
         }
         catch (Exception ex)
         {

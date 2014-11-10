@@ -43,8 +43,7 @@ public class FindItem extends HttpServlet {
             SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");
             ProductBean productBean = searchbean.getSearchResult().get(0);
 
-            List<Item> items = itemFacade.findAvailable(productBean.getProductId());
-            Item item = items.get(0);
+            Object item = itemFacade.findAvailable(productBean.getProductId());
             
             request.setAttribute("item", item);
             

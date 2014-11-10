@@ -30,12 +30,12 @@ public class ItemFacade extends AbstractFacade<Item> {
         super(Item.class);
     }
     
-    public List<Item> findAvailable(Long productId)
+    public Object findAvailable(Long productId)
     {
         Query query = em.createNamedQuery("Item.findAvailable");
         query.setParameter("productId", productId);
-        List<Item> items = query.getResultList();
+        Object item = query.getSingleResult();
         
-        return items;
+        return item;
     }
 }
