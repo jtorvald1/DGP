@@ -12,11 +12,8 @@
         <title>PLZ OH GOD</title>
     </head>
     <body>
-        <h1>WHATS WRONG</h1>
-        <jsp:useBean id="bean" class="JavaBean.ArticlesBean" scope="request" />
-        <center>
             <table>
-                <c:forEach article="${result.getArticles}" var="article" >
+                <c:forEach items="${result.allArticles}" var="article" >
                     <tr>
                         <td>Headline: ${article.getHeadline()}</td>
                     </tr>
@@ -28,9 +25,8 @@
                     </tr>
                     <tr>
                         <td>Category: ${article.getCategory()}</td>
-                    </tr>
-                    <tr>
-        </table>
-        <br>
+                </tr>
+                </c:forEach>
+            </table>
     </body>
 </html>
