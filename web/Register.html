@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="RegisterMemberCSS.css" type="text/css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Registration Page</title>
+    </head>
+    <body>
+        <div id="RegistrationWrapper">
+            <div id="CreateNonpaying">
+                <form method="post" action="CreateRegisteredCustomer">
+                    Enter non-paying member information:
+                    <br>
+                    <br>
+                    First name: <input type="text" name="firstName">
+                    <br>
+                    Last name: <input type="text" name="lastName"> 
+                    <br>
+                    Address: <input type="text" name="address">
+                    <br>
+                    Email address: <input type="text" name="email"> 
+                    <br>
+                    Password: <input type="text" name="password">
+                    <br>
+                    <br>
+                    <input type="submit" value="Create member">
+                </form>
+            </div>
+            <div id="CreatePaying">
+                <form method="post" action="CreatePayingMember">
+                    Enter paying-member information:
+                    <br>
+                    <br>
+                    First name: <input type="text" name="firstName">
+                    <br>
+                    Last name: <input type="text" name="lastName"> 
+                    <br>
+                    Address: <input type="text" name="address">
+                    <br>
+                    Email address: <input type="text" name="email"> 
+                    <br>
+                    Password: <input type="text" name="password">
+                    <br>
+                    <br>
+                    <input type="submit" value="Create member">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

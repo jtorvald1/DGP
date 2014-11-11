@@ -7,6 +7,7 @@
 package WebServlet;
 
 import Model.PayingMember;
+import Model.RegisteredCustomer;
 import java.io.IOException;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -23,8 +24,8 @@ import javax.transaction.UserTransaction;
  *
  * @author Jacob Nørgaard
  */
-@WebServlet(name = "CreatePayingMember", urlPatterns = {"/CreatePayingMember"})
-public class CreatePayingMember extends HttpServlet {
+@WebServlet(name = "CreateRegisteredCustomer", urlPatterns = {"/CreateRegisteredCustomer"})
+public class CreateRegisteredCustomer extends HttpServlet {
     
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -43,22 +44,19 @@ public class CreatePayingMember extends HttpServlet {
             String address = request.getParameter("address");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String membershipPeriod = "03-10-2014";
-            String membershipFee = "300";
+
             
-            PayingMember payingCustomer = new PayingMember();
-            payingCustomer.setFirstName(firstName);
-            payingCustomer.setLastName(lastName);
-            payingCustomer.setAddress(address);
-            payingCustomer.setEmail(email);
-            payingCustomer.setPassword(password);
-            payingCustomer.setMembershipFee(Double.parseDouble(membershipFee));
-            payingCustomer.setMembershipPeriod(membershipPeriod);
+            RegisteredCustomer nonpayingCustomer = new RegisteredCustomer();
+            nonpayingCustomer.setFirstName(firstName);
+            nonpayingCustomer.setLastName(lastName);
+            nonpayingCustomer.setAddress(address);
+            nonpayingCustomer.setEmail(email);
+            nonpayingCustomer.setPassword(password);
             
             utx.begin();
             
             em = emf.createEntityManager();
-            em.persist(payingCustomer);
+            em.persist(nonpayingCustomer);
             
             utx.commit();
             
