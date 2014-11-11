@@ -9,25 +9,29 @@
 <!DOCTYl>
 <html>
     <head>
+        <style>
+        body {background-color:lightgray}
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PLZ OH GOD</title>
     </head>
     <body>
-            <table>
                 <c:forEach items="${result.getArticles()}" var="article" >
-                    <tr>
-                        <td>Headline: ${article.getHeadline()}</td>
-                    </tr>
-                    <tr>
-                        <td>Text: ${article.getText()}</td>
-                    </tr>
-                    <tr>
-                        <td>CreationDate: ${article.getCreationDate()}</td>
-                    </tr>
-                    <tr>
-                        <td>Category: ${article.getCategory()}</td>
-                </tr>
+                    <tt>
+                        <form>
+                        <fieldset>
+                            On ${article.getCreationDate()}
+                            <br>
+                            <strong>${article.getHeadline()}</strong>
+                            <br>
+                            <br>
+                            ${article.getText()}
+                            <br>
+                            <br>
+                            <center>In ${article.getCategory()}<</center>
+                    </tt>
+                        </fieldset>
+                        </form>
                 </c:forEach>
-            </table>
     </body>
 </html>
