@@ -28,10 +28,16 @@
                             ${article.getText()}
                             <br>
                             <br>
-                            <center>In ${article.getCategory()}</center>
+                            In <span onClick='javascript:test("${article.getCategory()}");'>${article.getCategory()}</span>
                     </tt>
                         </fieldset>
                         </form>
                 </c:forEach>
+
+        <script>
+            function test(kategorija) {
+            alert(kategorija);
+        }
+        </script>
     </body>
 </html>
