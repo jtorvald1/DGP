@@ -38,7 +38,7 @@ public class Search extends HttpServlet {
             String searchBy = request.getParameter("SearchBy");
             String searchFor = request.getParameter("searchText");          
             
-            Collection<Product> products = productSessionFacade.findByBrand(searchBy);
+            Collection<Product> products = productSessionFacade.findByBrand(searchFor);
             
             ArrayList<ProductBean> result = getBeans(products);
    

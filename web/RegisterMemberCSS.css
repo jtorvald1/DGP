@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 20, 2014, 4:56:08 AM
+    Author     : Torvald
+*/
+
+#RegistrationWrapper {
+    width: 601px;
+    border: 1px solid black;
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+#CreateNonpaying {
+    width: 300px;
+    float:left; /* add this */
+    border-right: 1px solid black;
+}
+#CreatePaying {
+    width: 300px;
+
+    overflow: hidden; /* if you don't want #second to wrap below #first */
+}

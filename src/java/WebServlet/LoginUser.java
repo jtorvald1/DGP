@@ -6,12 +6,24 @@
 
 package WebServlet;
 
+import JavaBean.CartItem;
+import JavaBean.SearchBean;
+import Model.Item;
 import Model.PayingMember;
+import Model.RegisteredCustomer;
+import SessionBean.PayingMemberFacade;
+import SessionBean.ProductFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,59 +33,50 @@ import javax.transaction.UserTransaction;
 
 /**
  *
- * @author Jacob Nørgaard
+ * @author Torvald
  */
-@WebServlet(name = "CreatePayingMember", urlPatterns = {"/CreatePayingMember"})
-public class CreatePayingMember extends HttpServlet {
+
+
+@WebServlet(name = "LoginUser", urlPatterns = {"/LoginUser"})
+public class LoginUser extends HttpServlet {
     
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+    @EJB
+    private PayingMemberFacade payingMemberFacade;
     
     @Resource
     private UserTransaction utx;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        EntityManager em = null;
-        
-        try 
-        {
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
-            String address = request.getParameter("address");
+        try
+        {  
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String membershipPeriod = "03-10-2014";
-            String membershipFee = "300";
             
-            PayingMember payingCustomer = new PayingMember();
-            payingCustomer.setFirstName(firstName);
-            payingCustomer.setLastName(lastName);
-            payingCustomer.setAddress(address);
-            payingCustomer.setEmail(email);
-            payingCustomer.setPassword(password);
-            payingCustomer.setMembershipFee(Double.parseDouble(membershipFee));
-            payingCustomer.setMembershipPeriod(membershipPeriod);
+
+            Object user = payingMemberFacade.findByPassword(email, password);
             
-            utx.begin();
+            if(user != null)
+            {
+                request.getSession().setAttribute("user", user);
+                PayingMember member1 = (PayingMember)request.getSession().getAttribute("user");
+                System.out.println(member1.getFirstName());
+            }
             
-            em = emf.createEntityManager();
-            em.persist(payingCustomer);
-            
-            utx.commit();
-            
-            /*List customers = em.createQuery("SELECT c FROM CUSTOMERS c").getResultList();
-            System.out.println(customers.toString());*/
+            /*RequestDispatcher dispatcher = request.getRequestDispatcher("???");
+            dispatcher.forward(request, response);
+            */
         }
-        catch(Exception e)
+        catch(Exception ex)
         {
-            
+            System.out.println(ex);
         }
         finally
         {
-            em.close();
+
         }
     }
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

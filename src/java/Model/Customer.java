@@ -35,6 +35,13 @@ public abstract class Customer implements Serializable {
     
     @Column(name = "ADDRESS")
     private String address;
+    
+    @Column(name = "EMAIL", length = 320, nullable = false)
+    private String email;
+    
+    @Column(name = "PASSWORD", length = 200, nullable = false)
+    private String password;
+
 
     /*@OneToMany(mappedBy = "customer", targetEntity = CustomerOrder.class, fetch = FetchType.EAGER)
     private Collection<CustomerOrder> orders;*/
@@ -81,6 +88,24 @@ public abstract class Customer implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+
 
     @Override
     public String toString() {
