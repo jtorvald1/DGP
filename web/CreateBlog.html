@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Create new blog</title>
+    </head>
+    <body>
+        <form method="post" action="CreateBlog">
+            Create new blog:
+            <br>
+            <br>
+            Enter headline for blog: <input type="text" name="headline">
+            <br>
+            <br>
+            Category:
+            <SELECT name="category">
+                <option>Self
+                <option>Life
+                <option>Info
+            </select>
+            <br>
+            <br>
+            <textarea name="blogContent" style="width:250px;height:150px;"></textarea>
+            <br>
+            <br>
+            <input type="submit" value="Create blog">
+        </form>
+    </body>
+</html>

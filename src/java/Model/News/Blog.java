@@ -17,18 +17,18 @@ import javax.persistence.NamedQuery;
 
 /**
  *
- * @author Jacob Nørgaard
+ * @author User
  */
-@Entity(name = "ARTICLES")
+@Entity(name = "BLOGS")
 @NamedQueries({                                        
-@NamedQuery(name = "Article.AllArticles", query = "SELECT a FROM ARTICLES a")
+@NamedQuery(name = "Blog.AllBlogs", query = "SELECT b FROM BLOGS b")
 })
-public class Article implements Serializable {
+public class Blog implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "ARTICLE_ID", nullable = false)
+    @Column(name = "BLOG_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long articleId;
+    private Long blogId;
     
     @Column(name = "HEADLINE")
     private String headline;
@@ -44,22 +44,22 @@ public class Article implements Serializable {
     
     
     
-    public Article() {
+    public Blog() {
     }
 
-    public Article(String headline, String text, String creationDate, String category) {
+    public Blog(String headline, String text, String creationDate, String category) {
         this.headline = headline;
         this.text = text;
         this.creationDate = creationDate;
         this.category = category;
     }
     
-    public Long getArticleId() {
-        return articleId;
+    public Long getBlogId() {
+        return blogId;
     }
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
+    public void setBlogId(Long blogId) {
+        this.blogId = blogId;
     }
 
     public String getHeadline() {
@@ -96,6 +96,6 @@ public class Article implements Serializable {
     
     @Override
     public String toString() {
-        return "Article{" + "articleId=" + articleId + ", headline=" + headline + ", text=" + text + ", creationDate=" + creationDate + ", category=" + category + '}';
+        return "Blog{" + "blogId=" + blogId + ", headline=" + headline + ", text=" + text + ", creationDate=" + creationDate + ", category=" + category + '}';
     }
 }
