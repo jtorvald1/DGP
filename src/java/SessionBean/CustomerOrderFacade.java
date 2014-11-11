@@ -5,19 +5,17 @@
  */
 package SessionBean;
 
-import Model.Product;
-import java.util.Collection;
+import Model.CustomerOrder;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author Jacob Nørgaard
  */
 @Stateless
-public class ProductFacade extends AbstractFacade<Product> {
+public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
     @PersistenceContext(unitName = "DalsgaardPU")
     private EntityManager em;
 
@@ -26,16 +24,8 @@ public class ProductFacade extends AbstractFacade<Product> {
         return em;
     }
 
-    public ProductFacade() {
-        super(Product.class);
+    public CustomerOrderFacade() {
+        super(CustomerOrder.class);
     }
-
-    public Collection<Product> findByBrand(String brand)
-    {
-        Query query = em.createNamedQuery("Product.findByBrand");
-        query.setParameter("brand", brand);
-        Collection<Product> products = query.getResultList();
-        
-        return products;
-    }
+    
 }

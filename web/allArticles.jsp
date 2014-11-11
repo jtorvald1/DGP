@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYl>
 <html>
@@ -12,11 +13,8 @@
         <title>PLZ OH GOD</title>
     </head>
     <body>
-        <h1>WHATS WRONG</h1>
-        <jsp:useBean id="bean" class="JavaBean.ArticlesBean" scope="request" />
-        <center>
             <table>
-                <c:forEach article="${result.getArticles}" var="article" >
+                <c:forEach items="${result.getArticles()}" var="article" >
                     <tr>
                         <td>Headline: ${article.getHeadline()}</td>
                     </tr>
@@ -28,9 +26,8 @@
                     </tr>
                     <tr>
                         <td>Category: ${article.getCategory()}</td>
-                    </tr>
-                    <tr>
-        </table>
-        <br>
+                </tr>
+                </c:forEach>
+            </table>
     </body>
 </html>

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -26,7 +25,7 @@ import org.apache.commons.io.IOUtils;
 public class CreateProduct extends HttpServlet {
         
     @EJB
-    private ProductFacade productSessionFacade;
+    private ProductFacade productFacade;
     
     @Resource
     private UserTransaction utx;
@@ -57,8 +56,8 @@ public class CreateProduct extends HttpServlet {
         {
             utx.begin();
             
-            productSessionFacade.create(product);
-            productSessionFacade.getEntityManager().flush();
+            productFacade.create(product);
+            productFacade.flushEntityManager();
 
             utx.commit();
         }

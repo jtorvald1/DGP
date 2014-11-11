@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ArticlesBean {
     
-    private ArrayList<ArticleBean> allArticles;
+    private ArrayList<ArticleBean> allArticles = new ArrayList<ArticleBean>();
 
     public ArticlesBean() {
     }

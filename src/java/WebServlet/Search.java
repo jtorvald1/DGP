@@ -7,6 +7,7 @@ package WebServlet;
 
 import JavaBean.ProductBean;
 import JavaBean.SearchBean;
+import JavaBean.ShoppingCart;
 import Model.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Nicole
@@ -33,13 +35,15 @@ public class Search extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         
-        try {
-           
+        try
+        {
+            startCart(request);
+            
             String searchBy = request.getParameter("SearchBy");
             String searchFor = request.getParameter("searchText");          
             
             Collection<Product> products = productSessionFacade.findByBrand(searchFor);
-            
+
             ArrayList<ProductBean> result = getBeans(products);
    
             SearchBean searchbean = new SearchBean();
@@ -48,18 +52,18 @@ public class Search extends HttpServlet {
             searchbean.setSearchResult(result);
 
             request.setAttribute("bean", searchbean);
-            //request.getSession().setAttribute("bean", searchbean);
+            request.getSession().setAttribute("bean", searchbean);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("SearchResult.jsp");
             dispatcher.forward(request, response);
         }            
-            catch(Exception ex)
-        {
-            System.out.println(ex);
-        }     
+        catch(Exception ex)
+            {
+                System.out.println(ex);
+            }     
     }
     
-        private ArrayList<ProductBean> getBeans(Collection<Product> allProducts)
+    private ArrayList<ProductBean> getBeans(Collection<Product> allProducts)
     {
         ArrayList<ProductBean> list = new ArrayList<ProductBean>();
         
@@ -67,7 +71,7 @@ public class Search extends HttpServlet {
             
             ProductBean productBean = getProductBean(product);            
             list.add(productBean);
-        }
+    }
         
         return list;
     }
@@ -75,6 +79,7 @@ public class Search extends HttpServlet {
     private ProductBean getProductBean(Product product)
     {
         ProductBean productBean = new ProductBean();
+        productBean.setProductId(product.getProductId());
         productBean.setDescription(product.getDescription());
         productBean.setSize(product.getSize());
         productBean.setBrand(product.getBrand());
@@ -82,6 +87,17 @@ public class Search extends HttpServlet {
         productBean.setColor(product.getColor());
         
         return productBean;                
+    }
+    
+    private void startCart(HttpServletRequest request)
+    {
+        HttpSession ShoppingSession = request.getSession();
+        ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
+        
+        if(cart == null) {
+            cart = new ShoppingCart();
+            ShoppingSession.setAttribute("cart", cart);
+        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

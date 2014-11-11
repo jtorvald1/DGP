@@ -4,7 +4,6 @@ package Model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +15,7 @@ import javax.persistence.OneToOne;
 
 @Entity(name = "IMAGES")
 @NamedQueries({
-    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM IMAGES i")/*,
-    @NamedQuery(name = "Image.findById", query = "SELECT i FROM IMAGES WHERE i.imageId = :imageId")*/
+    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM IMAGES i")
 })
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;

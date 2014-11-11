@@ -95,5 +95,9 @@ public class CartItem {
     public void setImage(String image) {
         this.image = image;
     }
-    
+
+    @Override
+    public String toString() {
+        return "CartItem{" + "productId=" + productId + ", itemId=" + itemId + ", description=" + description + ", brand=" + brand + ", color=" + color + ", size=" + size + ", price=" + price + ", weight=" + weight + ", image=" + image + '}';
+    }
 }

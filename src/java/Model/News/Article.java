@@ -7,20 +7,23 @@
 package Model.News;
 
 import java.io.Serializable;
-import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Jacob Nørgaard
  */
 @Entity(name = "ARTICLES")
+@NamedQueries({                                        
+@NamedQuery(name = "Article.AllArticles", query = "SELECT a FROM ARTICLES a")
+})
 public class Article implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,6 +43,17 @@ public class Article implements Serializable {
     @Column(name = "CATEGORY")
     private String category;
     
+    
+    
+    public Article() {
+    }
+
+    public Article(String headline, String text, String creationDate, String category) {
+        this.headline = headline;
+        this.text = text;
+        this.creationDate = creationDate;
+        this.category = category;
+    }
     
     public Long getArticleId() {
         return articleId;

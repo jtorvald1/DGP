@@ -10,35 +10,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Products</title>
+        <title>Articles</title>
     </head>
     <body>
         <center>
             <table>
-                <c:forEach items="${result.allProducts}" var="product" >
+                <c:forEach items="${result.getArticles()}" var="article" >
                     <tr>
-                        <td>Description: ${product.getDescription()}</td>
+                        <td>Description: ${article.getHeadline()}</td>
                     </tr>
                     <tr>
-                        <td>Brand: ${product.getBrand()}</td>
+                        <td>Brand: ${article.getCreationDate()}</td>
                     </tr>
                     <tr>
-                        <td>Category: ${product.getCategory()}</td>
+                        <td>Category: ${article.getText()}</td>
                     </tr>
                     <tr>
-                        <td>Price: ${product.getPrice()}</td>
-                    </tr>
-                    <tr>
-                        <td>Color: ${product.getColor()}</td>
-                    </tr>
-                    <tr>
-                        <td>Weight: ${product.getWeight()}</td>
-                    </tr>
-                    <tr>
-                        <td>Size: ${product.getSize()}</td>
-                    </tr>
-                    <tr>
-                        <td><img src="data:image/jpg;base64,${product.getImage()}" width="500" /></td>
+                        <td>Price: ${article.getCategory()}</td>
                     </tr>
                 </c:forEach>
             </table>

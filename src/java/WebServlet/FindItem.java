@@ -1,16 +1,10 @@
 
 package WebServlet;
 
-import JavaBean.CartItem;
 import JavaBean.ProductBean;
-import JavaBean.ProductsBean;
 import JavaBean.SearchBean;
-import Model.Item;
-import Model.Product;
 import SessionBean.ItemFacade;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,8 +18,6 @@ public class FindItem extends HttpServlet {
 
     @EJB
     private ItemFacade itemFacade;
-    
-
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
@@ -42,36 +34,20 @@ public class FindItem extends HttpServlet {
             throws ServletException, IOException {
         try
         {
-            SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");                 
-            List<Item> items = itemFacade.findAvailable(searchbean.getSearchResult().get(0).getProductId().toString());
-            Item item = items.get(0);
+            SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");
+            ProductBean productBean = searchbean.getSearchResult().get(0);
+
+            Object item = itemFacade.findAvailable(productBean.getProductId());
             
-            CartItem cartItem = getCartItem(item);
+            request.setAttribute("item", item);
             
-            request.setAttribute("cartItem", cartItem);
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("AddToCart");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/AddToCart");
             dispatcher.forward(request, response);
         }
         catch(Exception ex)
         {
             System.out.println(ex);
         }
-        finally
-        {
-
-        }
-    }
-    
-    private CartItem getCartItem(Item item)
-    {
-        CartItem cartitem = new CartItem();
-        cartitem.setBrand(item.getProduct().getBrand());
-        cartitem.setDescription(item.getProduct().getDescription());
-        cartitem.setColor(item.getProduct().getColor());
-        cartitem.setPrice(item.getProduct().getPrice());
-        
-        return cartitem;                
     }
 
     @Override

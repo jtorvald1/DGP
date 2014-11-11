@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package SessionBean;
 
-import Model.Image;
+import Model.News.Article;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Jacob Nørgaard
  */
 @Stateless
-public class ImageFacade extends AbstractFacade<Image> {
+public class ArticleFacade extends AbstractFacade<Article> {
     @PersistenceContext(unitName = "DalsgaardPU")
     private EntityManager em;
 
@@ -24,8 +27,15 @@ public class ImageFacade extends AbstractFacade<Image> {
         return em;
     }
 
-    public ImageFacade() {
-        super(Image.class);
+    public ArticleFacade() {
+        super(Article.class);
     }
-    
+
+    public Collection<Article> AllArticles()
+    {
+        Query query = em.createNamedQuery("Article.AllArticles");
+        Collection<Article> articles = query.getResultList();
+        
+        return articles;
+    }
 }
