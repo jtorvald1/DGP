@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
@@ -20,6 +22,9 @@ import javax.persistence.InheritanceType;
  */
 @Entity(name = "CUSTOMERS")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NamedQueries({
+    @NamedQuery(name = "Customer.findByPassword", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email AND u.password = :password")
+})
 public abstract class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
