@@ -18,7 +18,7 @@
     <body>
                 <c:forEach items="${result.getArticles()}" var="article" >
                     <tt>
-                        <form>
+                        <form method="get" action="SearchServlet">
                         <fieldset>
                             On ${article.getCreationDate()}
                             <br>
@@ -28,17 +28,15 @@
                             ${article.getText()}
                             <br>
                             <br>
-                            In <span onClick='javascript:test("${article.getCategory()}");'>${article.getCategory()}</span>
+                            In <span id="cat" onClick='javascript:test("${article.getCategory()}");'>${article.getCategory()}</span>
                     </tt>
                         </fieldset>
                         </form>
                 </c:forEach>
-
         <script>
             function test(category) {
-            sessionStorage.setItem('cat', category);
-            window.location.replace("ByCategory.jsp");
-        }
+                document.location.href = "SearchArticle?cat=" + category;
+            }
         </script>
     </body>
 </html>
