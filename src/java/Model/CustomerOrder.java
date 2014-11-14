@@ -46,6 +46,7 @@ public class CustomerOrder implements Serializable {
 
     public CustomerOrder(Collection<Item> items) {
         this.items = items;
+        this.invoice = new Invoice(this);
     }
 
     public Long getOrderId() {
@@ -87,5 +88,4 @@ public class CustomerOrder implements Serializable {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
-
 }

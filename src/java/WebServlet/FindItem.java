@@ -3,6 +3,7 @@ package WebServlet;
 
 import JavaBean.ProductBean;
 import JavaBean.SearchBean;
+import Model.Item;
 import SessionBean.ItemFacade;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -37,12 +38,12 @@ public class FindItem extends HttpServlet {
             SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");
             ProductBean productBean = searchbean.getSearchResult().get(0);
 
-            Object item = itemFacade.findAvailable(productBean.getProductId());
+            Item item = (Item)itemFacade.findAvailable(productBean.getProductId());
             
-            request.setAttribute("item", item);
+            /*request.setAttribute("item", item);
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("/AddToCart");
-            dispatcher.forward(request, response);
+            dispatcher.forward(request, response);*/
         }
         catch(Exception ex)
         {

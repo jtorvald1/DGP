@@ -2,6 +2,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +36,24 @@ public class Invoice implements Serializable {
     @OneToMany(mappedBy = "invoice", targetEntity = OrderLine.class, fetch = FetchType.EAGER)
     private Collection<OrderLine> orderLines;
 
+    public Invoice() {
+    }
+
+    public Invoice(CustomerOrder order) {
+        this.order = order;
+        createOrderLines();
+    }  
+        
+    private void createOrderLines()
+    {      
+        Collection<Item> items = order.getItems();
+        orderLines = new ArrayList();
+        
+        for(Item item: items) {
+            orderLines.add(new OrderLine());
+        }
+    }
+
     public Long getInvoiceId() {
         return invoiceId;
     }
@@ -48,7 +67,7 @@ public class Invoice implements Serializable {
     }
 
     public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+        
     }
 
     public CustomerOrder getOrder() {
@@ -57,5 +76,13 @@ public class Invoice implements Serializable {
 
     public void setOrder(CustomerOrder order) {
         this.order = order;
+    }
+
+    public Collection<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(Collection<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 }

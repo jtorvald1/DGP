@@ -24,6 +24,9 @@ public class OrderLine implements Serializable {
     @JoinColumn(name = "INVOICE_ID")
     private Invoice invoice;
 
+    public OrderLine() {
+    }
+
     public Long getOrderLineId() {
         return orderLineId;
     }

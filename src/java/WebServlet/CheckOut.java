@@ -72,6 +72,7 @@ public class CheckOut extends HttpServlet {
             
             CustomerOrder order = new CustomerOrder(items);
             order.setDateTime(new Date().toString());
+            customerOrderFacade.create(order);
             
             for(Item item: items) {
                 item.setOrder(order);
