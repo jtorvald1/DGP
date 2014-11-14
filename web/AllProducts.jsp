@@ -15,18 +15,27 @@
     <body>
         <center>
             <table>
-                <c:forEach items="${result.getArticles()}" var="article" >
+                <c:forEach items="${result.getAllProducts()}" var="product" >
                     <tr>
-                        <td>Description: ${article.getHeadline()}</td>
+                        <td>Description: ${product.getDescription()}</td>
                     </tr>
                     <tr>
-                        <td>Brand: ${article.getCreationDate()}</td>
+                        <td>Brand: ${product.getBrand()}</td>
                     </tr>
                     <tr>
-                        <td>Category: ${article.getText()}</td>
+                        <td>Color: ${product.getColor()}</td>
                     </tr>
                     <tr>
-                        <td>Price: ${article.getCategory()}</td>
+                        <td>Size ${product.getSize()}</td>
+                    </tr>
+                    <tr>
+                        <td>Category: ${product.getCategory()}</td>
+                    </tr>
+                    <tr>
+                        <td>Price: ${product.getPrice()}</td>
+                    </tr>
+                    <tr>
+                        <td><img width="300" src="data:image/jpg;base64, ${product.getImage()}"></td>
                     </tr>
                 </c:forEach>
             </table>

@@ -2,9 +2,11 @@
 package WebServlet;
 
 import JavaBean.CartItem;
+import JavaBean.ProductBean;
+import JavaBean.SearchBean;
 import JavaBean.ShoppingCart;
-import Model.Item;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,13 +25,18 @@ public class AddToCart extends HttpServlet {
             HttpSession ShoppingSession = request.getSession();
             ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
 
-            CartItem cartItem = getCartItem(request);
-            cart.getItems().add(cartItem);
-            System.out.println(cart);
-            request.setAttribute("bean", cart);
-            /*RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
+            SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");
+            ProductBean productBean = searchbean.getSearchResult().get(0);
+            
+            if(!alreadyInCart(productBean, cart))
+                putInNewProduct(productBean, cart);
+            
+            cart.incrementNumber();
 
-            dispatcher.forward(request, response);*/
+            request.setAttribute("bean", cart);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
+
+            dispatcher.forward(request, response);
         }
         catch (Exception ex)
         {
@@ -37,17 +44,27 @@ public class AddToCart extends HttpServlet {
         }
     }
     
-    private CartItem getCartItem(HttpServletRequest request)
+    private boolean alreadyInCart(ProductBean productBean, ShoppingCart cart)
     {
-        Item item = (Item)request.getAttribute("item");
-        CartItem cartItem = new CartItem();
+        ArrayList<CartItem> cartItems = cart.getItems();
         
-        cartItem.setBrand(item.getProduct().getBrand());
-        cartItem.setColor(item.getProduct().getColor());
-        cartItem.setDescription(item.getProduct().getDescription());
-        //.........
-        
-        return cartItem; 
+        for(CartItem cartItem: cartItems)
+        {
+            ProductBean product = cartItem.getProduct();
+            if(product.getProductId().equals(productBean.getProductId()))
+            {
+                cartItem.incrementQuantity();
+                
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void putInNewProduct(ProductBean productBean, ShoppingCart cart) {
+        CartItem newCartItem = new CartItem();
+        newCartItem.setProduct(productBean);
+        cart.getItems().add(newCartItem);
     }
     
     @Override

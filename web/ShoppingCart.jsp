@@ -16,19 +16,11 @@
         <center>
             <h1>Shopping cart</h1>
             <table>
-                <c:forEach items="bean.getItems()" var="cartItem">
+                <c:forEach items="${bean.getItems()}" var="cartItem">
                     <tr>
-                        <td>${cartItem.getDescription()}</td>
+                        <td>${cartItem.getQuantity()}</td>
+                        <td>${cartItem.getProduct().getDescription()}</td>
                     </tr>
-                    <br>
-                    <tr>
-                        <td>${cartItem.getColor()}</td>
-                    </tr>
-                    <br>
-                    <tr>
-                        <td>${cartItem.getBrand()}</td>
-                    </tr>
-                    <br>
                     <br>
                 </c:forEach>
             </table>

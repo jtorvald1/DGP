@@ -2,6 +2,7 @@
 package Model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
  *
  * @author Jacob Nørgaard
  */
-@Entity
+@Entity(name = "ORDER_LINES")
 public class OrderLine implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -23,6 +24,12 @@ public class OrderLine implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "INVOICE_ID")
     private Invoice invoice;
+    
+    @Column(name = "QUANTITY")
+    private int quantity;
+        
+    @Column(name = "LINE_PRICE")
+    private double linePrice;
 
     public OrderLine() {
     }

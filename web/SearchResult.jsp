@@ -20,7 +20,7 @@
         ${bean.searchResult}<br>
         <br>
         <br>
-        <form method="post" action="FindItem">
+        <form method="post" action="AddToCart">
             <input type="submit" value="Add to cart">
         </form>
         <br>

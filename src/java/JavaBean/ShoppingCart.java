@@ -10,6 +10,13 @@ public class ShoppingCart {
     private double totalPrice;
 
     public ShoppingCart() {
+        numberOfItems = 0;
+        totalPrice = 0;
+    }
+    
+    public void incrementNumber()
+    {
+        numberOfItems++;
     }
 
     public ArrayList<CartItem> getItems() {
