@@ -11,7 +11,7 @@
         <title>TRATATA</title>
     </head>
     <body>
-                <c:forEach items="${article.getCategory()}" var="article" >
+                <c:forEach items="${foundArticles.getArticles()}" var="article" >
                     <tt>
                         <form>
                         <fieldset>

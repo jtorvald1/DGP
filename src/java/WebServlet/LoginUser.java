@@ -6,13 +6,11 @@
 
 package WebServlet;
 
-import JavaBean.CartItem;
-import JavaBean.SearchBean;
-import Model.Item;
+import Model.Customer;
 import Model.PayingMember;
 import Model.RegisteredCustomer;
+import SessionBean.CustomerFacade;
 import SessionBean.PayingMemberFacade;
-import SessionBean.ProductFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -41,7 +39,7 @@ import javax.transaction.UserTransaction;
 public class LoginUser extends HttpServlet {
     
     @EJB
-    private PayingMemberFacade payingMemberFacade;
+    private CustomerFacade customerFacade;
     
     @Resource
     private UserTransaction utx;
@@ -54,12 +52,12 @@ public class LoginUser extends HttpServlet {
             String password = request.getParameter("password");
             
 
-            Object user = payingMemberFacade.findByPassword(email, password);
+            Object user = customerFacade.findByPassword(email, password);
             
             if(user != null)
             {
                 request.getSession().setAttribute("user", user);
-                PayingMember member1 = (PayingMember)request.getSession().getAttribute("user");
+                Customer member1 = (Customer)request.getSession().getAttribute("user");
                 System.out.println(member1.getFirstName());
             }
             

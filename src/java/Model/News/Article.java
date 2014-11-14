@@ -21,7 +21,8 @@ import javax.persistence.NamedQuery;
  */
 @Entity(name = "ARTICLES")
 @NamedQueries({                                        
-@NamedQuery(name = "Article.AllArticles", query = "SELECT a FROM ARTICLES a")
+@NamedQuery(name = "Article.AllArticles", query = "SELECT a FROM ARTICLES a"), 
+@NamedQuery(name = "Article.searchByCategory", query = "SELECT a FROM ARTICLES a WHERE a.category = :category")
 })
 public class Article implements Serializable {
     private static final long serialVersionUID = 1L;

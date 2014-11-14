@@ -38,4 +38,13 @@ public class ArticleFacade extends AbstractFacade<Article> {
         
         return articles;
     }
+    
+    public Collection<Article> searchByCategory(String category)
+    {
+        Query query = em.createNamedQuery("Article.searchByCategory");
+        query.setParameter("category", category);
+        Collection<Article> articles = query.getResultList();
+        
+        return articles;
+    }
 }
