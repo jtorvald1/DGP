@@ -2,6 +2,7 @@
 package WebServlet;
 
 import JavaBean.CartItem;
+import JavaBean.ProductBean;
 import JavaBean.ShoppingCart;
 import Model.CustomerOrder;
 import Model.Item;
@@ -10,6 +11,7 @@ import SessionBean.ItemFacade;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -32,78 +34,87 @@ public class CheckOut extends HttpServlet {
     @Resource
     private UserTransaction userTransaction;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IllegalStateException, SecurityException, SystemException {
       
         try
         {
             HttpSession ShoppingSession = request.getSession();
             ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
 
-            ArrayList<CartItem> cartItems = cart.getItems();
+            userTransaction.begin();
             
-            ArrayList<Item> items = convertToEntityBeans(cartItems);
-            
+            ArrayList<Item> items = getItemsFromDB(cart);
             createOrder(items);
+            
+            userTransaction.commit();
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+            userTransaction.rollback();
+        }
+    }
+
+    private ArrayList<Item> getItemsFromDB(ShoppingCart cart)
+    {
+        ArrayList<CartItem> cartItems = cart.getItems();
+        ArrayList<Item> checkoutItems = new ArrayList<Item>();
+        
+        for(CartItem cartItem: cartItems)
+        {
+            ProductBean productBean = cartItem.getProduct();          
+            List<Item> items = itemFacade.findAvailable(productBean.getProductId(), cartItem.getQuantity());
+            checkoutItems.addAll(items);
+        }
+        
+        return checkoutItems; 
+    }
+    
+    private void createOrder(ArrayList<Item> items)
+    {
+        try
+        {
+            CustomerOrder order = new CustomerOrder();
+            order.setDateTime(new Date().toString());
+            customerOrderFacade.create(order);
+            
+            for(Item item: items) {
+                item.setOrder(order);
+                itemFacade.edit(item);
+            }            
         }
         catch(Exception ex)
         {
             System.out.println(ex);
         }
     }
-    
-    private ArrayList<Item> convertToEntityBeans(ArrayList<CartItem> cartItems)
-    {
-        ArrayList<Item> items = new ArrayList<Item>();
-        
-        for(CartItem cartItem : cartItems) {
-            Long cartItemId = cartItem.getItemId();
-            Item item = itemFacade.find(cartItemId);
-            items.add(item);
-        }
-        
-        return items;
-    }
-    
-    private void createOrder(ArrayList<Item> items) throws IllegalStateException, SecurityException, SystemException
-    {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
         try
         {
-            userTransaction.begin();
-            
-            CustomerOrder order = new CustomerOrder(items);
-            order.setDateTime(new Date().toString());
-            customerOrderFacade.create(order);
-            
-            for(Item item: items) {
-                item.setOrder(order);
-                itemFacade.create(item);
-            }            
-            
-            userTransaction.commit();
+            processRequest(request, response);
         }
         catch(Exception ex)
         {
-            userTransaction.rollback();
+            System.out.println(ex);
         }
-        
-        
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try
+        {
+            processRequest(request, response);
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 public class OrderLine implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderLineId;
     
     @ManyToOne(optional = false)

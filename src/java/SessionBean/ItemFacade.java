@@ -6,6 +6,7 @@
 package SessionBean;
 
 import Model.Item;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,12 +30,13 @@ public class ItemFacade extends AbstractFacade<Item> {
         super(Item.class);
     }
     
-    public Object findAvailable(Long productId)
+    public List<Item> findAvailable(Long productId, int quantity)
     {
         Query query = em.createNamedQuery("Item.findAvailable");
         query.setParameter("productId", productId);
-        Object item = query.getSingleResult();
+        query.setMaxResults(quantity);
+        List<Item> items = query.getResultList();
         
-        return item;
+        return items;
     }
 }

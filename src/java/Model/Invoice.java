@@ -39,21 +39,6 @@ public class Invoice implements Serializable {
     public Invoice() {
     }
 
-    public Invoice(CustomerOrder order) {
-        this.order = order;
-        createOrderLines();
-    }  
-        
-    private void createOrderLines()
-    {      
-        Collection<Item> items = order.getItems();
-        orderLines = new ArrayList();
-        
-        for(Item item: items) {
-            orderLines.add(new OrderLine());
-        }
-    }
-
     public Long getInvoiceId() {
         return invoiceId;
     }

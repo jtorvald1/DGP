@@ -19,11 +19,20 @@
                 <c:forEach items="${bean.getItems()}" var="cartItem">
                     <tr>
                         <td>${cartItem.getQuantity()}</td>
+                        <td>x</td>
                         <td>${cartItem.getProduct().getDescription()}</td>
                     </tr>
                     <br>
                 </c:forEach>
             </table>
+                    Number of items in cart: ${bean.getNumberOfItems()}
+                    <br>
+                    Total price: ${bean.getTotalPrice()} money
+                    <br>
+                    <br>
+                    <form method="post" action="CheckOut">
+                        <input type="submit" value="Buy stuff">
+                    </form>
         </center>
     </body>
 </html>

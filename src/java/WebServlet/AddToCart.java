@@ -32,6 +32,7 @@ public class AddToCart extends HttpServlet {
                 putInNewProduct(productBean, cart);
             
             cart.incrementNumber();
+            cart.updateTotalPrice();
 
             request.setAttribute("bean", cart);
             RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");

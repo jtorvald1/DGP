@@ -18,6 +18,17 @@ public class ShoppingCart {
     {
         numberOfItems++;
     }
+    
+    public void updateTotalPrice()
+    {
+       for(CartItem cartItem: items)
+       {
+           double unitPrice = cartItem.getProduct().getPrice();
+           int quantity = cartItem.getQuantity();
+           
+           totalPrice = unitPrice * quantity;
+       }
+    }
 
     public ArrayList<CartItem> getItems() {
         return items;

@@ -4,21 +4,13 @@ package JavaBean;
 public class ProductBean {
     
     private Long productId;
-        
     private String description;
-    
     private String brand;
-    
     private String color;
-    
     private String size;
-    
     private double price;
-    
     private double weight;
-    
     private String category;
-    
     private String image;
 
     public ProductBean() {

@@ -6,8 +6,10 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -47,9 +50,8 @@ public abstract class Customer implements Serializable {
     @Column(name = "PASSWORD", length = 200, nullable = false)
     private String password;
 
-
-    /*@OneToMany(mappedBy = "customer", targetEntity = CustomerOrder.class, fetch = FetchType.EAGER)
-    private Collection<CustomerOrder> orders;*/
+    @OneToMany(mappedBy = "customer", targetEntity = CustomerOrder.class, fetch = FetchType.EAGER)
+    private Collection<CustomerOrder> orders;
        
     public Customer() {
     }
@@ -62,13 +64,13 @@ public abstract class Customer implements Serializable {
         this.customerId = customerId;
     }
 
-    /*public Collection<CustomerOrder> getOrders() {
+    public Collection<CustomerOrder> getOrders() {
         return orders;
     }
 
     public void setOrders(Collection<CustomerOrder> orders) {
         this.orders = orders;
-    }*/
+    }
 
     public String getFirstName() {
         return firstName;
@@ -110,11 +112,8 @@ public abstract class Customer implements Serializable {
         this.password = password;
     }
     
-
-
     @Override
     public String toString() {
         return "Customer{" + "customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + '}';
     }
-
 }
