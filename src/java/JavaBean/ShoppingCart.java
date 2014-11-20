@@ -21,12 +21,14 @@ public class ShoppingCart {
     
     public void updateTotalPrice()
     {
+       totalPrice = 0;        
+        
        for(CartItem cartItem: items)
        {
            double unitPrice = cartItem.getProduct().getPrice();
            int quantity = cartItem.getQuantity();
            
-           totalPrice = unitPrice * quantity;
+           totalPrice += unitPrice * quantity;
        }
     }
 
