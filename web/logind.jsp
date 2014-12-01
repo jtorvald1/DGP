@@ -18,7 +18,7 @@
 	<div id="login_triangle"></div>
 	<div id="login_box">
     	
-		<div><label for="name" id="login_text">Brugernavn: </label><br><input type="text" id="username" class="login_field"/></div>  
+        <div><label for="name" id="login_text">Brugernavn: </label><br><input type="text" id="username" class="login_field"/></div>  
         <div class="glemt"><a href="#">Glemt brugernavn?</a></div><br>
 
         <div><label for="surname" id="login_text">Kode: </label><br><br><input type="password" id="password" class="login_field"/></div>

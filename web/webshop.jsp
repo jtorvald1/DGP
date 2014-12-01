@@ -10,11 +10,21 @@
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-       $(".web_more_button").click(function() {
-          alert(HELLO); 
-       });
-    });
+    function addToCart(productNumber)
+    {
+        document.location.href="AddToCart?productNumber=" + productNumber;
+    }
+    
+    function updateCartView()
+    {
+        var classArray = document.getElementsByClassName("web_cart_cirkel");
+        var numberOfcartItems = ${cart.getNumberOfItems()};
+        classArray[0].innerHTML = numberOfcartItems;
+    }
+    function goToProductDetails(productNumber)
+    {
+        document.location.href="ProductDetails?productNumber=" + productNumber;
+    }
 </script>
 
 </head>
@@ -66,7 +76,7 @@
  	 Ønskeliste
   	</div>
     <div class="web_cart_cirkel">${cart.getNumberOfItems()}</div>
-    <div id="cart_image"><img src="Images/web_cart.png"></div>
+    <div onclick="updateCartView()" id="cart_image"><img src="Images/web_cart.png"></div>
   </div>
 <!---------CART END----------------->
 <!---------CATEGORIES START----------------->
@@ -83,7 +93,7 @@
 <!-------------- BOX START --------------->
     <div class="web_box">
     	<!-------------- ITEM START --------------->
-        <c:forEach items="${result.getAllProducts()}" var="product">
+        <c:forEach items="${lastSearchedProducts.getAllProducts()}" var="product" varStatus="loop">
             <div class="web_itembox">            
                 <img src="data:image/jpg;base64, ${product.getImage()}" width="93" height="111" class="web_item">
                 <div class="web_itemtext">
@@ -91,7 +101,7 @@
                     <div class="web_describtion">info info info info info info info</div>
                 </div>
                 <div class="web_price">${product.getPrice()},-</div>
-                <input type="button" class="web_more_button" value="More">
+                <input onclick="goToProductDetails((${loop.index}))" type="button" class="web_more_button" value="More">
             </div>
         </c:forEach>
         <!-------------- ITEM END --------------->   

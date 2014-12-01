@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "AllProducts", urlPatterns = {"/AllProducts"})
 public class AllProducts extends HttpServlet {
@@ -28,9 +29,11 @@ public class AllProducts extends HttpServlet {
         try
         {
             List<Product> allProducts = productSessionFacade.findAll();
-            ProductsBean bean = getBean(allProducts);
+            ProductsBean lastSearchedProducts = getBean(allProducts);
 
-            sendData(bean, request, response);
+            HttpSession session = request.getSession();
+            session.setAttribute("lastSearchedProducts", lastSearchedProducts);
+            sendData(lastSearchedProducts, request, response);
         }
         catch(Exception ex)
         {
@@ -43,7 +46,6 @@ public class AllProducts extends HttpServlet {
         try
         {
             RequestDispatcher dispatcher = request.getRequestDispatcher("webshop.jsp");
-            request.setAttribute("result", bean);
             dispatcher.forward(request, response);
         }
         catch(Exception ex)
@@ -73,6 +75,7 @@ public class AllProducts extends HttpServlet {
     private ProductBean getProductBean(Product product)
     {
         ProductBean productBean = new ProductBean();
+        productBean.setProductId(product.getProductId());
         productBean.setDescription(product.getDescription());
         productBean.setSize(product.getSize());
         productBean.setWeight(product.getWeight());

@@ -3,7 +3,7 @@ package WebServlet;
 
 import JavaBean.CartItem;
 import JavaBean.ProductBean;
-import JavaBean.SearchBean;
+import JavaBean.ProductsBean;
 import JavaBean.ShoppingCart;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,20 +22,23 @@ public class AddToCart extends HttpServlet {
         
         try
         {
-            HttpSession ShoppingSession = request.getSession();
-            ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
+            HttpSession shoppingSession = request.getSession();
+            ShoppingCart cart = (ShoppingCart)shoppingSession.getAttribute("cart");
 
-            SearchBean searchbean = (SearchBean) request.getSession().getAttribute("bean");
-            ProductBean productBean = searchbean.getSearchResult().get(0);
+            ProductsBean lastSearchedProducts = (ProductsBean) shoppingSession.getAttribute("lastSearchedProducts");
+            String productNumberString = (String) request.getParameter("productNumber");
+            int productNumber = Integer.parseInt(productNumberString);
             
-            if(!alreadyInCart(productBean, cart))
-                putInNewProduct(productBean, cart);
+            ProductBean productToAdd = lastSearchedProducts.getAllProducts().get(productNumber);
+
+            if(!alreadyInCart(productToAdd, cart))
+                putInNewProduct(productToAdd, cart);
             
-            cart.incrementNumber();
+            cart.incrementNumberOfItems();
             cart.updateTotalPrice();
 
             request.setAttribute("bean", cart);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Old/ShoppingCart.jsp");
 
             dispatcher.forward(request, response);
         }

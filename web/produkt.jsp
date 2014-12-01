@@ -70,7 +70,7 @@
 <div id="content">
 <!-------------- BOX 1 START --------------->
   <div class="pro_box1">
-    <img src="Images/pro_item.png" width="216" height="258" class="pro_item">
+    <img src="data:image/jpg;base64,${detailedProduct.getImage()}" width="216" height="258" class="pro_item">
     <div class="pro_item_text">
     	<div class="pro_item_headline">Navn</div>
     	<div class="pro_item_describtion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 		eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 	ullamco laboris nisi ut aliquip ex.</div> 
@@ -110,7 +110,7 @@
       </tr>
   </table>
 	<div class="pro_item_stk">Stk. 20.00,-<br>På lager</div>
-    <div class="pro_item_ialt">i alt 100.00,-</div>
+    <div class="pro_item_ialt">i alt ${detailedProduct.getPrice()},-</div>
 </div>
 <!-------------- BOX 1.5 END --------------->
   </div>

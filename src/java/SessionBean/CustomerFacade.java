@@ -37,7 +37,6 @@ public class CustomerFacade extends AbstractFacade<Customer> {
         query.setParameter("password", password);
         Object customer = query.getSingleResult();
         
-        
         return customer;
     }
 }

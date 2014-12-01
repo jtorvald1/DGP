@@ -14,7 +14,7 @@ public class ShoppingCart {
         totalPrice = 0;
     }
     
-    public void incrementNumber()
+    public void incrementNumberOfItems()
     {
         numberOfItems++;
     }
