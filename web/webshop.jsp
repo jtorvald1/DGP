@@ -12,7 +12,7 @@
 <script>
     $(document).ready(function() {
        $(".web_more_button").click(function() {
-          alert($(this).attr()); 
+          alert(HELLO); 
        });
     });
 </script>
