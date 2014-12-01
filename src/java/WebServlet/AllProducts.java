@@ -3,6 +3,7 @@ package WebServlet;
 
 import JavaBean.ProductBean;
 import JavaBean.ProductsBean;
+import Model.Base64Encoder;
 import Model.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
@@ -15,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.codec.binary.Base64;
 
 @WebServlet(name = "AllProducts", urlPatterns = {"/AllProducts"})
 public class AllProducts extends HttpServlet {
@@ -29,15 +29,12 @@ public class AllProducts extends HttpServlet {
         {
             List<Product> allProducts = productSessionFacade.findAll();
             ProductsBean bean = getBean(allProducts);
+
             sendData(bean, request, response);
         }
         catch(Exception ex)
         {
             System.out.println(ex);
-        }
-        finally
-        {
-
         }
     }
     
@@ -45,7 +42,7 @@ public class AllProducts extends HttpServlet {
     {
         try
         {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("AllProducts.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("webshop.jsp");
             request.setAttribute("result", bean);
             dispatcher.forward(request, response);
         }
@@ -62,7 +59,7 @@ public class AllProducts extends HttpServlet {
         for(Product product : allProducts) {
 
             byte[] imageData = product.getImage().getContent();
-            String imageDataString = getByteArrayString(imageData);
+            String imageDataString = Base64Encoder.getByteArrayString(imageData);
             
             ProductBean productBean = getProductBean(product);
             productBean.setImage(imageDataString);
@@ -85,11 +82,6 @@ public class AllProducts extends HttpServlet {
         productBean.setColor(product.getColor());
         
         return productBean;                
-    }
-      
-    private String getByteArrayString(byte[] imageData)
-    {
-        return Base64.encodeBase64String(imageData);
     }
 
     @Override

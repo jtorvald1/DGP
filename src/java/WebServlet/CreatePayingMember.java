@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package WebServlet;
 
 import Model.PayingMember;
+import SessionBean.PayingMemberFacade;
 import java.io.IOException;
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,16 +20,14 @@ import javax.transaction.UserTransaction;
 @WebServlet(name = "CreatePayingMember", urlPatterns = {"/CreatePayingMember"})
 public class CreatePayingMember extends HttpServlet {
     
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+    @EJB
+    private PayingMemberFacade payingMemberFacade;
     
     @Resource
     private UserTransaction utx;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        EntityManager em = null;
-        
+       
         try 
         {
             String firstName = request.getParameter("firstName");
@@ -57,8 +49,7 @@ public class CreatePayingMember extends HttpServlet {
             
             utx.begin();
             
-            em = emf.createEntityManager();
-            em.persist(payingCustomer);
+            payingMemberFacade.create(payingCustomer);
             
             utx.commit();
             
@@ -67,11 +58,7 @@ public class CreatePayingMember extends HttpServlet {
         }
         catch(Exception e)
         {
-            
-        }
-        finally
-        {
-            em.close();
+            System.out.println(e);
         }
     }
 
