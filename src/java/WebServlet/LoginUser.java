@@ -48,6 +48,7 @@ public class LoginUser extends HttpServlet {
                 request.getSession().setAttribute("user", user);
                 Customer member1 = (Customer)request.getSession().getAttribute("user");
                 System.out.println(member1.getFirstName());
+                response.sendRedirect("webshop.jsp");
             }
             
             /*RequestDispatcher dispatcher = request.getRequestDispatcher("???");
