@@ -26,7 +26,9 @@ import javax.persistence.OneToMany;
 @Entity(name = "CUSTOMERS")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NamedQueries({
-    @NamedQuery(name = "Customer.findByPassword", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email AND u.password = :password")
+    @NamedQuery(name = "Customer.findByPassword", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email AND u.password = :password"),
+    @NamedQuery(name = "Customer.findByUserName", query = "SELECT u FROM CUSTOMERS u WHERE u.userName = :username"),
+    @NamedQuery(name = "Customer.findAllUsers", query = "SELECT u FROM CUSTOMERS u")
 })
 public abstract class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -40,6 +42,9 @@ public abstract class Customer implements Serializable {
     
     @Column(name = "LAST_NAME", length = 200, nullable = false)
     private String lastName;
+    
+    @Column(name = "USERNAME", length = 200, nullable = false)
+    private String userName;
     
     @Column(name = "ADDRESS")
     private String address;
@@ -87,6 +92,14 @@ public abstract class Customer implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    
+    public String getUserName() {
+        return userName;
+    }
+    
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getAddress() {
         return address;
@@ -114,6 +127,6 @@ public abstract class Customer implements Serializable {
     
     @Override
     public String toString() {
-        return "Customer{" + "customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + '}';
+        return "Customer{" + "customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + "username=" + userName + ", address=" + address + '}';
     }
 }

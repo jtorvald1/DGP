@@ -7,6 +7,7 @@
 package SessionBean;
 
 import Model.Customer;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -39,4 +40,20 @@ public class CustomerFacade extends AbstractFacade<Customer> {
         
         return customer;
     }
+        
+        public Object findByUserName(String username) {
+            Query query = em.createNamedQuery("Customer.findByUserName");
+            query.setParameter("username", username);
+            Object user = query.getSingleResult();
+            
+            return user;
+        }
+        
+        public Collection<Customer> findAllUsers()
+        {
+        Query query = em.createNamedQuery("Customer.findAllUsers");
+        Collection<Customer> users = query.getResultList();
+        
+        return users;
+        }
 }

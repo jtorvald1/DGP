@@ -9,15 +9,18 @@ public class UserBean {
     
     private String lastName;
     
+    private String userName;
+    
     private String email;
 
     public UserBean() {
     }
 
-    public UserBean(Long userId, String firstName, String lastName, String email) {
+    public UserBean(Long userId, String firstName, String lastName, String userName, String email) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userName = userName;
         this.email = email;
     }
 
@@ -44,7 +47,15 @@ public class UserBean {
     public void setlastName(String lastName) {
         this.lastName = lastName;
     }
+    
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName() {
+        this.userName = userName;
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -52,5 +63,4 @@ public class UserBean {
     public void setEmail(String email) {
         this.email = email;
     }
-    
 }

@@ -6,10 +6,10 @@
 
 package WebServlet;
 
-import JavaBean.ArticleBean;
-import JavaBean.ArticlesBean;
-import Model.News.Article;
-import SessionBean.ArticleFacade;
+import JavaBean.UserBean;
+import JavaBean.UsersBean;
+import Model.Customer;
+import SessionBean.CustomerFacade;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -25,18 +25,18 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "ShowArticles", urlPatterns = {"/ShowArticles"})
-public class ShowArticles extends HttpServlet {
+@WebServlet(name = "AllUsersList", urlPatterns = {"/AllUsersList"})
+public class AllUsersList extends HttpServlet {
     
     @EJB
-    private ArticleFacade articleSessionFacade;
+    private CustomerFacade customerSessionFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try
         {
-            List<Article> allArticles = articleSessionFacade.findAll();
-            ArticlesBean bean = getBean(allArticles);
+            List<Customer> allUsers = customerSessionFacade.findAll();
+            UsersBean bean = getBean(allUsers);
             sendData(bean, request, response);
         }
         catch(Exception ex)
@@ -49,11 +49,11 @@ public class ShowArticles extends HttpServlet {
         }
     }
     
-    private void sendData(ArticlesBean bean, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+    private void sendData(UsersBean bean, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         try
         {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("allArticles.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("allUsers.jsp");
             request.setAttribute("result", bean);
             dispatcher.forward(request, response);
         }
@@ -63,28 +63,27 @@ public class ShowArticles extends HttpServlet {
         }
     }
     
-    private ArticlesBean getBean(Collection<Article> getArticles)
+    private UsersBean getBean(Collection<Customer> getUsers)
     {
-        ArticlesBean bean = new ArticlesBean();
+        UsersBean bean = new UsersBean();
         
-        for(Article article : getArticles) {
+        for(Customer user : getUsers) {
   
-            ArticleBean articleBean = getArticleBean(article);
+            UserBean userBean = getUserBean(user);
             
-            bean.getArticles().add(articleBean);
+            bean.getUsers().add(userBean);
         }
         
         return bean;
     }
     
-    private ArticleBean getArticleBean(Article article) {
-        ArticleBean articleBean = new ArticleBean();
-        articleBean.setHeadline(article.getHeadline());
-        articleBean.setText(article.getText());
-        articleBean.setCreationDate(article.getCreationDate());
-        articleBean.setCategory(article.getCategory());
+    private UserBean getUserBean(Customer user) {
+        UserBean userBean = new UserBean();
+        userBean.setFirstName(user.getFirstName());
+        userBean.setlastName(user.getLastName());
+        userBean.setEmail(user.getEmail());
         
-        return articleBean;  
+        return userBean;  
     }
 
     @Override

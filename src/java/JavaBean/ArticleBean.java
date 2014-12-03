@@ -1,6 +1,8 @@
 
 package JavaBean;
 
+import java.util.ArrayList;
+
 public class ArticleBean {
     
     private Long ArticleId; 
@@ -8,6 +10,8 @@ public class ArticleBean {
     private String text;
     private String creation_date;
     private String category;
+    private ArrayList<ArticleBean> searchResult;
+    private String searchCategory;
 
     public ArticleBean() {
     }
