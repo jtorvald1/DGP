@@ -28,7 +28,12 @@
           <li><a href="registrer.jsp">Registrer</a></li>
 		</ul>
     </nav> 
-	<div id="log_ind"><a href="#">Log Ind</a></div>
+    <div id="log_ind" >
+        <c:choose>
+            <c:when test="${empty user}"><a href="logind.jsp">Log Ind</a></c:when>
+            <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
+        </c:choose>
+    </div>
     
     <div id="title"><b>Produkt</b></div>
 <!---------MENU END----------------->
@@ -115,7 +120,7 @@
       </td>
       </tr>
       <tr>
-          <td><input type="button" onclick="addToCart()" value="Put in cart"></td>
+          <td><input type="button" onclick="addToCart()" value="Smid i kurv"></td>
       </tr>
   </table>
 	<div class="pro_item_stk">Stk. 20.00,-<br>På lager</div>

@@ -10,18 +10,11 @@
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-    function updateCartView()
-    {
-        var classArray = document.getElementsByClassName("web_cart_cirkel");
-        var numberOfcartItems = ${cart.getNumberOfItems()};
-        classArray[0].innerHTML = numberOfcartItems;
-    }
     function goToProductDetails(productNumber)
     {
         document.location.href="ProductDetails?productNumber=" + productNumber;
     }
 </script>
-
 </head>
 
 <body>
@@ -38,7 +31,12 @@
           <li><a href="registrer.jsp">Registrer</a></li>
 		</ul>
     </nav> 
-	<div id="log_ind"><a href="#">Log Ind</a></div>
+    <div id="log_ind" >
+        <c:choose>
+            <c:when test="${empty user}"><a href="logind.jsp">Log Ind</a></c:when>
+            <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
+        </c:choose>
+    </div>
     
     <div id="title"><b>Webshop</b></div>
 <!---------MENU END----------------->

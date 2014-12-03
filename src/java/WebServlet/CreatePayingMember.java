@@ -34,6 +34,7 @@ public class CreatePayingMember extends HttpServlet {
             String lastName = request.getParameter("lastName");
             String address = request.getParameter("address");
             String email = request.getParameter("email");
+            String userName = request.getParameter("email");
             String password = request.getParameter("password");
             String membershipPeriod = "03-10-2014";
             String membershipFee = "300";
@@ -43,6 +44,7 @@ public class CreatePayingMember extends HttpServlet {
             payingCustomer.setLastName(lastName);
             payingCustomer.setAddress(address);
             payingCustomer.setEmail(email);
+            payingCustomer.setUserName(userName);
             payingCustomer.setPassword(password);
             payingCustomer.setMembershipFee(Double.parseDouble(membershipFee));
             payingCustomer.setMembershipPeriod(membershipPeriod);
@@ -53,8 +55,7 @@ public class CreatePayingMember extends HttpServlet {
             
             utx.commit();
             
-            /*List customers = em.createQuery("SELECT c FROM CUSTOMERS c").getResultList();
-            System.out.println(customers.toString());*/
+            response.sendRedirect("index.jsp");
         }
         catch(Exception e)
         {

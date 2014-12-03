@@ -6,6 +6,7 @@
 
 package WebServlet;
 
+import JavaBean.UserBean;
 import Model.Customer;
 import SessionBean.CustomerFacade;
 import java.io.IOException;
@@ -40,29 +41,29 @@ public class LoginUser extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             
-
-            Object user = customerFacade.findByPassword(email, password);
+            Customer user = (Customer) customerFacade.findByPassword(email, password);
+            UserBean userBean = getUserBean(user);
             
             if(user != null)
             {
-                request.getSession().setAttribute("user", user);
-                Customer member1 = (Customer)request.getSession().getAttribute("user");
-                System.out.println(member1.getFirstName());
-                response.sendRedirect("webshop.jsp");
+                request.getSession().setAttribute("user", userBean);
+                response.sendRedirect("index.jsp");
             }
-            
-            /*RequestDispatcher dispatcher = request.getRequestDispatcher("???");
-            dispatcher.forward(request, response);
-            */
         }
         catch(Exception ex)
         {
             System.out.println(ex);
         }
-        finally
-        {
-
-        }
+    }
+    
+    private UserBean getUserBean(Customer user) 
+    {
+        UserBean userBean = new UserBean();
+        userBean.setFirstName(user.getFirstName());
+        userBean.setlastName(user.getLastName());
+        userBean.setEmail(user.getEmail());
+        
+        return userBean;  
     }
 
     @Override

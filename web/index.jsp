@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -23,7 +24,12 @@
           <li><a href="registrer.jsp">Registrer</a></li>
 		</ul>
     </nav> 
-	<div id="log_ind"><a href="#">Log Ind</a></div>
+    <div id="log_ind" >
+        <c:choose>
+            <c:when test="${empty user}"><a href="logind.jsp">Log Ind</a></c:when>
+            <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
+        </c:choose>
+    </div>
 <!---------MENU END----------------->
 </div>
 </header>
