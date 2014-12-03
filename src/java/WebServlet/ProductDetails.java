@@ -25,7 +25,7 @@ public class ProductDetails extends HttpServlet {
             
         ProductBean productToShow = lastSearchedProducts.getAllProducts().get(productNumber);
         
-        request.setAttribute("detailedProduct", productToShow);
+        shoppingSession.setAttribute("detailedProduct", productToShow);
         RequestDispatcher dispatcher = request.getRequestDispatcher("produkt.jsp");
 
         dispatcher.forward(request, response);

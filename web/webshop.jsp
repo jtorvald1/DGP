@@ -10,11 +10,6 @@
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-    function addToCart(productNumber)
-    {
-        document.location.href="AddToCart?productNumber=" + productNumber;
-    }
-    
     function updateCartView()
     {
         var classArray = document.getElementsByClassName("web_cart_cirkel");
@@ -76,7 +71,7 @@
  	 Ønskeliste
   	</div>
     <div class="web_cart_cirkel">${cart.getNumberOfItems()}</div>
-    <div onclick="updateCartView()" id="cart_image"><img src="Images/web_cart.png"></div>
+    <div id="cart_image"><img src="Images/web_cart.png"></div>
   </div>
 <!---------CART END----------------->
 <!---------CATEGORIES START----------------->

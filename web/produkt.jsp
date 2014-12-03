@@ -6,6 +6,12 @@
 <meta charset="utf-8">
 <title>Produkt</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
+<script>
+    function addToCart(productNumber)
+    {
+        document.location.href="AddToCart?productNumber=" + productNumber;
+    }
+</script>
 </head>
 
 <body>
@@ -105,8 +111,11 @@
       <td>
       <input name="Antal" type="text" size="3">
       <img src="Images/plus.png">
-      <img src="images/negativ.png">
+      <img src="Images/negativ.png">
       </td>
+      </tr>
+      <tr>
+          <td><input type="button" onclick="addToCart()" value="Put in cart"></td>
       </tr>
   </table>
 	<div class="pro_item_stk">Stk. 20.00,-<br>På lager</div>
