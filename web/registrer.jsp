@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="iso-8859-1">
-<title>registrer</title>
+<title>registrér</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 </head>
 
@@ -20,12 +20,12 @@
           <li><a href="blog.jsp">Blog</a></li>
           <li><a href="webshop.jsp">Webshop</a></li>
           <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
-          <li><a href="registrer.jsp">Registrer</a></li>
+          <li><a href="registrer.jsp">Registrér</a></li>
 		</ul>
     </nav> 
 	<div id="log_ind"><a href="#">Log Ind</a></div>
     
-    <div id="title"><b>Registrer</b></div>
+    <div id="title"><b>Registrér</b></div>
 <!---------MENU END----------------->
 </div>
 </header>
@@ -121,6 +121,89 @@
 <!-------------- BOX INFO START --------------->
     <div id="box_info">
         <div id="reg_info">
+          
+        <!-------------- VALIDATION START --------------->
+            <script> 
+                function validate(form) {
+                    fail  = validateForNavn(form.forNavn.value)
+                    fail += validateEfterNavn(form.efterNavn.value)
+                    fail += validateEmail(form.email.value)
+                    fail += validateTelefon(form.email.value)
+                    fail += validateAdresse(form.adresse.value)
+                    fail += validatePostnummer(form.postnummer.value)
+                    fail += validateBrugernavn(form.brugerNavn.value)
+                    fail += validatePassword(form.password.value)
+                    fail += validateGentagPassword(form.gentagPassword.value)
+                    if (fail == "") return true
+                    else { alert(fail); return false }
+                }
+            </script>
+            <script>
+            function validateForNavn(field) {
+            if (field == "") return "Ugyldigt fornavn.\n"
+            return ""
+            }
+
+            function validateEfterNavn(field) {
+            if (field == "") return "Ugyldigt efternavn.\n"
+            return ""
+            }
+            
+            function validateEmail(field) {
+            if (field == "") return "Ingen Email indtastet.\n"
+		else if (!((field.indexOf(".") > 0) &&
+			       (field.indexOf("@") > 0)) ||
+			       /[^a-åA-Å0-9.@_-]/.test(field))
+		return "Email adressen er ugyldig.\n"
+            return ""
+            }
+            
+            function validateTelefon(field) {
+            if (field == "") return "Intet telefonnummer indtastet.\n"
+		else if (!((field.indexOf(/[^a-åA-Å.@_-]/.test(field))
+		return "Telefonnummeret er ugyldigt.\n"
+            return ""
+            }
+            
+            function validateAdresse(field) {
+            if (field == "") return "Ingen adresse indtastet.\n"
+            return ""
+            }
+            
+            function validatePostnummer(field) {
+            if (field == "") return "Intet Postnummer indtastet.\n"
+		else if (!((field.indexOf(field.length > 4 && /[^a-åA-Å.@_-]/.test(field))
+		return "Postnummeret er ugyldigt.\n"
+            return ""
+            }
+            
+            function validateBrugernavn(field) {
+            if (field == "") return "Intet brugernavn indtastet.\n"
+            else if (field.length < 5)
+		return "Brugernavn skal være mindst 5 karakterer langt.\n"
+            else if (/[^a-zA-Z0-9_-]/.test(field))
+		return "Kun karaktererne a-å, A-Å, 0-9, - og _ er tilladte i brugernavne.\n"
+            return ""
+            }
+            function validatePassword(field) {
+            if (field == "") return "Intet password indtastet.\n"
+            else if (field.length < 6)
+		return "Passwords skal være mindst 6 karakterer langt.\n"
+            else if (! /[a-å]/.test(field) ||
+			 ! /[A-Å]/.test(field) ||
+		     ! /[0-9]/.test(field))
+		return "Passwords kræver mindst én af hver følgende karakter a-å, A-Å og et tal mellem 0-9.\n"
+            return ""
+            }
+            function validateGentagPassword(field) {
+            if (field == "") return "Intet gentaget password indtastet.\n"
+		else if (field != validatePassword)  //Don't know if this is correct 
+		return "Gentaget password matcher ikke.\n"
+            return ""
+            }
+    </script>      
+    <!-------------- VALIDATION END --------------->
+            
         	<form method="post" action="CreatePayingMember">
                     <div><label for="name">Navn: </label><br><input name="firstName" type="text" id="name" class="reg_field"/></div><br>        
                     <div><label for="surname">Efternavn: </label><br><input name="lastName" type="text" id="surname" class="reg_field"/></div><br>
@@ -135,7 +218,7 @@
                     <br>
                 
 				<input type="checkbox" name="accept_checkbox"><label for="accept_checkbox" id="accept_label"> Jeg har læst og accepter <a href="#">betalings vilkår</a></label>
-                <div><input type="submit" value="Registrer" id="reg_button"/></div> <!---- have to be moved down 'on top of' the backgorund, don't know if possible as it is in a form-->
+                <div><input type="submit" value="Registrér" id="reg_button" onSubmit="return validate(this)"/></div> <!---- have to be moved down 'on top of' the backgorund, don't know if possible as it is in a form-->
         	 </form>
         </div>
     </div>
@@ -163,7 +246,7 @@
           <li><a href="#">Blog</a></li>
           <li><a href="#">Webshop</a></li>
           <li><a href="#">Brugte Varer</a></li>
-          <li><a href="#">Registrer</a></li>
+          <li><a href="#">Registrér</a></li>
 		</ul>
     </div> 
 <!---------MENU END----------------->
