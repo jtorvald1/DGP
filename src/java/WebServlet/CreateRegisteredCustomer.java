@@ -6,8 +6,8 @@
 
 package WebServlet;
 
-import Model.PayingMember;
-import Model.RegisteredCustomer;
+import Model.Webshop.PayingMember;
+import Model.Webshop.RegisteredCustomer;
 import java.io.IOException;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;

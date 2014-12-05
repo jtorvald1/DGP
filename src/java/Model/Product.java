@@ -1,5 +1,5 @@
 
-package Model;
+package Model.Webshop;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -22,7 +22,10 @@ import javax.persistence.OneToOne;
  */
 @Entity(name = "PRODUCTS")
 @NamedQueries({                                        
-    @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE p.brand = :brand")
+    @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE p.brand = :brand"),
+    @NamedQuery(name = "Product.findByColor", query = "SELECT p FROM PRODUCTS p WHERE p.color = :color"),
+    @NamedQuery(name = "Product.findBySize", query = "SELECT p FROM PRODUCTS p WHERE p.size = :size")/*,
+    @NamedQuery(name = "Product.findByBrand&Category", query = "SELECT p FROM PRODUCTS p WHERE p.brand = :brand AND p.category = :category")*/
 })
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;

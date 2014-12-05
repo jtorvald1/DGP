@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package WebServlet;
 
 import JavaBean.ProductBean;
-import JavaBean.SearchBean;
-import JavaBean.ShoppingCart;
-import Model.Product;
+import Model.Webshop.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.EJB;
@@ -21,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 /**
  *
  * @author Nicole
@@ -37,24 +29,25 @@ public class Search extends HttpServlet {
         
         try
         {
-            startCart(request);
+            String searchBy = request.getParameter("searchBy");
+            String value = request.getParameter("value");
             
-            String searchBy = request.getParameter("SearchBy");
-            String searchFor = request.getParameter("searchText");          
+            Collection<Product> products = null;
             
-            Collection<Product> products = productSessionFacade.findByBrand(searchFor);
+            switch(searchBy) 
+            {
+                case "brand": products = productSessionFacade.findByBrand(value); break;
+                case "color": products = productSessionFacade.findByColor(value); break;
+                case "size": products = productSessionFacade.findBySize(value); break;
+                //case "brand&category": products = productSessionFacade.findByBrandAndCategory(searchBy, searchFor); break;
+            }
 
-            ArrayList<ProductBean> result = getBeans(products);
-   
-            SearchBean searchbean = new SearchBean();
-            searchbean.setSearchBy(searchBy);
-            searchbean.setSearchFor(searchFor);
-            searchbean.setSearchResult(result);
+            ArrayList<ProductBean> searchResult = getBeans(products);           
+            
+            request.setAttribute("searchResult", searchResult);
+            request.getSession().setAttribute("searchResult", searchResult);
 
-            request.setAttribute("bean", searchbean);
-            request.getSession().setAttribute("bean", searchbean);
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher("SearchResult.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Produkt.jsp");
             dispatcher.forward(request, response);
         }            
         catch(Exception ex)
@@ -65,7 +58,7 @@ public class Search extends HttpServlet {
     
     private ArrayList<ProductBean> getBeans(Collection<Product> allProducts)
     {
-        ArrayList<ProductBean> list = new ArrayList<ProductBean>();
+        ArrayList<ProductBean> list = new ArrayList<>();
         
         for(Product product : allProducts) {
             
@@ -88,68 +81,19 @@ public class Search extends HttpServlet {
         
         return productBean;                
     }
-    
-    private void startCart(HttpServletRequest request)
-    {
-        HttpSession ShoppingSession = request.getSession();
-        ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
-        
-        if(cart == null) {
-            cart = new ShoppingCart();
-            ShoppingSession.setAttribute("cart", cart);
-        }
-    }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Search</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Search at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
-    }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -10,9 +10,9 @@
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-    function goToProductDetails(productNumber)
+    function goToProductDetails(brand)
     {
-        document.location.href="ProductDetails?productNumber=" + productNumber;
+        document.location.href="ProductDetails?searchFor=brand&value=" + brand;
     }
 </script>
 </head>
@@ -90,11 +90,11 @@
             <div class="web_itembox">            
                 <img src="data:image/jpg;base64, ${product.getImage()}" width="93" height="111" class="web_item">
                 <div class="web_itemtext">
-                    <div class="web_headline">${product.getDescription()}</div>
-                    <div class="web_describtion">info info info info info info info</div>
+                    <div class="web_headline"></div>
+                    <div class="web_describtion">${product.getDescription()}</div>
                 </div>
                 <div class="web_price">${product.getPrice()},-</div>
-                <input onclick="goToProductDetails((${loop.index}))" type="button" class="web_more_button" value="More">
+                <input onclick="goToProductDetails(${product.getBrand()})" type="button" class="web_more_button" value="More">
             </div>
         </c:forEach>
         <!-------------- ITEM END --------------->   

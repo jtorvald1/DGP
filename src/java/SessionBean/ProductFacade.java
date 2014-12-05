@@ -5,7 +5,7 @@
  */
 package SessionBean;
 
-import Model.Product;
+import Model.Webshop.Product;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,6 +33,34 @@ public class ProductFacade extends AbstractFacade<Product> {
     public Collection<Product> findByBrand(String brand)
     {
         Query query = em.createNamedQuery("Product.findByBrand");
+        query.setParameter("brand", brand);
+        Collection<Product> products = query.getResultList();
+        
+        return products;
+    }
+    
+    public Collection<Product> findBySize(String size)
+    {
+        Query query = em.createNamedQuery("Product.findByBrand");
+        query.setParameter("brand", size);
+        Collection<Product> products = query.getResultList();
+        
+        return products;
+    }
+    
+    public Collection<Product> findByColor(String color)
+    {
+        Query query = em.createNamedQuery("Product.findByBrand");
+        query.setParameter("brand", color);
+        Collection<Product> products = query.getResultList();
+        
+        return products;
+    }
+    
+    public Collection<Product> findByBrandAndCategory(String brand, String category)
+    {
+        Query query = em.createNamedQuery("Product.findByBrand&Category");
+        query.setParameter("category", category);
         query.setParameter("brand", brand);
         Collection<Product> products = query.getResultList();
         
