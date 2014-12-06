@@ -6,7 +6,6 @@ import JavaBean.ProductBean;
 import JavaBean.ShoppingCart;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +23,7 @@ public class AddToCart extends HttpServlet {
             HttpSession shoppingSession = request.getSession();
             ShoppingCart cart = (ShoppingCart)shoppingSession.getAttribute("cart");
 
-            ProductBean productToAdd = (ProductBean) shoppingSession.getAttribute("detailedProduct");
+            ProductBean productToAdd = (ProductBean) shoppingSession.getAttribute("productToShow");
 
             if(!alreadyInCart(productToAdd, cart))
                 putInNewProduct(productToAdd, cart);
@@ -32,7 +31,7 @@ public class AddToCart extends HttpServlet {
             cart.incrementNumberOfItems();
             cart.updateTotalPrice();
 
-            response.sendRedirect("webshop.jsp");
+            response.sendRedirect("produkt.jsp");
         }
         catch (Exception ex)
         {

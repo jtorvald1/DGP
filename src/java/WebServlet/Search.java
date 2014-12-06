@@ -2,10 +2,11 @@
 package WebServlet;
 
 import JavaBean.ProductBean;
+import JavaBean.ProductsBean;
+import Model.Webshop.Base64Encoder;
 import Model.Webshop.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Nicole
@@ -25,7 +27,7 @@ public class Search extends HttpServlet {
     private ProductFacade productSessionFacade;
  
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         
         try
         {
@@ -39,34 +41,40 @@ public class Search extends HttpServlet {
                 case "brand": products = productSessionFacade.findByBrand(value); break;
                 case "color": products = productSessionFacade.findByColor(value); break;
                 case "size": products = productSessionFacade.findBySize(value); break;
-                //case "brand&category": products = productSessionFacade.findByBrandAndCategory(searchBy, searchFor); break;
+                //....
             }
 
-            ArrayList<ProductBean> searchResult = getBeans(products);           
+            ProductsBean searchResult = getBean(products);           
             
-            request.setAttribute("searchResult", searchResult);
-            request.getSession().setAttribute("searchResult", searchResult);
+            HttpSession session = request.getSession();
+            session.setAttribute("productToShow", searchResult.getAllProducts().get(0));
+            session.setAttribute("searchResult", searchResult);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Produkt.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("produkt.jsp");
             dispatcher.forward(request, response);
-        }            
+        }
         catch(Exception ex)
-            {
-                System.out.println(ex);
-            }     
+        {
+            System.out.println(ex);
+        }
     }
     
-    private ArrayList<ProductBean> getBeans(Collection<Product> allProducts)
+    private ProductsBean getBean(Collection<Product> allProducts)
     {
-        ArrayList<ProductBean> list = new ArrayList<>();
+        ProductsBean bean = new ProductsBean();
         
         for(Product product : allProducts) {
+
+            byte[] imageData = product.getImage().getContent();
+            String imageDataString = Base64Encoder.getByteArrayString(imageData);
             
-            ProductBean productBean = getProductBean(product);            
-            list.add(productBean);
-    }
+            ProductBean productBean = getProductBean(product);
+            productBean.setImage(imageDataString);
+            
+            bean.getAllProducts().add(productBean);
+        }
         
-        return list;
+        return bean;
     }
     
     private ProductBean getProductBean(Product product)
@@ -75,7 +83,9 @@ public class Search extends HttpServlet {
         productBean.setProductId(product.getProductId());
         productBean.setDescription(product.getDescription());
         productBean.setSize(product.getSize());
+        productBean.setWeight(product.getWeight());
         productBean.setBrand(product.getBrand());
+        productBean.setCategory(product.getCategory());
         productBean.setPrice(product.getPrice());
         productBean.setColor(product.getColor());
         
@@ -83,7 +93,7 @@ public class Search extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
