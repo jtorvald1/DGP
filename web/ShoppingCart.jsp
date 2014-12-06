@@ -16,18 +16,20 @@
         <center>
             <h1>Shopping cart</h1>
             <table>
-                <c:forEach items="${bean.getItems()}" var="cartItem">
+                <c:forEach items="${cart.getItems()}" var="cartItem">
                     <tr>
                         <td>${cartItem.getQuantity()}</td>
                         <td>x</td>
-                        <td>${cartItem.getProduct().getDescription()}</td>
+                        <td>${cartItem.getProduct().getCategory()}</td>
+                        <td>in</td>
+                        <td>${cartItem.getProduct().getColor()}</td>
                     </tr>
                     <br>
                 </c:forEach>
             </table>
-                    Number of items in cart: ${bean.getNumberOfItems()}
+                    Number of items in cart: ${cart.getNumberOfItems()}
                     <br>
-                    Total price: ${bean.getTotalPrice()} money
+                    Total price: ${cart.getTotalPrice()} kr.
                     <br>
                     <br>
                     <form method="post" action="CheckOut">

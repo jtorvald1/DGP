@@ -64,9 +64,9 @@
 <!---------CART START----------------->
   <div id="web_cart_box">
   	<div id="cart_text">
- 	 Gå til kurv
- 	 <br>
- 	 Ønskeliste
+            <a href="ShoppingCart.jsp">Gå til kurv</a>
+            <br>
+            Ønskeliste
   	</div>
     <div class="web_cart_cirkel">${cart.getNumberOfItems()}</div>
     <div id="cart_image"><img src="Images/web_cart.png"></div>
