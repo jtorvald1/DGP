@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ProductDetails", urlPatterns = {"/ProductDetails"})
-public class ProductDetails extends HttpServlet {
+@WebServlet(name = "RefineSearch", urlPatterns = {"/RefineSearch"})
+public class RefineSearch extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession shoppingSession = request.getSession();
         
-        ProductsBean lastSearchedProducts = (ProductsBean) shoppingSession.getAttribute("lastSearchedProducts");
-        String productNumberString = (String) request.getParameter("productNumber");
-        int productNumber = Integer.parseInt(productNumberString);
-            
-        ProductBean productToShow = lastSearchedProducts.getAllProducts().get(productNumber);
+        ProductsBean searchResult = (ProductsBean) shoppingSession.getAttribute("searchResult");
+        String size = (String) request.getParameter("size");
+        String color = (String) request.getParameter("color");
+                    
+        ProductBean productToShow = searchResult.searchByColorAndSize(size, color);
         
-        shoppingSession.setAttribute("detailedProduct", productToShow);
+        shoppingSession.setAttribute("productToShow", productToShow);
         RequestDispatcher dispatcher = request.getRequestDispatcher("produkt.jsp");
 
         dispatcher.forward(request, response);

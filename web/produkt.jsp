@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
@@ -6,15 +7,33 @@
 <meta charset="utf-8">
 <title>Produkt</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-    function addToCart(productNumber)
+    function removeDublicates()
     {
-        document.location.href="AddToCart?productNumber=" + productNumber;
+        var found = [];
+        $("select option").each(function() {
+            if($.inArray(this.value, found) != -1) $(this).remove();
+                found.push(this.value);
+});
+
+    }
+    function addToCart()
+    {
+        document.location.href="AddToCart";
+    }
+    
+    function updateProduct()
+    {
+        var size = $("#selectSize option:selected").text();
+        var color = $("#selectColor option:selected").text();
+        
+        document.location.href="RefineSearch?size=" + size + "&color=" + color;
     }
 </script>
 </head>
 
-<body>
+<body onload="removeDublicates()">
 
 <header>
 <div id="top_image">
@@ -89,10 +108,11 @@
 <!---------CART START----------------->
   <div id="web_cart_box">
   	<div id="cart_text">
- 	 <a href="">Go to cart</a>
- 	 <br>
- 	 <a href="">My wish-list</a>
+            <a href="ShoppingCart.jsp">Gå til kurv</a>
+            <br>
+            Ønskeliste
   	</div>
+    <div class="web_cart_cirkel">${cart.getNumberOfItems()}</div>
     <div id="cart_image"><img src="Images/web_cart.png"></div>
   </div>
 <!---------CART END----------------->
@@ -109,36 +129,34 @@
 <div id="content">
 <!-------------- BOX 1 START --------------->
   <div class="pro_box1">
-    <img src="data:image/jpg;base64,${detailedProduct.getImage()}" width="216" height="258" class="pro_item">
+    <img src="data:image/jpg;base64,${productToShow.getImage()}" width="216" height="258" class="pro_item">
     <div class="pro_item_text">
-    	<div class="pro_item_headline">Navn</div>
+    	<div class="pro_item_headline">${productToShow.getCategory()}</div>
     	<div class="pro_item_describtion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 		eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 	ullamco laboris nisi ut aliquip ex.</div> 
     </div>
 <!-------------- BOX 1.5 START --------------->
 <div class="pro_item_decision">
-  <table width="100%" border="0" cellspacing="4" cellpadding="4" class="pro_item_decision_table">
+    <table width="100%" border="0" cellspacing="4" cellpadding="4" class="pro_item_decision_table">
+        <tr>
+            <td width="14%">Størrelse</td>
+            <td width="39%">
+        <select id="selectSize">
+            <option selected="selected">Vælg størrelse</option>
+            <c:forEach items="${searchResult.getAllProducts()}" var="product">
+            <option value="${product.getSize()}">${product.getSize()}</option>
+            </c:forEach>
+        </select>
+        </tr>
     <tr>
-      <td width="14%">Størrelse</td>
-      <td width="39%">
-        <select>
-          <option selected="selected">Vælg størrelse</option>
-          <option value="">38</option>
-          <option value="">39</option>
-          <option value="">40</option>
-          <option value="">41</option>
-          </select>
-      </td>
-      </tr>
-    <tr>
-      <td>Farve</td>
-      <td>
-        <select>
-          <option selected="selected">Vælg farve</option>
-          <option value="">rød</option> 
-          <option value="">sort</option>
-          </select>
-      </td>
-      </tr>
+        <td>Farve</td>
+        <td>
+        <select id="selectColor">
+            <option selected="selected">Vælg farve</option>
+            <c:forEach items="${searchResult.getAllProducts()}" var="product">
+            <option value="${product.getColor()}">${product.getColor()}</option>
+            </c:forEach>
+        </select>
+    </tr>
     <tr>
       <td>Antal</td>
       <td>
@@ -148,11 +166,12 @@
       </td>
       </tr>
       <tr>
-          <td><input type="button" onclick="addToCart()" value="Smid i kurv"></td>
+          <td><input type="button" onclick="updateProduct()" value="Opdater produkt"></td>
+          <td><input type="button" onclick="addToCart(${productToShow.getProductId()})" value="Smid i kurv"></td>
       </tr>
   </table>
 	<div class="pro_item_stk">Stk. 20.00,-<br>På lager</div>
-    <div class="pro_item_ialt">i alt ${detailedProduct.getPrice()},-</div>
+    <div class="pro_item_ialt">i alt ${productToShow.getPrice()},-</div>
 </div>
 <!-------------- BOX 1.5 END --------------->
   </div>

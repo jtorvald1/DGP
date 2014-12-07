@@ -58,7 +58,7 @@ public class CheckOut extends HttpServlet {
     private ArrayList<Item> getItemsFromDB(ShoppingCart cart)
     {
         ArrayList<CartItem> cartItems = cart.getItems();
-        ArrayList<Item> checkoutItems = new ArrayList<Item>();
+        ArrayList<Item> checkoutItems = new ArrayList<>();
         
         for(CartItem cartItem: cartItems)
         {

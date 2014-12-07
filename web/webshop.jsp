@@ -12,7 +12,7 @@
 <script>
     function goToProductDetails(brand)
     {
-        document.location.href="ProductDetails?searchFor=brand&value=" + brand;
+        document.location.href="Search?searchBy=brand&value=" + brand;
     }
 </script>
 </head>
@@ -80,7 +80,7 @@
     <td><input type="search" name="search" id="search" value="search" width="227px" style="float:right; margin-right:15px;"></td>
   </tr>
   <tr>
-    <td>First &lt;0...${result.getAllProducts().size()}&gt; Last</td>
+    <td>First &lt;0...${lastSearchedProducts.getAllProducts().size()}&gt; Last</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
@@ -92,9 +92,9 @@
 <!---------CART START----------------->
   <div id="web_cart_box">
   	<div id="cart_text">
- 	 Gå til kurv
- 	 <br>
- 	 Ønskeliste
+            <a href="ShoppingCart.jsp">Gå til kurv</a>
+            <br>
+            Ønskeliste
   	</div>
     <div class="web_cart_cirkel">${cart.getNumberOfItems()}</div>
     <div id="cart_image"><img src="Images/web_cart.png"></div>
@@ -122,7 +122,7 @@
                     <div class="web_describtion">${product.getDescription()}</div>
                 </div>
                 <div class="web_price">${product.getPrice()},-</div>
-                <input onclick="goToProductDetails(${product.getBrand()})" type="button" class="web_more_button" value="More">
+                <input onclick="goToProductDetails('Bulls')" type="button" class="web_more_button" value="More">
             </div>
         </c:forEach>
         <!-------------- ITEM END --------------->   
