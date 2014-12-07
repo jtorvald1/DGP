@@ -15,10 +15,6 @@
 <body>
 
 <header>
-    <script>
-    
-    
-</script>
 <div id="index_image">
 <!---------MENU START--------------->
      <a href="#"><img src="Images/JJ_logo.png" id="logo"></a><!--------LOGO: height and width 100 px ---------->
@@ -30,12 +26,6 @@
           <li><a href="registrer.jsp">Registrer</a></li>
 		</ul>
     </nav> 
-<!--------LoginDropdownTestStart--->
-
-
-    
-     
-<!--------LoginDropdownTestend----->     
     <div id="log_ind" >
         <c:choose>
             <c:when test="${empty user}">         
@@ -67,7 +57,7 @@
 
                 </ul>
             </c:when>
-            <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
+            <c:when test="${not empty user}">Logget ind som: <a href="memberInfo.jsp">${user.getFirstName()}</a></c:when>
         </c:choose>
     </div>
 <!---------MENU END----------------->

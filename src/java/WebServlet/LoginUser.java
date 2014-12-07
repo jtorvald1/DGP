@@ -62,6 +62,8 @@ public class LoginUser extends HttpServlet {
         userBean.setFirstName(user.getFirstName());
         userBean.setlastName(user.getLastName());
         userBean.setEmail(user.getEmail());
+        userBean.setAddress(user.getAddress());
+        userBean.setOrders(user.getOrders());
         
         return userBean;  
     }

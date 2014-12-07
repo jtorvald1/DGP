@@ -33,7 +33,35 @@
     </nav> 
     <div id="log_ind" >
         <c:choose>
-            <c:when test="${empty user}"><a href="logind.jsp">Log Ind</a></c:when>
+            <c:when test="${empty user}">         
+                <ul>
+                    <li id="login">
+                        <a id="login-trigger" href="#">
+                            Log in <span>&#x25BC;</span>
+                        </a>
+                        <div id="login-content">
+                            <div id="login_triangle"></div>
+
+                            <form method="post" action="LoginUser">
+
+                                <div id="login_box">
+
+                                    <div><label for="name" id="login_text">Brugernavn: </label><br><input type="text" name="email" id="username" class="login_field"/></div>  
+                                    <div class="glemt"><a href="#">Glemt brugernavn?</a></div><br>
+
+                                    <div><label for="surname" id="login_text">Kode: </label><br><br><input type="password" name="password" id="password" class="login_field"/></div>
+                                    <div class="glemt"><a href="#">Glemt adgangskode?</a></div><br>
+
+                                    <div id="opret"><a href="registrer.jsp">Opret ny bruger</a></div>
+                                    <div><input id="login_button" type="submit" value="Login"></div>
+                                </div>
+
+                            </form>
+                        </div>                     
+                    </li>
+
+                </ul>
+            </c:when>
             <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
         </c:choose>
     </div>

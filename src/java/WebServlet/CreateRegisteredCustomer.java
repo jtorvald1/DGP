@@ -43,6 +43,7 @@ public class CreateRegisteredCustomer extends HttpServlet {
             String lastName = request.getParameter("lastName");
             String address = request.getParameter("address");
             String email = request.getParameter("email");
+            String userName = request.getParameter("email");
             String password = request.getParameter("password");
 
             
@@ -51,6 +52,7 @@ public class CreateRegisteredCustomer extends HttpServlet {
             nonpayingCustomer.setLastName(lastName);
             nonpayingCustomer.setAddress(address);
             nonpayingCustomer.setEmail(email);
+            nonpayingCustomer.setUserName(userName);
             nonpayingCustomer.setPassword(password);
             
             utx.begin();
@@ -59,6 +61,8 @@ public class CreateRegisteredCustomer extends HttpServlet {
             em.persist(nonpayingCustomer);
             
             utx.commit();
+            
+            response.sendRedirect("index.jsp");
             
             /*List customers = em.createQuery("SELECT c FROM CUSTOMERS c").getResultList();
             System.out.println(customers.toString());*/
