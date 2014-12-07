@@ -123,8 +123,8 @@
 <div id="box_type">
         
   <div class="type_content">
-      <input type="radio" name="checkbox" id="radio1" checked="true">
-        <label for="radio1" class="cb_label"> Betalt medlem</label> <!--- when the box is checked highligt the box---->
+        <input type="checkbox" name="checkbox" id="checkbox">
+        <label for="checkbox" class="cb_label"> Betalt medlem</label> <!--- when the box is checked highligt the box---->
     <br>
         <div class="type_text">
         - Lorem ipsum dolor sit amet. <br>
@@ -137,8 +137,8 @@
   </div>
   
  <div class="type_content" style="padding-bottom:30px;">
-        <input type="radio" name="checkbox" id="radio2"> <!--- when the box is checked highligt the box---->
-        <label for="radio2" class="cb_label"> Gratis medlem</label>
+        <input type="checkbox" name="checkbox" id="checkbox"> <!--- when the box is checked highligt the box---->
+        <label for="checkbox" class="cb_label"> Gratis medlem</label>
     <br>
         <div class="type_text">
         - Lorem ipsum dolor sit amet. <br>
@@ -236,33 +236,31 @@
             }
     </script>      
     <!-------------- VALIDATION END --------------->
-            <script type="text/javascript">
-                function select()
-                {
-                 var1=document.getElementById("radio1");
-                 var2=document.getElementById("radio2");
-                 if(var1.checked==true)
-                 {
-                    document.register.action="CreatePayingMember";
-                 }
-                 else
-                 {
-                    document.register.action="CreateRegisteredCustomer";
-                 }
-               }
-            </script>
-        	<form onsubmit="select();" method="post" action="" name="register">
-                    <div><label for="name">Navn: </label><br><input name="firstName" type="text" id="name" class="reg_field"/></div><br>        
-                    <div><label for="surname">Efternavn: </label><br><input name="lastName" type="text" id="surname" class="reg_field"/></div><br>
-                    <div><label for="email">Email: </label><br><input name="email" type="email" id="email" class="reg_field"/></div><br>
-                    <div><label for="phone">Tlf: </label><br><input name="phone" type="text" id="phone" class="reg_field"/></div><br>
-                    <div><label for="address">Adresse: </label><br><input name="address" type="text" id="address" class="reg_field"/></div><br>
-                    <div><label for="pnr">Postnummer: </label><br><input type="text" id="pnr" class="reg_field"/></div><br>
-                    <br>
-                    <div><label for="username">Brugernavn: </label><br><input type="text" id="username" class="reg_field"/></div><br>
-                    <div><label for="pw">Kode: </label><br><input name="password" type="password" id="pw" class="reg_field"/></div><br>
-                    <div><label for="pw">Gentag kode: </label><br><input type="password" id="pw" class="reg_field"/></div><br>
-                    <br>
+            
+        	<form method="post" action="CreatePayingMember">
+                    <c:choose>
+                        <c:when test="${not empty user}"><div><label for="name">Navn: </label><br><input name="firstName" type="text" id="name" class="reg_field" value="${user.getFirstName()}"/></div></c:when>
+                        <br>
+                        <c:when test="${not empty user}"><div><label for="surname">Efternavn: </label><br><input name="lastName" type="text" id="surname" class="reg_field" value="${user.getLastName()}"/></div></c:when>
+                        <br>
+                        <c:when test="${not empty user}"><div><label for="email">Email: </label><br><input name="email" type="email" id="email" class="reg_field" value="${user.getEmail()}"/></div></c:when>
+                        <br>
+                        <c:when test="${not empty user}"><div><label for="phone">Tlf: </label><br><input name="phone" type="text" id="phone" class="reg_field" value=""/></div></c:when>
+                        <br>
+                        <c:when test="${not empty user}"><div><label for="address">Adresse: </label><br><input name="address" type="text" id="address" class="reg_field" value="${user.getAddress()}"/></div></c:when>
+                        <br>
+                        <c:when test="${not empty user}"><div><label for="pnr">Postnummer: </label><br><input type="text" id="pnr" class="reg_field" value=""/></div></c:when>
+                        <br>
+                        <br>
+                        <c:when test="${not empty user}"><div><label for="username">Brugernavn: </label><br><input type="text" id="username" class="reg_field" value="${user.getUserName()}"/></div><br></c:when>
+                        <c:when test="${not empty user}"><div><label for="pw">Kode: </label><br><input name="password" type="password" id="pw" class="reg_field"/></div><br></c:when>
+                        <c:when test="${not empty user}"><div><label for="pw">Gentag kode: </label><br><input type="password" id="pw" class="reg_field"/></div><br></c:when>
+                        <br>
+                    </c:choose>
+                            
+                    
+                    
+                    
                 
 				<input type="checkbox" name="accept_checkbox"><label for="accept_checkbox" id="accept_label"> Jeg har læst og accepter <a href="#">betalings vilkår</a></label>
                 <div><input type="submit" value="Registrér" id="reg_button" onSubmit="return validate(this)"/></div> <!---- have to be moved down 'on top of' the backgorund, don't know if possible as it is in a form-->

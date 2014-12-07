@@ -1,6 +1,9 @@
 
 package JavaBean;
 
+import Model.Webshop.CustomerOrder;
+import java.util.Collection;
+
 public class UserBean {
     
     private Long userId;
@@ -12,16 +15,23 @@ public class UserBean {
     private String userName;
     
     private String email;
+    
+    private String address;
 
+    private Collection<CustomerOrder> orders;
+    
     public UserBean() {
     }
 
-    public UserBean(Long userId, String firstName, String lastName, String userName, String email) {
+    public UserBean(Long userId, String firstName, String lastName, String userName, String email, String address, Collection orders) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.email = email;
+        this.address = address;
+        this.orders = orders;
+        
     }
 
     public Long getUserId() {
@@ -52,7 +62,7 @@ public class UserBean {
         return userName;
     }
 
-    public void setUserName() {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
     
@@ -63,4 +73,21 @@ public class UserBean {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public String getAddress(){
+        return address;
+    }
+    
+    public void setAddress(String address){
+        this.address = address;
+    }
+    
+    public Collection getOrders(){
+        return orders;
+    }
+    
+    public void setOrders(Collection<CustomerOrder> orders) {
+        this.orders = orders;
+    }
+
 }
