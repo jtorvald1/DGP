@@ -45,7 +45,7 @@ public class CreateRegisteredCustomer extends HttpServlet {
             String lastName = request.getParameter("lastName");
             String address = request.getParameter("address");
             String email = request.getParameter("email");
-            String userName = request.getParameter("email");
+            String userName = request.getParameter("username");
             String password = request.getParameter("password");
 
             

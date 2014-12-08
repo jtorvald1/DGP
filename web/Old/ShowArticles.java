@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "News", urlPatterns = {"/News"})
+@WebServlet(name = "blabla", urlPatterns = {"/blabla"})
 public class ShowArticles extends HttpServlet {
     
     @EJB

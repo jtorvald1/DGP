@@ -18,12 +18,11 @@
     <body>
                 <c:forEach items="${result.getUsers()}" var="user" >
                         <form method="get" action="SearchServlet">
-                            ${user.getFirstName()}
-                            <br>
-                            ${user.getLastName()}
-                            <br>
-                            <br>
-                            ${user.getEmail()}
+                            name: ${user.getFirstName()} <br>
+                            suername: ${user.getLastName()} <br>
+                            userId: ${user.getUserId()} <br>
+                            username: ${user.getUserName()} <br>
+                            email: ${user.getEmail()}
                             <br>
                             <br>
                         </form>

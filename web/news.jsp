@@ -120,13 +120,13 @@
 <!------------------------------------------------------------ CONTENT BOXES START ------------------------------------------------------------>    
 <div id="content"><br>
 <!-------------- BOX 1 START --------------->
-        <c:forEach items="${result.getArticles()}" var="article" >
+        <c:forEach items="${result.getArticles()}" var="article" begin="0" end="5">
         <form method="get" action="News">
     	<div class="box">
             <div class="box_headline">${article.getHeadline()}
-            <font size="1">  by Admin On ${article.getCreationDate()} </font> </div>
+                <font size="4">  by <u><a href="memberInfo.jsp?user=1">Admin</a></u> on ${article.getCreationDate()} </font> </div>
         <div class="box_text">${article.getText()}</div><!-------Change text to fit database---->
-        <div class="box_category"> In <span id="cat" onClick='javascript:test("${article.getCategory()}");'>${article.getCategory()} </div>
+        <div class="box_category"> In <span id="cat" onClick='javascript:test("${article.getCategory()}");'><a href="#">${article.getCategory()}</a> </div>
 		</div>
         	<input type="button" class="content_button" value="Bliv Medlem"> <!-------Change value to fit database---->
                 </c:forEach>

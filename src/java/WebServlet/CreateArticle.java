@@ -2,13 +2,12 @@
 package WebServlet;
 
 import Model.News.Article;
+import SessionBean.ArticleFacade;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,15 +22,14 @@ import javax.transaction.UserTransaction;
 @WebServlet(name = "CreateArticle", urlPatterns = {"/CreateArticle"})
 public class CreateArticle extends HttpServlet {
               
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+    @EJB
+    private ArticleFacade articleFacade;
     
     @Resource
     private UserTransaction utx;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        EntityManager em = null;
         
         try
         {
@@ -51,18 +49,13 @@ public class CreateArticle extends HttpServlet {
             
             utx.begin();
             
-            em = emf.createEntityManager();
-            em.persist(newArticle);
+            articleFacade.create(newArticle);
             
             utx.commit();
         }
         catch(Exception e)
         {
             
-        }
-        finally
-        {
-            em.close();
         }
     }
 

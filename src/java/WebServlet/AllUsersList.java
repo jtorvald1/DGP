@@ -11,6 +11,7 @@ import JavaBean.UsersBean;
 import Model.Webshop.Customer;
 import SessionBean.CustomerFacade;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
@@ -35,10 +36,25 @@ public class AllUsersList extends HttpServlet {
 
         try
         {
-            List<Customer> allUsers = customerSessionFacade.findAll();
-            UsersBean bean = getBean(allUsers);
-            sendData(bean, request, response);
+            String userId = request.getParameter("user");
+            if (userId == null) {
+            
+                List<Customer> allUsers = customerSessionFacade.findAll();
+                UsersBean bean = getBean(allUsers);
+                sendData(bean, request, response);
+            }
+            
+            else {
+                Customer find = customerSessionFacade.find(userId);
+                UserBean bean = getUserBean(find);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("memberInfo.jsp");
+                request.setAttribute("user", bean);
+                dispatcher.forward(request, response);
+            }
+            
+
         }
+        
         catch(Exception ex)
         {
             System.out.println(ex);
@@ -79,6 +95,8 @@ public class AllUsersList extends HttpServlet {
     
     private UserBean getUserBean(Customer user) {
         UserBean userBean = new UserBean();
+        userBean.setUserId(user.getCustomerId());
+        userBean.setUserName(user.getUserName());
         userBean.setFirstName(user.getFirstName());
         userBean.setlastName(user.getLastName());
         userBean.setEmail(user.getEmail());

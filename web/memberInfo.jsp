@@ -251,7 +251,7 @@
                  }
                }
             </script>
-            
+                
         	<form onsubmit="select();" method="post" action="" name="register">
                     <c:choose>
                         <c:when test="${not empty user}"><div><label for="name">Navn: </label><br><input name="firstName" type="text" id="name" class="reg_field" value="${user.getFirstName()}"/></div></c:when>

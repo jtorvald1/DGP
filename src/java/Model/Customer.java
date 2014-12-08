@@ -28,13 +28,13 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery(name = "Customer.findByPassword", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email AND u.password = :password"),
     @NamedQuery(name = "Customer.findByUserName", query = "SELECT u FROM CUSTOMERS u WHERE u.userName = :username"),
-    @NamedQuery(name = "Customer.findAllUsers", query = "SELECT u FROM CUSTOMERS u")
+    @NamedQuery(name = "Customer.findAllUsers", query = "SELECT u FROM CUSTOMERS u"),
 })
 public abstract class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "CUSTOMER_ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerId;
     
     @Column(name = "FIRST_NAME", length = 200, nullable = false)

@@ -259,7 +259,7 @@
                     <div><label for="address">Adresse: </label><br><input name="address" type="text" id="address" class="reg_field"/></div><br>
                     <div><label for="pnr">Postnummer: </label><br><input type="text" id="pnr" class="reg_field"/></div><br>
                     <br>
-                    <div><label for="username">Brugernavn: </label><br><input type="text" id="username" class="reg_field"/></div><br>
+                    <div><label for="username">Brugernavn: </label><br><input name="username" type="text" id="username" class="reg_field"/></div><br>
                     <div><label for="pw">Kode: </label><br><input name="password" type="password" id="pw" class="reg_field"/></div><br>
                     <div><label for="pw">Gentag kode: </label><br><input type="password" id="pw" class="reg_field"/></div><br>
                     <br>
