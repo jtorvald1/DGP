@@ -3,6 +3,7 @@ package WebServlet;
 
 import Model.News.Article;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -38,11 +39,15 @@ public class CreateArticle extends HttpServlet {
             String category = request.getParameter("category");
             String articleContent = request.getParameter("articleContent");
             
+            Date myDate = new Date();
+            SimpleDateFormat mdyFormat = new SimpleDateFormat("MM-dd-yyyy");
+            String mdy = mdyFormat.format(myDate);
+            
             Article newArticle = new Article();
             newArticle.setHeadline(headline);
             newArticle.setCategory(category);
             newArticle.setText(articleContent);
-            newArticle.setCreationDate(new Date().toString());
+            newArticle.setCreationDate(mdy);
             
             utx.begin();
             

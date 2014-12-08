@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "ShowArticles", urlPatterns = {"/ShowArticles"})
+@WebServlet(name = "News", urlPatterns = {"/News"})
 public class ShowArticles extends HttpServlet {
     
     @EJB
@@ -53,7 +53,7 @@ public class ShowArticles extends HttpServlet {
     {
         try
         {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("allArticles.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("news.jsp");
             request.setAttribute("result", bean);
             dispatcher.forward(request, response);
         }

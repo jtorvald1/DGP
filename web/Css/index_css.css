@@ -286,7 +286,15 @@ footer {
 	padding-left:15px;
 	padding-top:15px;
 	padding-bottom:10px;
-	}	 
+	}
+        
+.box_category {	
+	font-size:14px;
+	color:#fff;
+	padding-left:15px;
+	padding-top:160px;
+	padding-bottom:5px;
+	}        
 	
 .box_text {
 	font-size:16px;

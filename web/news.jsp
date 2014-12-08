@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="Js/index_javascript.js"></script>
 <meta charset="utf-8">
-<title>Front Page</title>
+<title>News</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 </head>
 
@@ -120,34 +120,24 @@
 <!------------------------------------------------------------ CONTENT BOXES START ------------------------------------------------------------>    
 <div id="content"><br>
 <!-------------- BOX 1 START --------------->
+        <c:forEach items="${result.getArticles()}" var="article" >
+        <form method="get" action="News">
     	<div class="box">
-        <div class="box_headline">Medlemskab</div>
-		<div class="box_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div><!-------Change text to fit database---->
+            <div class="box_headline">${article.getHeadline()}
+            <font size="1">  by Admin On ${article.getCreationDate()} </font> </div>
+        <div class="box_text">${article.getText()}</div><!-------Change text to fit database---->
+        <div class="box_category"> In <span id="cat" onClick='javascript:test("${article.getCategory()}");'>${article.getCategory()} </div>
 		</div>
         	<input type="button" class="content_button" value="Bliv Medlem"> <!-------Change value to fit database---->
+                </c:forEach>
+        <script>
+            function test(category) {
+                document.location.href = "News?cat=" + category;
+            }
+        </script>
+        
 <!-------------- BOX 1 END --------------->
 
-<!-------------- BOX 2 START --------------->
-        <div class="box">
-        <div class="box_headline">Hvad er Jiu Jitsu</div>
-		<div class="box_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 		magna aliqua. <br><br>
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </div><!-------Change text to fit database---->
-		</div>
-      
-        	<input type="button" class="content_button" value="Læs Mere"><!-------Change value to fit database---->
- <!-------------- BOX 2 END --------------->
- 
- <!-------------- BOX 3 STRAT --------------->
-    <div class="box">
- 		<div class="box_headline">Denne Uge - 5% På Alle Bælter</div>
-		<div class="box_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 		magna aliqua. <br>
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </div><!-------Change text to fit database---->
-        
-    </div>
-    		<input type="button" class="content_button" value="Gå til Webshop"><!-------Change value to fit database---->
-		<br><br>
-    </div>
-<!-------------- BOX 3 END --------------->
 <!------------------------------------------------------------ CONTENT BOXES END ------------------------------------------------------------>
 <!-------------------------------------------------------------- INFO BOX START ------------------------------------------------------------->
 
