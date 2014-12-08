@@ -6,7 +6,7 @@
 
 package SessionBean;
 
-import Model.PayingMember;
+import Model.Webshop.PayingMember;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

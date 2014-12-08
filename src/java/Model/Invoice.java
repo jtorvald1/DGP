@@ -1,7 +1,8 @@
 
-package Model;
+package Model.Webshop;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;

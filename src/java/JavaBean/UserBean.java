@@ -1,7 +1,7 @@
 
 package JavaBean;
 
-import Model.CustomerOrder;
+import Model.Webshop.CustomerOrder;
 import java.util.Collection;
 
 public class UserBean {

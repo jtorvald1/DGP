@@ -6,12 +6,15 @@
 
 package WebServlet;
 
-import Model.RegisteredCustomer;
+import Model.Webshop.PayingMember;
+import Model.Webshop.RegisteredCustomer;
 import SessionBean.RegisteredCustomerFacade;
 import java.io.IOException;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
