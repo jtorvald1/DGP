@@ -1,9 +1,9 @@
 
 package WebServlet;
 
-import Model.Webshop.Customer;
-import Model.Webshop.PayingMember;
-import Model.Webshop.RegisteredCustomer;
+import Model.Customer;
+import Model.PayingMember;
+import Model.RegisteredCustomer;
 import SessionBean.CustomerFacade;
 import JavaBean.UserBean;
 import java.io.IOException;

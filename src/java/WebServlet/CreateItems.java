@@ -1,8 +1,8 @@
 
 package WebServlet;
 
-import Model.Webshop.Item;
-import Model.Webshop.Product;
+import Model.Item;
+import Model.Product;
 import SessionBean.ItemFacade;
 import java.io.IOException;
 import javax.annotation.Resource;

@@ -6,7 +6,7 @@
 
 package SessionBean;
 
-import Model.Webshop.RegisteredCustomer;
+import Model.RegisteredCustomer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

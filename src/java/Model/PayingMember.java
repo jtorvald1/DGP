@@ -1,5 +1,5 @@
 
-package Model.Webshop;
+package Model;
 
 import java.io.Serializable;
 import java.util.Collection;

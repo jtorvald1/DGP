@@ -1,8 +1,8 @@
 
 package WebServlet;
 
-import Model.Webshop.Image;
-import Model.Webshop.Product;
+import Model.Image;
+import Model.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
 import java.io.InputStream;

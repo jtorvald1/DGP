@@ -1,7 +1,7 @@
 
 package WebServlet;
 
-import Model.Webshop.PayingMember;
+import Model.PayingMember;
 import SessionBean.PayingMemberFacade;
 import java.io.IOException;
 import javax.annotation.Resource;

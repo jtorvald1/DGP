@@ -1,5 +1,5 @@
 
-package Model.Webshop;
+package Model;
 
 import java.io.Serializable;
 import javax.persistence.Column;

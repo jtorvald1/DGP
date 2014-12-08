@@ -7,7 +7,7 @@
 package WebServlet;
 
 import JavaBean.UserBean;
-import Model.Webshop.Customer;
+import Model.Customer;
 import SessionBean.CustomerFacade;
 import java.io.IOException;
 import javax.annotation.Resource;

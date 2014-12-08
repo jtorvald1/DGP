@@ -3,8 +3,8 @@ package WebServlet;
 
 import JavaBean.ProductBean;
 import JavaBean.ProductsBean;
-import Model.Webshop.Base64Encoder;
-import Model.Webshop.Product;
+import Model.Base64Encoder;
+import Model.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
 import java.util.Collection;
