@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <title>Webshop</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
     function goToProductDetails(brand)
     {

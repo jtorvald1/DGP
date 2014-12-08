@@ -7,13 +7,13 @@
 <meta charset="utf-8">
 <title>Produkt</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
     function removeDublicates()
     {
         var found = [];
         $("select option").each(function() {
-            if($.inArray(this.value, found) != -1) $(this).remove();
+            if($.inArray(this.value, found) !== -1) $(this).remove();
                 found.push(this.value);
 });
 
