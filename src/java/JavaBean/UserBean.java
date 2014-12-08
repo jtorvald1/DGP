@@ -17,19 +17,22 @@ public class UserBean {
     private String email;
     
     private String address;
+    
+    private String password;
 
     private Collection<CustomerOrder> orders;
     
     public UserBean() {
     }
 
-    public UserBean(Long userId, String firstName, String lastName, String userName, String email, String address, Collection orders) {
+    public UserBean(Long userId, String firstName, String lastName, String userName, String email, String address, String password, Collection orders) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.email = email;
         this.address = address;
+        this.password = password;
         this.orders = orders;
         
     }
@@ -80,6 +83,14 @@ public class UserBean {
     
     public void setAddress(String address){
         this.address = address;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
+    
+    public void setPassword (String password){
+        this.password = password;
     }
     
     public Collection getOrders(){

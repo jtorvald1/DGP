@@ -123,8 +123,8 @@
 <div id="box_type">
         
   <div class="type_content">
-        <input type="checkbox" name="checkbox" id="checkbox">
-        <label for="checkbox" class="cb_label"> Betalt medlem</label> <!--- when the box is checked highligt the box---->
+      <input type="radio" name="checkbox" id="radio1" checked="true">
+        <label for="radio1" class="cb_label"> Betalt medlem</label> <!--- when the box is checked highligt the box---->
     <br>
         <div class="type_text">
         - Lorem ipsum dolor sit amet. <br>
@@ -137,8 +137,8 @@
   </div>
   
  <div class="type_content" style="padding-bottom:30px;">
-        <input type="checkbox" name="checkbox" id="checkbox"> <!--- when the box is checked highligt the box---->
-        <label for="checkbox" class="cb_label"> Gratis medlem</label>
+        <input type="radio" name="checkbox" id="radio2"> <!--- when the box is checked highligt the box---->
+        <label for="radio2" class="cb_label"> Gratis medlem</label>
     <br>
         <div class="type_text">
         - Lorem ipsum dolor sit amet. <br>
@@ -236,8 +236,23 @@
             }
     </script>      
     <!-------------- VALIDATION END --------------->
+            <script type="text/javascript">
+                function select()
+                {
+                 var1=document.getElementById("radio1");
+                 var2=document.getElementById("radio2");
+                 if(var1.checked==true)
+                 {
+                    document.register.action="EditPayingMember";
+                 }
+                 else
+                 {
+                    document.register.action="EditRegisteredCustomer";
+                 }
+               }
+            </script>
             
-        	<form method="post" action="CreatePayingMember">
+        	<form onsubmit="select();" method="post" action="" name="register">
                     <c:choose>
                         <c:when test="${not empty user}"><div><label for="name">Navn: </label><br><input name="firstName" type="text" id="name" class="reg_field" value="${user.getFirstName()}"/></div></c:when>
                         <br>

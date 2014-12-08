@@ -8,8 +8,10 @@ package WebServlet;
 
 import Model.Webshop.PayingMember;
 import Model.Webshop.RegisteredCustomer;
+import SessionBean.RegisteredCustomerFacade;
 import java.io.IOException;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -27,8 +29,8 @@ import javax.transaction.UserTransaction;
 @WebServlet(name = "CreateRegisteredCustomer", urlPatterns = {"/CreateRegisteredCustomer"})
 public class CreateRegisteredCustomer extends HttpServlet {
     
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+    @EJB
+    private RegisteredCustomerFacade registeredCustomerFacade;
     
     @Resource
     private UserTransaction utx;
@@ -57,8 +59,7 @@ public class CreateRegisteredCustomer extends HttpServlet {
             
             utx.begin();
             
-            em = emf.createEntityManager();
-            em.persist(nonpayingCustomer);
+            registeredCustomerFacade.create(nonpayingCustomer);
             
             utx.commit();
             
@@ -69,12 +70,9 @@ public class CreateRegisteredCustomer extends HttpServlet {
         }
         catch(Exception e)
         {
-            
+            System.out.println(e);
         }
-        finally
-        {
-            em.close();
-        }
+        
     }
 
     @Override
