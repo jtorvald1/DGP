@@ -4,11 +4,16 @@ package WebServlet;
 import JavaBean.CartItem;
 import JavaBean.ProductBean;
 import JavaBean.ShoppingCart;
+<<<<<<< HEAD
 import JavaBean.UserBean;
 import Model.Customer;
 import Model.CustomerOrder;
 import Model.Item;
 import SessionBean.CustomerFacade;
+=======
+import Model.Webshop.CustomerOrder;
+import Model.Webshop.Item;
+>>>>>>> d7950a2d799517f65159c0a7a8d6a1e6a4ef3376
 import SessionBean.CustomerOrderFacade;
 import SessionBean.ItemFacade;
 import java.io.IOException;

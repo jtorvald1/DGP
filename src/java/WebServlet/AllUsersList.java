@@ -8,9 +8,10 @@ package WebServlet;
 
 import JavaBean.UserBean;
 import JavaBean.UsersBean;
-import Model.Customer;
+import Model.Webshop.Customer;
 import SessionBean.CustomerFacade;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;

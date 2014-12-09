@@ -5,7 +5,7 @@
  */
 package SessionBean;
 
-import Model.Product;
+import Model.Webshop.Product;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

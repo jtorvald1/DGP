@@ -5,7 +5,7 @@
  */
 package SessionBean;
 
-import Model.CustomerOrder;
+import Model.Webshop.CustomerOrder;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
