@@ -4,16 +4,11 @@ package WebServlet;
 import JavaBean.CartItem;
 import JavaBean.ProductBean;
 import JavaBean.ShoppingCart;
-<<<<<<< HEAD
 import JavaBean.UserBean;
-import Model.Customer;
-import Model.CustomerOrder;
-import Model.Item;
+import Model.Webshop.Customer;
 import SessionBean.CustomerFacade;
-=======
 import Model.Webshop.CustomerOrder;
 import Model.Webshop.Item;
->>>>>>> d7950a2d799517f65159c0a7a8d6a1e6a4ef3376
 import SessionBean.CustomerOrderFacade;
 import SessionBean.ItemFacade;
 import java.io.IOException;
@@ -51,21 +46,21 @@ public class CheckOut extends HttpServlet {
             HttpSession ShoppingSession = request.getSession();
             ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
             UserBean userMan = (UserBean)ShoppingSession.getAttribute("user");
-            System.out.println(userMan);
-          /*  Customer findU = findU(userMan);
+
+            Customer findU = findU(userMan);
 
             userTransaction.begin();
             
             ArrayList<Item> items = getItemsFromDB(cart);
             createOrder(items, findU);
             
-            userTransaction.commit();*/
+            userTransaction.commit();
         }
                   
         catch(Exception ex)
         {
             System.out.println(ex);
-            //userTransaction.rollback();
+            userTransaction.rollback();
         }
     }
                   
@@ -92,7 +87,7 @@ public class CheckOut extends HttpServlet {
             CustomerOrder order = new CustomerOrder();
             order.setDateTime(new Date().toString());
             order.setCustomer(userMan);
-            System.out.println(userMan);
+
             customerOrderFacade.create(order);
             
             for(Item item: items) {
@@ -110,7 +105,7 @@ public class CheckOut extends HttpServlet {
     private Customer findU(UserBean userMan)
     {
         Customer findU = customerFacade.find(userMan.getUserId());
-        System.out.println(userMan);
+
         return findU;
     }
 
