@@ -4,8 +4,11 @@ package WebServlet;
 import JavaBean.CartItem;
 import JavaBean.ProductBean;
 import JavaBean.ShoppingCart;
+import JavaBean.UserBean;
+import Model.Customer;
 import Model.CustomerOrder;
 import Model.Item;
+import SessionBean.CustomerFacade;
 import SessionBean.CustomerOrderFacade;
 import SessionBean.ItemFacade;
 import java.io.IOException;
@@ -30,6 +33,8 @@ public class CheckOut extends HttpServlet {
     private ItemFacade itemFacade;
     @EJB
     private CustomerOrderFacade customerOrderFacade;
+    @EJB
+    private CustomerFacade customerFacade;
     
     @Resource
     private UserTransaction userTransaction;
@@ -40,20 +45,25 @@ public class CheckOut extends HttpServlet {
         {
             HttpSession ShoppingSession = request.getSession();
             ShoppingCart cart = (ShoppingCart)ShoppingSession.getAttribute("cart");
+            UserBean userMan = (UserBean)ShoppingSession.getAttribute("user");
+            System.out.println(userMan);
+          /*  Customer findU = findU(userMan);
 
             userTransaction.begin();
             
             ArrayList<Item> items = getItemsFromDB(cart);
-            createOrder(items);
+            createOrder(items, findU);
             
-            userTransaction.commit();
+            userTransaction.commit();*/
         }
+                  
         catch(Exception ex)
         {
             System.out.println(ex);
-            userTransaction.rollback();
+            //userTransaction.rollback();
         }
     }
+                  
 
     private ArrayList<Item> getItemsFromDB(ShoppingCart cart)
     {
@@ -70,12 +80,14 @@ public class CheckOut extends HttpServlet {
         return checkoutItems; 
     }
     
-    private void createOrder(ArrayList<Item> items)
+    private void createOrder(ArrayList<Item> items, Customer userMan)
     {
         try
         {
             CustomerOrder order = new CustomerOrder();
             order.setDateTime(new Date().toString());
+            order.setCustomer(userMan);
+            System.out.println(userMan);
             customerOrderFacade.create(order);
             
             for(Item item: items) {
@@ -87,6 +99,14 @@ public class CheckOut extends HttpServlet {
         {
             System.out.println(ex);
         }
+    }
+    
+    
+    private Customer findU(UserBean userMan)
+    {
+        Customer findU = customerFacade.find(userMan.getUserId());
+        System.out.println(userMan);
+        return findU;
     }
 
     @Override

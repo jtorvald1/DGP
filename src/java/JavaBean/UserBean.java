@@ -101,4 +101,9 @@ public class UserBean {
         this.orders = orders;
     }
 
+    @Override
+    public String toString() {
+        return "UserBean{" + "userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", email=" + email + ", address=" + address + ", password=" + password + ", orders=" + orders + '}';
+    }
+
 }
