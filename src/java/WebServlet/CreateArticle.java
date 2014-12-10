@@ -4,10 +4,12 @@ package WebServlet;
 import Model.News.Article;
 import SessionBean.ArticleFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,7 @@ import javax.transaction.UserTransaction;
  *
  * @author Jacob Nørgaard
  */
-@WebServlet(name = "CreateArticle", urlPatterns = {"/CreateArticle"})
+@WebServlet(name = "NewArticle", urlPatterns = {"/NewArticle"})
 public class CreateArticle extends HttpServlet {
               
     @EJB
@@ -50,6 +52,8 @@ public class CreateArticle extends HttpServlet {
             utx.begin();
             
             articleFacade.create(newArticle);
+            
+            request.getRequestDispatcher("/NewArticle.jsp").forward(request, response);
             
             utx.commit();
         }

@@ -12,6 +12,8 @@ import SessionBean.ArticleFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -56,10 +58,11 @@ public class SearchArticle extends HttpServlet {
             
         }        
     }
-       
+    
     
     private ArticlesBean getBean(Collection<Article> getArticles)
     {
+        
         ArticlesBean bean = new ArticlesBean();
         
         for(Article article : getArticles) {

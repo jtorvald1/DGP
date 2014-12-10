@@ -1,3 +1,8 @@
+<%-- 
+    Document   : NewBlog
+    Created on : Dec 10, 2014, 8:19:55 AM
+    Author     : User
+--%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="Js/index_javascript.js"></script>
 <meta charset="utf-8">
-<title>News</title>
+<title>Create Blogpost</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 </head>
 
@@ -57,8 +62,13 @@
 
                 </ul>
             </c:when>
-            <c:when test="${not empty user}">Logget ind som: <a href="memberInfo.jsp">${user.getFirstName()}</a></c:when>
+            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</a></c:when>
         </c:choose>
+            <script>
+            function test(userid) {
+                document.location.href = "memberInfo.jsp?user=" + userid;
+            }
+            </script>
     </div>
 <!---------MENU END----------------->
 </div>
@@ -69,40 +79,28 @@
   <div id="column_box">
   	<div id="column_content">
   	<!-----------CONTENT 1 START-------------->
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
+    	<input id="menu" type="button" class="button" value="Menu" onClick="redirect()"><!-------Change value to headline from database---->
     	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
+        <div class="column_text">
+            <a href="NewArticle.jsp">New article</a>
+            <br>
+            <a href="NewBlog.jsp">New blog</a>
+            <br>
+            <a href="AdminProducts.jsp">New product</a>
+            <br>
+            Edit product
+            <br>
+            Edit user
+            <br>
         </div>
+        </div>
+        <script>
+            function redirect() {
+                document.location.href = "AdminMenu.jsp";
+            }
+        </script>
     <!-----------CONTENT 1 END---------------->
     
-    <!-----------CONTENT 2 START-------------->
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
-    	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
-        </div>
-    <!-----------CONTENT 2 END---------------->
-    
-    <!-----------CONTENT 3 START-------------->
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
-    	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
-        </div>
-    <!-----------CONTENT 3 END-------------->
-    
-    <!-----------CONTENT 4 START------------>
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
-    	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
-        </div>
-    <!-----------CONTENT 4 END-------------->
     </div>
    <div id="column_space"></div>  
    
@@ -120,22 +118,33 @@
 <!------------------------------------------------------------ CONTENT BOXES START ------------------------------------------------------------>    
 <div id="content"><br>
 <!-------------- BOX 1 START --------------->
-        <c:forEach items="${result.getArticles()}" var="article" begin="0" end="5">
-        <form method="get" action="News">
-    	<div class="box">
-        <div class="box_headline">${article.getHeadline()}
-                <font size="4">  by <u><a href="memberInfo.jsp?user=1">Admin</a></u> on ${article.getCreationDate()} </font> </div>
-        <div class="box_text">${article.getText()}</div><!-------Change text to fit database---->
-        <div class="box_category"> In <span id="cat" onClick='javascript:test("${article.getCategory()}");'><a href="#">${article.getCategory()}</a> </div></div>
-        	<input type="button" class="content_button" value="Bliv Medlem"> <!-------Change value to fit database---->
-                </c:forEach>
+        <div class="admin_box"></div>
+        <div class="admin_headline">Create a new blog post</div>
+        <br><br>
+        <div class="admin_content">
+            <form method="post" action="NewBlog">
+            Headline for the blog: <input type="text" name="headline">
+            <br>
+            <br>
+            Category:
+            <SELECT name="category">
+                <option>Self
+                <option>Life
+                <option>Info
+            </select>
+            <br>
+            <br>
+            <textarea name="blogContent" style="width:250px;height:150px;"></textarea>
+            <br>
+            <br>
+            <input type="submit" value="Create" onclick="message()">
+            </form>
+        </div></div>
         <script>
-            function test(category) {
-                document.location.href = "News?cat=" + category;
-            }
+                function message() {
+                    alert("Blog created!");
+                }
         </script>
-        
-<!-------------- BOX 1 END --------------->
 
 <!------------------------------------------------------------ CONTENT BOXES END ------------------------------------------------------------>
 <!-------------------------------------------------------------- INFO BOX START ------------------------------------------------------------->
