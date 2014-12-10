@@ -1,6 +1,7 @@
 
 package WebServlet;
 
+import JavaBean.ItemsBean;
 import JavaBean.ProductsBean;
 import Model.Webshop.BeanGenerator;
 import Model.Webshop.Product;
@@ -49,9 +50,11 @@ public class AdminProductSearch extends HttpServlet {
                 default: products = productSessionFacade.findAll(); break;
             }
 
-            ProductsBean searchResult = BeanGenerator.getProductsBean(products);        
+            ProductsBean productsBean = BeanGenerator.getProductsBean(products);
+            ItemsBean itemsBean = BeanGenerator.getItemsBean(products);
 
-            request.setAttribute("result", searchResult);
+            request.setAttribute("products", productsBean);
+            request.setAttribute("items", itemsBean);
             RequestDispatcher dispatcher = request.getRequestDispatcher("AdminProducts.jsp");
             dispatcher.forward(request, response);
         }

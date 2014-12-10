@@ -5,12 +5,15 @@ import JavaBean.ArticleBean;
 import JavaBean.ArticlesBean;
 import JavaBean.BlogBean;
 import JavaBean.BlogsBean;
+import JavaBean.ItemBean;
+import JavaBean.ItemsBean;
 import JavaBean.ProductBean;
 import JavaBean.ProductsBean;
 import JavaBean.UserBean;
 import JavaBean.UsersBean;
 import Model.News.Article;
 import Model.News.Blog;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class BeanGenerator {
@@ -123,5 +126,35 @@ public class BeanGenerator {
         blogBean.setCategory(blog.getCategory());
         
         return blogBean;  
+    }
+
+    public static ItemsBean getItemsBean(Collection<Product> products) 
+    {
+        ItemsBean itemsBean = new ItemsBean();
+        
+        for(Product product: products)
+        {
+            itemsBean.getItems().addAll(getItemBeans(product));
+        }
+        return itemsBean;
+    }
+
+    private static ArrayList<ItemBean> getItemBeans(Product product) 
+    {
+        Collection<Item> items = product.getItems();
+        ArrayList<ItemBean> itemBeans = new ArrayList<>();
+        
+        for(Item item: items)
+        {
+            ItemBean itemBean = new ItemBean();
+            itemBean.setItemId(item.getItemId());
+            itemBean.setProductId(product.getProductId());
+            itemBean.setStockId(new Long(1));
+            if(item.getOrder() != null) 
+                itemBean.setOrderId(item.getOrder().getOrderId());
+            
+            itemBeans.add(itemBean);
+        }
+        return itemBeans;
     }
 }
