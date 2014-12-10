@@ -8,6 +8,7 @@ package WebServlet;
 import JavaBean.ArticleBean;
 import JavaBean.ArticlesBean;
 import Model.News.Article;
+import Model.Webshop.BeanGenerator;
 import SessionBean.ArticleFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +38,7 @@ public class SearchArticle extends HttpServlet {
             String category = request.getParameter("cat");
             if (category == null) {
                 List<Article> allArticles = articleFacade.findAll();
-                ArticlesBean bean = getBean(allArticles);
+                ArticlesBean bean = BeanGenerator.getArticlesBean(allArticles);
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("news.jsp");
                 request.setAttribute("result", bean);
@@ -47,7 +48,7 @@ public class SearchArticle extends HttpServlet {
             
             Collection<Article> articles = articleFacade.searchByCategory(category);
             
-            ArticlesBean foundArticles = getBean(articles);
+            ArticlesBean foundArticles = BeanGenerator.getArticlesBean(articles);
             request.setAttribute("result", foundArticles);
             RequestDispatcher dispatcher = request.getRequestDispatcher("news.jsp");
             dispatcher.forward(request, response);
@@ -57,32 +58,6 @@ public class SearchArticle extends HttpServlet {
         {
             
         }        
-    }
-    
-    
-    private ArticlesBean getBean(Collection<Article> getArticles)
-    {
-        
-        ArticlesBean bean = new ArticlesBean();
-        
-        for(Article article : getArticles) {
-  
-            ArticleBean articleBean = getArticleBean(article);
-            
-            bean.getArticles().add(articleBean);
-        }
-        
-        return bean;
-    }
-    
-    private ArticleBean getArticleBean(Article article) {
-        ArticleBean articleBean = new ArticleBean();
-        articleBean.setHeadline(article.getHeadline());
-        articleBean.setText(article.getText());
-        articleBean.setCreationDate(article.getCreationDate());
-        articleBean.setCategory(article.getCategory());
-        
-        return articleBean;  
     }
 
     @Override

@@ -8,6 +8,7 @@ package WebServlet;
 
 import JavaBean.UserBean;
 import JavaBean.UsersBean;
+import Model.Webshop.BeanGenerator;
 import Model.Webshop.Customer;
 import SessionBean.CustomerFacade;
 import java.io.IOException;
@@ -40,19 +41,17 @@ public class AllUsersList extends HttpServlet {
             if (userId == null) {
             
                 List<Customer> allUsers = customerSessionFacade.findAll();
-                UsersBean bean = getBean(allUsers);
+                UsersBean bean = BeanGenerator.getUsersBean(allUsers);
                 sendData(bean, request, response);
             }
             
             else {
                 Customer find = customerSessionFacade.find(userId);
-                UserBean bean = getUserBean(find);
+                UserBean bean = BeanGenerator.getUserBean(find);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("memberInfo.jsp");
                 request.setAttribute("user", bean);
                 dispatcher.forward(request, response);
             }
-            
-
         }
         
         catch(Exception ex)
@@ -77,31 +76,6 @@ public class AllUsersList extends HttpServlet {
         {
             System.out.println(ex);
         }
-    }
-    
-    private UsersBean getBean(Collection<Customer> getUsers)
-    {
-        UsersBean bean = new UsersBean();
-        
-        for(Customer user : getUsers) {
-  
-            UserBean userBean = getUserBean(user);
-            
-            bean.getUsers().add(userBean);
-        }
-        
-        return bean;
-    }
-    
-    private UserBean getUserBean(Customer user) {
-        UserBean userBean = new UserBean();
-        userBean.setUserId(user.getCustomerId());
-        userBean.setUserName(user.getUserName());
-        userBean.setFirstName(user.getFirstName());
-        userBean.setlastName(user.getLastName());
-        userBean.setEmail(user.getEmail());
-        
-        return userBean;  
     }
 
     @Override

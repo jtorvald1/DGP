@@ -1,9 +1,8 @@
 
 package WebServlet;
 
-import JavaBean.ProductBean;
 import JavaBean.ProductsBean;
-import Model.Webshop.Base64Encoder;
+import Model.Webshop.BeanGenerator;
 import Model.Webshop.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
@@ -50,7 +49,7 @@ public class AdminProductSearch extends HttpServlet {
                 default: products = productSessionFacade.findAll(); break;
             }
 
-            ProductsBean searchResult = getBean(products);           
+            ProductsBean searchResult = BeanGenerator.getProductsBean(products);        
 
             request.setAttribute("result", searchResult);
             RequestDispatcher dispatcher = request.getRequestDispatcher("AdminProducts.jsp");
@@ -60,39 +59,6 @@ public class AdminProductSearch extends HttpServlet {
         {
             System.out.println(ex);
         }
-    }
-    
-    private ProductsBean getBean(Collection<Product> allProducts)
-    {
-        ProductsBean bean = new ProductsBean();
-        
-        for(Product product : allProducts) {
-
-            byte[] imageData = product.getImage().getContent();
-            String imageDataString = Base64Encoder.getByteArrayString(imageData);
-            
-            ProductBean productBean = getProductBean(product);
-            productBean.setImage(imageDataString);
-            
-            bean.getAllProducts().add(productBean);
-        }
-        
-        return bean;
-    }
-    
-    private ProductBean getProductBean(Product product)
-    {
-        ProductBean productBean = new ProductBean();
-        productBean.setProductId(product.getProductId());
-        productBean.setDescription(product.getDescription());
-        productBean.setSize(product.getSize());
-        productBean.setWeight(product.getWeight());
-        productBean.setBrand(product.getBrand());
-        productBean.setCategory(product.getCategory());
-        productBean.setPrice(product.getPrice());
-        productBean.setColor(product.getColor());
-        
-        return productBean;                
     }
 
     @Override

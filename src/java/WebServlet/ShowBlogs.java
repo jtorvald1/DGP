@@ -9,6 +9,7 @@ package WebServlet;
 import JavaBean.BlogBean;
 import JavaBean.BlogsBean;
 import Model.News.Blog;
+import Model.Webshop.BeanGenerator;
 import SessionBean.BlogFacade;
 import java.io.IOException;
 import java.util.Collection;
@@ -36,7 +37,7 @@ public class ShowBlogs extends HttpServlet {
         try
         {
             List<Blog> allBlogs = blogSessionFacade.findAll();
-            BlogsBean bean = getBean(allBlogs);
+            BlogsBean bean = BeanGenerator.getBlogsBean(allBlogs);
             sendData(bean, request, response);
         }
         catch(Exception ex)
@@ -61,30 +62,6 @@ public class ShowBlogs extends HttpServlet {
         {
             System.out.println(ex);
         }
-    }
-    
-    private BlogsBean getBean(Collection<Blog> getBlogs)
-    {
-        BlogsBean bean = new BlogsBean();
-        
-        for(Blog blog : getBlogs) {
-  
-            BlogBean blogBean = getBlogBean(blog);
-            
-            bean.getBlogs().add(blogBean);
-        }
-        
-        return bean;
-    }
-    
-    private BlogBean getBlogBean(Blog blog) {
-        BlogBean blogBean = new BlogBean();
-        blogBean.setHeadline(blog.getHeadline());
-        blogBean.setText(blog.getText());
-        blogBean.setCreationDate(blog.getCreationDate());
-        blogBean.setCategory(blog.getCategory());
-        
-        return blogBean;  
     }
 
     @Override
