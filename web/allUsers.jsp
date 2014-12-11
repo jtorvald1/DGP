@@ -18,7 +18,7 @@
     <body>
                 <c:forEach items="${result.getUsers()}" var="user" >
                         <form method="get" action="SearchServlet">
-                            name: ${user.getFirstName()} <br>
+                            name: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span> <br>
                             suername: ${user.getLastName()} <br>
                             userId: ${user.getUserId()} <br>
                             username: ${user.getUserName()} <br>
@@ -27,5 +27,10 @@
                             <br>
                         </form>
                 </c:forEach>
+            <script>
+            function test(userid) {
+                document.location.href = "memberInfo.jsp?user=" + userid;
+            }
+            </script>
     </body>
 </html>

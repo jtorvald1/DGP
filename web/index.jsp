@@ -57,7 +57,7 @@
 
                 </ul>
             </c:when>
-            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</a></c:when>
+            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span></c:when>
         </c:choose>
             <script>
             function test(userid) {
