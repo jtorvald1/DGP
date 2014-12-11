@@ -257,6 +257,33 @@ footer {
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------INDEX CSS START--------------------------------------------------------------------*/
 
+/*---------------------------------ADMIN MENU----------------------------------------*/
+
+.admin_box {
+        width: 538px;
+	height: 800px;
+	margin-left:65px;
+	margin-top:26px;
+	background-color:#434249;   
+        }
+
+.admin_headline {
+            font-size:24px;
+            color:#e2dede;
+            margin-top:-700px;
+            padding-left:250px;
+        }        
+
+.admin_content {
+            font-size:16px;
+            color:#e2dede;
+            margin-top:40px;
+            padding-left:120px;
+            padding-right:30px;
+        }
+        
+/*---------------------------------ADMIN MENU END----------------------------------------*/        
+
 
 /*---------------------------------CONTENT CSS START----------------------------------------*/
 
@@ -267,6 +294,7 @@ footer {
 	margin-top:26px;
 	background-color:#434249;
 	}
+        
 
 .content_button {
 	background-color:#9a0b1f;

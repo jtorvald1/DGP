@@ -2,12 +2,12 @@
 package WebServlet;
 
 import Model.News.Blog;
+import SessionBean.BlogFacade;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,22 +15,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author Jacob Nørgaard
- */
-@WebServlet(name = "CreateBlog", urlPatterns = {"/CreateBlog"})
+
+@WebServlet(name = "NewBlog", urlPatterns = {"/NewBlog"})
 public class CreateBlog extends HttpServlet {
               
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+    @EJB
+    private BlogFacade blogFacade;
     
     @Resource
     private UserTransaction utx;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        EntityManager em = null;
+        
         
         try
         {
@@ -44,20 +41,21 @@ public class CreateBlog extends HttpServlet {
             newBlog.setText(blogContent);
             newBlog.setCreationDate(new Date().toString());
             
+            Date myDate = new Date();
+            SimpleDateFormat mdyFormat = new SimpleDateFormat("MM-dd-yyyy");
+            String mdy = mdyFormat.format(myDate);
+            
             utx.begin();
             
-            em = emf.createEntityManager();
-            em.persist(newBlog);
+            blogFacade.create(newBlog);
+            
+            request.getRequestDispatcher("/NewBlog.jsp").forward(request, response);
             
             utx.commit();
         }
         catch(Exception e)
         {
             
-        }
-        finally
-        {
-            em.close();
         }
     }
 

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : NewArticle
+    Created on : Dec 10, 2014, 7:24:37 AM
+    Author     : User
+--%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="Js/index_javascript.js"></script>
 <meta charset="utf-8">
-<title>Front Page</title>
+<title>Create Article</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 </head>
 
@@ -57,7 +62,7 @@
 
                 </ul>
             </c:when>
-            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span></c:when>
+            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</a></c:when>
         </c:choose>
             <script>
             function test(userid) {
@@ -74,40 +79,28 @@
   <div id="column_box">
   	<div id="column_content">
   	<!-----------CONTENT 1 START-------------->
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
+    	<input id="menu" type="button" class="button" value="Menu" onClick="redirect()"><!-------Change value to headline from database---->
     	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
+        <div class="column_text">
+            <a href="NewArticle.jsp">New article</a>
+            <br>
+            <a href="NewBlog.jsp">New blog</a>
+            <br>
+            <a href="AdminProducts.jsp">New product</a>
+            <br>
+            Edit product
+            <br>
+            Edit user
+            <br>
         </div>
+        </div>
+        <script>
+            function redirect() {
+                document.location.href = "AdminMenu.jsp";
+            }
+        </script>
     <!-----------CONTENT 1 END---------------->
     
-    <!-----------CONTENT 2 START-------------->
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
-    	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
-        </div>
-    <!-----------CONTENT 2 END---------------->
-    
-    <!-----------CONTENT 3 START-------------->
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
-    	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
-        </div>
-    <!-----------CONTENT 3 END-------------->
-    
-    <!-----------CONTENT 4 START------------>
-    	<input type="button" class="button" value="Overskrift" onClick="#"><!-------Change value to headline from database---->
-    	<div> 
-        <div class="column_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim veniam...<!---Change text to fit database, show XXX charaters--->
-        <br><br>
-		<b><a href="#">Læs mere</a></div></b>
-        </div>
-    <!-----------CONTENT 4 END-------------->
     </div>
    <div id="column_space"></div>  
    
@@ -125,34 +118,34 @@
 <!------------------------------------------------------------ CONTENT BOXES START ------------------------------------------------------------>    
 <div id="content"><br>
 <!-------------- BOX 1 START --------------->
-    	<div class="box">
-        <div class="box_headline">Medlemskab</div>
-		<div class="box_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div><!-------Change text to fit database---->
-		</div>
-        	<input type="button" class="content_button" value="Bliv Medlem"> <!-------Change value to fit database---->
-<!-------------- BOX 1 END --------------->
+        <div class="admin_box"></div>
+        <div class="admin_headline">Create a new article</div>
+        <br><br>
+        <div class="admin_content">
+            <form method="post" action="NewArticle">
+            Headline for article: <input type="text" name="headline">
+            <br>
+            <br>
+            Category:
+            <SELECT name="category">
+                <option>Product News
+                <option>Events
+                <option>Sports
+            </select>
+            <br>
+            <br>
+            <textarea name="articleContent" style="width:250px;height:150px;"></textarea>
+            <br>
+            <br>
+            <input type="submit" value="Create" onclick="message()">
+            </form>
+        </div></div>
+        <script>
+                function message() {
+                    alert("Article created!");
+                }
+        </script>
 
-<!-------------- BOX 2 START --------------->
-        <div class="box">
-        <div class="box_headline">Hvad er Jiu Jitsu</div>
-		<div class="box_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 		magna aliqua. <br><br>
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </div><!-------Change text to fit database---->
-		</div>
-      
-        	<input type="button" class="content_button" value="Læs Mere"><!-------Change value to fit database---->
- <!-------------- BOX 2 END --------------->
- 
- <!-------------- BOX 3 STRAT --------------->
-    <div class="box">
- 		<div class="box_headline">Denne Uge - 5% På Alle Bælter</div>
-		<div class="box_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 		magna aliqua. <br>
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </div><!-------Change text to fit database---->
-        
-    </div>
-    		<input type="button" class="content_button" value="Gå til Webshop"><!-------Change value to fit database---->
-		<br><br>
-    </div>
-<!-------------- BOX 3 END --------------->
 <!------------------------------------------------------------ CONTENT BOXES END ------------------------------------------------------------>
 <!-------------------------------------------------------------- INFO BOX START ------------------------------------------------------------->
 

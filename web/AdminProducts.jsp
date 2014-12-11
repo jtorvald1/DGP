@@ -32,7 +32,7 @@
                 <td>Price</td>
                 <td>Weight</td>
             </tr>
-            <c:forEach items="${result.getAllProducts()}" var="product" >
+            <c:forEach items="${products.getAllProducts()}" var="product" >
                 <tr>
                     <td>${product.getProductId()}</td>
                     <td>${product.getCategory()}</td>
@@ -49,22 +49,32 @@
         <table class="tg">
             <tr>
                 <td>Item ID</td>
-                <td>Product category</td>
-                <td>Brand</td>
-                <td>Color</td>
+                <td>Product</td>
+                <td>Stock</td>
+                <td>Order</td>
             </tr>
-            <c:forEach items="${items.getAllItems()}" var="item" >
+            <c:forEach items="${items.getItems()}" var="item" >
                 <tr>
                     <td>${item.getItemId()}</td>
-                    <td>${item.getOrder()}</td>
-                    <td>${item.getProduct()}</td>
-                    <td>${item.getStock()}</td>
+                    <td>${item.getProductId()}</td>
+                    <td>${item.getStockId()}</td>
+                    <td><c:choose>
+                            <c:when test="${empty item.getOrderId()}">(Not sold yet)</c:when>
+                            <c:otherwise>${item.getItemId()}</c:otherwise>
+                        </c:choose>    
+                    </td>
                 </tr>
             </c:forEach>
         </table>
         <br>
         <br>
         <input type="text" id="productID" size="50">
+        <input type="text" id="category" size="50">
+        <input type="text" id="brand" size="50">
+        <input type="text" id="color" size="50">
+        <input type="text" id="size" size="50">
+        <input type="text" id="price" size="50">
+        <input type="text" id="weight" size="50">
         <input type="button" onclick="submit()" value="submit">
     </body>
 </html>
