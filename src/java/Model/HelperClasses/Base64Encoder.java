@@ -1,5 +1,5 @@
 
-package Model.Webshop;
+package Model.HelperClasses;
 
 import org.apache.commons.codec.binary.Base64;
 

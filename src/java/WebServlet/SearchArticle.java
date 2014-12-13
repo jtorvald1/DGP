@@ -8,7 +8,7 @@ package WebServlet;
 import JavaBean.ArticleBean;
 import JavaBean.ArticlesBean;
 import Model.News.Article;
-import Model.Webshop.BeanGenerator;
+import Model.HelperClasses.JavaBeanGenerator;
 import SessionBean.ArticleFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,7 @@ public class SearchArticle extends HttpServlet {
             String category = request.getParameter("cat");
             if (category == null) {
                 List<Article> allArticles = articleFacade.findAll();
-                ArticlesBean bean = BeanGenerator.getArticlesBean(allArticles);
+                ArticlesBean bean = JavaBeanGenerator.getArticlesBean(allArticles);
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("news.jsp");
                 request.setAttribute("result", bean);
@@ -48,7 +48,7 @@ public class SearchArticle extends HttpServlet {
             
             Collection<Article> articles = articleFacade.searchByCategory(category);
             
-            ArticlesBean foundArticles = BeanGenerator.getArticlesBean(articles);
+            ArticlesBean foundArticles = JavaBeanGenerator.getArticlesBean(articles);
             request.setAttribute("result", foundArticles);
             RequestDispatcher dispatcher = request.getRequestDispatcher("news.jsp");
             dispatcher.forward(request, response);

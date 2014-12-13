@@ -22,11 +22,15 @@ import javax.persistence.OneToOne;
  */
 @Entity(name = "PRODUCTS")
 @NamedQueries({                                        
-    @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE p.brand = :brand"),
-    @NamedQuery(name = "Product.findByColor", query = "SELECT p FROM PRODUCTS p WHERE p.color = :color"),
-    @NamedQuery(name = "Product.findBySize", query = "SELECT p FROM PRODUCTS p WHERE p.size = :size")/*,
-    @NamedQuery(name = "Product.findByBrand&Category", query = "SELECT p FROM PRODUCTS p WHERE p.brand = :brand AND p.category = :category")*/
+    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM PRODUCTS p WHERE p.productId = :productId"),
+    @NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.category) = UPPER(:category)"),
+    @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.brand) = UPPER(:brand)"),
+    @NamedQuery(name = "Product.findByColor", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.color) = UPPER(:color)"),
+    @NamedQuery(name = "Product.findBySize", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.size) = UPPER(:size)"),
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM PRODUCTS p WHERE p.price = :price"),
+    @NamedQuery(name = "Product.findByWeight", query = "SELECT p FROM PRODUCTS p WHERE p.weight = :weight")
 })
+
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -155,10 +159,5 @@ public class Product implements Serializable {
 
     public void setImage(Image image) {
         this.image = image;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" + "productId=" + productId + ", description=" + description + ", brand=" + brand + ", color=" + color + ", size=" + size + ", price=" + price + ", weight=" + weight + ", category=" + category + ", items=" + items + ", image=" + image + '}';
     }
 }

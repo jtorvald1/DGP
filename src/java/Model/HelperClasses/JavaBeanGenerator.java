@@ -1,5 +1,5 @@
 
-package Model.Webshop;
+package Model.HelperClasses;
 
 import JavaBean.ArticleBean;
 import JavaBean.ArticlesBean;
@@ -13,30 +13,29 @@ import JavaBean.UserBean;
 import JavaBean.UsersBean;
 import Model.News.Article;
 import Model.News.Blog;
+import Model.Webshop.Customer;
+import Model.Webshop.Item;
+import Model.Webshop.Product;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BeanGenerator {
+public class JavaBeanGenerator {
     
     public static ProductsBean getProductsBean(Collection<Product> products)
     {
         ProductsBean bean = new ProductsBean();
         
-        for(Product product : products) {
+        for(Product product : products) {          
 
-            byte[] imageData = product.getImage().getContent();
-            String imageDataString = Base64Encoder.getByteArrayString(imageData);
-            
             ProductBean productBean = getProductBean(product);
-            productBean.setImage(imageDataString);
-            
+                        
             bean.getAllProducts().add(productBean);
         }
         
         return bean;
     }
     
-    private static ProductBean getProductBean(Product product)
+    public static ProductBean getProductBean(Product product)
     {
         ProductBean productBean = new ProductBean();
         productBean.setProductId(product.getProductId());
@@ -47,6 +46,11 @@ public class BeanGenerator {
         productBean.setCategory(product.getCategory());
         productBean.setPrice(product.getPrice());
         productBean.setColor(product.getColor());
+        
+        byte[] imageData = product.getImage().getContent();
+        String imageDataString = Base64Encoder.getByteArrayString(imageData);
+        
+        productBean.setImage(imageDataString);
         
         return productBean;                
     }
@@ -134,7 +138,8 @@ public class BeanGenerator {
         
         for(Product product: products)
         {
-            itemsBean.getItems().addAll(getItemBeans(product));
+            ArrayList<ItemBean> itemBeans = getItemBeans(product);
+            itemsBean.getItems().addAll(itemBeans);
         }
         return itemsBean;
     }

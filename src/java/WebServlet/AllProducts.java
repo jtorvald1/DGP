@@ -3,8 +3,8 @@ package WebServlet;
 
 import JavaBean.ProductBean;
 import JavaBean.ProductsBean;
-import Model.Webshop.Base64Encoder;
-import Model.Webshop.BeanGenerator;
+import Model.HelperClasses.Base64Encoder;
+import Model.HelperClasses.JavaBeanGenerator;
 import Model.Webshop.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class AllProducts extends HttpServlet {
         try
         {
             List<Product> allProducts = productSessionFacade.findAll();
-            ProductsBean lastSearchedProducts = BeanGenerator.getProductsBean(allProducts);
+            ProductsBean lastSearchedProducts = JavaBeanGenerator.getProductsBean(allProducts);
 
             HttpSession session = request.getSession();
             session.setAttribute("lastSearchedProducts", lastSearchedProducts);
