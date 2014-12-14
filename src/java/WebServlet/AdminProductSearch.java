@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminProductSearch extends HttpServlet {
 
     @EJB
-    private ProductFacade productSessionFacade;
+    private ProductFacade productFacade;
  
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -36,15 +36,15 @@ public class AdminProductSearch extends HttpServlet {
             switch(searchBy)
             {
                 case "productId": 
-                    Product product = productSessionFacade.find(Long.parseLong(value));
+                    Product product = productFacade.find(Long.parseLong(value));
                     products = addToList(product, request); break;
-                case "category": products = productSessionFacade.findByCategory(value); break;
-                case "brand": products = productSessionFacade.findByBrand(value); break;
-                case "color": products = productSessionFacade.findByColor(value); break;
-                case "size": products = productSessionFacade.findBySize(value); break;
-                case "price": products = productSessionFacade.findByPrice(Double.parseDouble(value)); break;
-                case "weight": products = productSessionFacade.findByWeight(Double.parseDouble(value)); break;
-                default: products = productSessionFacade.findAll(); break;
+                case "category": products = productFacade.findByCategory(value); break;
+                case "brand": products = productFacade.findByBrand(value); break;
+                case "color": products = productFacade.findByColor(value); break;
+                case "size": products = productFacade.findBySize(value); break;
+                case "price": products = productFacade.findByPrice(Double.parseDouble(value)); break;
+                case "weight": products = productFacade.findByWeight(Double.parseDouble(value)); break;
+                default: products = productFacade.findAll(); break;
             }
 
             ProductsBean productsBean = JavaBeanGenerator.getProductsBean(products);

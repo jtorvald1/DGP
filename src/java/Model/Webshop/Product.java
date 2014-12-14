@@ -21,8 +21,7 @@ import javax.persistence.OneToOne;
  * @author jakelhamselv
  */
 @Entity(name = "PRODUCTS")
-@NamedQueries({                                        
-    @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM PRODUCTS p WHERE p.productId = :productId"),
+@NamedQueries({     
     @NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.category) = UPPER(:category)"),
     @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.brand) = UPPER(:brand)"),
     @NamedQuery(name = "Product.findByColor", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.color) = UPPER(:color)"),

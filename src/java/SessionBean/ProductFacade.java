@@ -7,6 +7,7 @@ package SessionBean;
 
 import Model.Webshop.Product;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,15 +29,6 @@ public class ProductFacade extends AbstractFacade<Product> {
 
     public ProductFacade() {
         super(Product.class);
-    }
-    
-    public Collection<Product> findById(Long productId)
-    {
-        Query query = em.createNamedQuery("Product.findByProductId");
-        query.setParameter("productId", productId);
-        Collection<Product> products = query.getResultList();
-        
-        return products;
     }
     
     public Collection<Product> findByCategory(String category)

@@ -15,6 +15,9 @@
             .fields {width: 400px;}
             #container {margin-left: auto; margin-right: auto; width: 1100px;}
         </style>
+        <script src="Js/alertify.min.js"></script>
+        <link rel="stylesheet" href="Css/alertify.min.css" />
+        <link rel="stylesheet" href="Css/default.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="Js/AdminProducts.js"></script>
     </head>
@@ -70,7 +73,7 @@
             <br>
             <br>
             <div id="content">
-                <form method="post" action="AdminProductEdit" enctype="multipart/form-data" onsubmit="return confirm(this)">
+                <form method="post" action="AdminProductEdit" enctype="multipart/form-data" onsubmit="return confirmForm(this)">
                     <table>
                         <tr>
                             <td>Product ID: </td>

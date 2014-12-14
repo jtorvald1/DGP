@@ -78,7 +78,7 @@ function search()
         default: value = "all"; validationResult = ""; break;
     }
     if(validationResult !== "")
-        alert(validationResult);
+        alertify.alert(validationResult);
     else
         document.location.href="AdminProductSearch?searchBy=" + searchBy +"&value=" + value;
 }
@@ -86,20 +86,26 @@ function search()
 function deleteProduct()
 {
     var productId = $("#productId").val();
-    var validationResult = validateProductID(productId);
-
-    if(validationResult !== "")
-        alert(validationResult);
-    else
-        document.location.href="AdminProductEdit?operation=delete&productId=" + productId;
+    var confirmed = confirm("Are you sure you want to delete product number " + productId + "?");
+    
+    if(confirmed) {
+        var validationResult = validateProductID(productId);
+        if(validationResult !== "")
+            alertify.alert(validationResult);
+        else
+            document.location.href="AdminProductEdit?operation=delete&productId=" + productId;
+    }
 }
 
-function confirm(form)
+function confirmForm(form)
 {
-    var validationResult = validateForm(form);
-    if(validationResult)
-        return true;
+    var confirmed = confirm("Are you sure you want to proceed?");
     
+    if(confirmed) {
+        var validationResult = validateForm(form);
+        if(validationResult)
+        return true;
+    }
     return false;
 }
 
@@ -118,7 +124,7 @@ function validateForm(form)
     
     if(fail !== "")
     {
-        alert(fail);
+        alertify.alert(fail);
         return false;
     }
     else

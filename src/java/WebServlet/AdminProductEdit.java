@@ -56,14 +56,10 @@ public class AdminProductEdit extends HttpServlet {
             
             if(product != null)
             {
-                Collection<Item> items = product.getItems();
+                deleteItems(product);
                 
                 utx.begin();
-                       
-                for(Item item: items)
-                {
-                    itemFacade.remove(item);
-                }
+
                 productFacade.remove(product);
             
                 utx.commit();
@@ -75,7 +71,28 @@ public class AdminProductEdit extends HttpServlet {
             utx.rollback();
             System.out.println(ex);
         }
-    }  
+    }
+    
+    private void deleteItems(Product product) throws IllegalStateException, SecurityException, SystemException
+    {
+        try
+        {
+            Collection<Item> items = product.getItems();
+            
+            utx.begin();
+
+            for(Item item: items)
+            {
+                itemFacade.remove(item);
+            }
+            utx.commit();
+        }
+        catch(Exception ex)
+        {
+            utx.rollback();
+            System.out.println(ex);
+        }
+    }
 
     private void editProduct(String productId, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, SecurityException, SystemException 
     {
@@ -154,7 +171,7 @@ public class AdminProductEdit extends HttpServlet {
         return product;
     }
     
-        private Product getProduct(HttpServletRequest request)
+    private Product getProduct(HttpServletRequest request)
     {
         Product product = null;
         

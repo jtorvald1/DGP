@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -7,8 +8,13 @@
 <meta charset="iso-8859-1">
 <title>Payment</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
+<script>
+    function checkOut()
+    {
+        document.location.href="CheckOut";
+    }
+</script>
 </head>
-
 <body>
 <header>
 <div id="top_image">
@@ -90,7 +96,7 @@
  	 <br>
  	 Ønskeliste
   	</div>
-    <div class="web_cart_cirkel">4</div>
+    <div class="web_cart_cirkel">${cart.getNumberOfItems()}</div>
     <div id="cart_image"><img src="Images/web_cart.png"></div>
   </div>
 <!---------CART END----------------->
@@ -119,48 +125,28 @@
 <!-------------- BOX START --------------->
     <div class="pay_box">
     	<!-------------- ITEM 1 START --------------->
+        <c:forEach items="${cart.getItems()}" var="cartItem">
         <div class="web_itembox_first">            
-            <img src="Images/webshop_item1.png" width="93" height="111" class="web_item">
+            <img src="data:image/jpg;base64, ${cartItem.getProduct().getImage()}" width="93" height="111" class="web_item">
             <div class="web_itemtext">
-            	<div class="web_headline">Something</div>
-            	<div class="web_describtion">Antal <input name="" type="text" style="width:73px;"> <img src="Images/negativ.png"> <img src="images/plus.png"></div>
+            	<div class="web_headline">${cartItem.getProduct().getCategory()}</div>
+            	<div class="web_describtion">Antal <input name="" value="${cartItem.getQuantity()}" type="text" style="width:73px;"> <img src="Images/negativ.png"> <img src="Images/plus.png"></div>
             </div>
-            <div class="web_price">100,-</div>
+            <div class="web_price">${cartItem.getProduct().getPrice()},-</div>
         </div>
-        <!-------------- ITEM 1 END --------------->   
-        <!-------------- ITEM 2 START --------------->
-        <div class="web_itembox">            
-            <img src="Images/webshop_item1.png" width="93" height="111" class="web_item">
-            <div class="web_itemtext">
-            	<div class="web_headline">Something</div>
-            	<div class="web_describtion">Antal <input name="" type="text" style="width:73px;"> <img src="Images/negativ.png"> <img src="images/plus.png"></div>
-            </div>
-            <div class="web_price">100,-</div>
-        </div>
-        <!-------------- ITEM 2 END ---------------> 
-        <!-------------- ITEM 3 START --------------->
-        <div class="web_itembox">            
-            <img src="Images/webshop_item1.png" width="93" height="111" class="web_item">
-            <div class="web_itemtext">
-            	<div class="web_headline">Something</div>
-            	<div class="web_describtion">Antal <input name="" type="text" style="width:73px;"> <img src="Images/negativ.png"> <img src="images/plus.png"></div>
-            </div>
-            <div class="web_price">100,-</div>
-        </div>
-        <!-------------- ITEM 3 END ---------------> 
-        <!-------------- ITEM 4 START --------------->
-        <div class="web_itembox">            
-            <img src="Images/webshop_item1.png" width="93" height="111" class="web_item">
-            <div class="web_itemtext">
-            	<div class="web_headline">Something</div>
-            	<div class="web_describtion">Antal <input name="" type="text" style="width:73px;"> <img src="Images/negativ.png"> <img src="images/plus.png"></div>
-            </div>
-            <div class="web_price">100,-</div>
-        </div>
-        <!-------------- ITEM 4 END ---------------> 
-        
-        <div id="pay_ialt">I alt 400,-</div>
-
+        <!-------------- ITEM 1 END --------------->    
+        </c:forEach>
+        <div id="pay_ialt">I alt ${cart.getTotalPrice()},-</div>
+        <br>
+        <br>
+        <c:choose>
+            <c:when test="${empty user}">
+                <input type="button" class="column_botton" value="Log ind">
+            </c:when>
+            <c:otherwise>
+                <input type="button" onclick="checkOut()" class="column_botton" value="Betal">
+            </c:otherwise>
+        </c:choose>
 	</div>
 <!-------------- BOX END --------------->
 <!------------------------------------------------------------ CONTENT BOXES END ------------------------------------------------------------>

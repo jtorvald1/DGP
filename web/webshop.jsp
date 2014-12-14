@@ -92,7 +92,7 @@
 <!---------CART START----------------->
   <div id="web_cart_box">
   	<div id="cart_text">
-            <a href="ShoppingCart.jsp">Gå til kurv</a>
+            <a href="payment.jsp">Gå til kurv</a>
             <br>
             Ønskeliste
   	</div>
@@ -122,7 +122,7 @@
                     <div class="web_describtion">${product.getDescription()}</div>
                 </div>
                 <div class="web_price">${product.getPrice()},-</div>
-                <input onclick="goToProductDetails('Bulls')" type="button" class="web_more_button" value="More">
+                <input onclick="goToProductDetails('${product.getBrand()}')" type="button" class="web_more_button" value="More">
             </div>
         </c:forEach>
         <!-------------- ITEM END --------------->   
