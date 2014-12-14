@@ -91,7 +91,7 @@
             <br>
             Edit product
             <br>
-            Edit user
+            <a href="AllUsersList.html">Edit User</a>
             <br>
         </div>
         </div>

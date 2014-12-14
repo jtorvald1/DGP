@@ -13,16 +13,18 @@
         body {background-color:lightgray}
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>yeay</title>
+        <title>Member Options</title>
     </head>
     <body>
                 <c:forEach items="${result.getUsers()}" var="user" >
                         <form method="get" action="SearchServlet">
-                            name: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span> <br>
-                            suername: ${user.getLastName()} <br>
-                            userId: ${user.getUserId()} <br>
-                            username: ${user.getUserName()} <br>
-                            email: ${user.getEmail()}
+                            Fornavn: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span> <br>
+                            Efternavn: ${user.getLastName()} <br>
+                            BrugerId: ${user.getUserId()} <br>
+                            Brugernavn: ${user.getUserName()} <br>
+                            Email: ${user.getEmail()}<br>
+                            <div><input type="submit" value="Redigér Bruger" id="Edit_button" onsubmit='???'/></div>
+                            
                             <br>
                             <br>
                         </form>

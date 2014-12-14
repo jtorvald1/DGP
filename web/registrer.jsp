@@ -27,11 +27,13 @@
                 
             function validateFirstName(field) {
             if (field == "") return "Ugyldigt fornavn.\n"
+                else if (/[0-9.@_-]/.test(field)) return "Fornavn kan ikke indeholde tal eller specialtegn."
             return ""
             }
 
             function validateLastName(field) {
             if (field == "") return "Ugyldigt efternavn.\n"
+            else if (/[0-9.@_-]/.test(field)) return "Efternavn kan ikke indeholde tal eller specialtegn."
             return ""
             }
             
@@ -58,7 +60,7 @@
             
             function validatePostalCode(field) {
             if (field == "") return "Intet Postnummer indtastet.\n"
-		else if (!((field.indexOf(field.length > 4 && /[^a-åA-Å.@_-]/.test(field)))))
+		else if (!((field.indexOf(field.length > 4 || /[^a-åA-Å.@_-]/.test(field)))))
 		return "Postnummeret er ugyldigt.\n"
             return ""
             }
