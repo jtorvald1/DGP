@@ -58,7 +58,7 @@
         </c:choose>
     </div>
     
-    <div id="title"><b>Registrér</b></div>
+    <div id="title"><b>Medlemsinfo</b></div>
 <!---------MENU END----------------->
 </div>
 </header>
@@ -278,7 +278,7 @@
                     
                 
 				<input type="checkbox" name="accept_checkbox"><label for="accept_checkbox" id="accept_label"> Jeg har læst og accepter <a href="#">betalings vilkår</a></label>
-                <div><input type="submit" value="Registrér" id="reg_button" onSubmit="return validate(this)"/></div> <!---- have to be moved down 'on top of' the backgorund, don't know if possible as it is in a form-->
+                <div><input type="submit" value="Opdatér" id="reg_button" onSubmit="return validate(this)"/></div> <!---- have to be moved down 'on top of' the backgorund, don't know if possible as it is in a form-->
         	 </form>
         </div>
     </div>

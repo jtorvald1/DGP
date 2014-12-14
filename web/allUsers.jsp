@@ -23,8 +23,14 @@
                             BrugerId: ${user.getUserId()} <br>
                             Brugernavn: ${user.getUserName()} <br>
                             Email: ${user.getEmail()}<br>
-                            <div><input type="submit" value="Redigér Bruger" id="Edit_button" onsubmit='???'/></div>
+                            <jsp:include page="/EditPayingMember"></jsp:include>
+                            <a href="memberInfo.jsp">Redigér Bruger</a>
+                            <%--<div><input type="Button" value="Redigér Bruger" name=Edit_button" 
+                            onclick="document.forms[0].action = 'memberInfo.jsp'; return true;" /></div> 
+                            This crap won't work with a button and I don't even know if it's needed............
                             
+                            And why are comments so ridiculous in jsp!!??
+                            --%>         
                             <br>
                             <br>
                         </form>
