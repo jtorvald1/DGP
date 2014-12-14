@@ -7,6 +7,7 @@ package SessionBean;
 
 import Model.Webshop.Product;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,6 +30,15 @@ public class ProductFacade extends AbstractFacade<Product> {
     public ProductFacade() {
         super(Product.class);
     }
+    
+    public Collection<Product> findByCategory(String category)
+    {
+        Query query = em.createNamedQuery("Product.findByCategory");
+        query.setParameter("category", category);
+        Collection<Product> products = query.getResultList();
+        
+        return products;
+    }
 
     public Collection<Product> findByBrand(String brand)
     {
@@ -41,8 +51,8 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     public Collection<Product> findBySize(String size)
     {
-        Query query = em.createNamedQuery("Product.findByBrand");
-        query.setParameter("brand", size);
+        Query query = em.createNamedQuery("Product.findBySize");
+        query.setParameter("size", size);
         Collection<Product> products = query.getResultList();
         
         return products;
@@ -50,18 +60,26 @@ public class ProductFacade extends AbstractFacade<Product> {
     
     public Collection<Product> findByColor(String color)
     {
-        Query query = em.createNamedQuery("Product.findByBrand");
-        query.setParameter("brand", color);
+        Query query = em.createNamedQuery("Product.findByColor");
+        query.setParameter("color", color);
         Collection<Product> products = query.getResultList();
         
         return products;
     }
     
-    public Collection<Product> findByBrandAndCategory(String brand, String category)
+    public Collection<Product> findByPrice(double price)
     {
-        Query query = em.createNamedQuery("Product.findByBrand&Category");
-        query.setParameter("category", category);
-        query.setParameter("brand", brand);
+        Query query = em.createNamedQuery("Product.findByPrice");
+        query.setParameter("price", price);
+        Collection<Product> products = query.getResultList();
+        
+        return products;
+    }
+     
+    public Collection<Product> findByWeight(double weight)
+    {
+        Query query = em.createNamedQuery("Product.findByWeight");
+        query.setParameter("weight", weight);
         Collection<Product> products = query.getResultList();
         
         return products;

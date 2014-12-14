@@ -61,14 +61,17 @@ public class CreateItems extends HttpServlet {
         try
         {
             String itemsString = request.getParameter("items");
+            
             int items = Integer.parseInt(itemsString);
+
             Product product = (Product)request.getAttribute("productGeneratedId");           
             
             persistItems(items, product);
+            response.sendRedirect("AdminProducts.jsp");
         }
         catch(Exception ex)
         {
-            throw new ServletException();
+            System.out.println(ex);
         }
     }
 

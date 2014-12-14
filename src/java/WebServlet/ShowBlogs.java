@@ -9,7 +9,7 @@ package WebServlet;
 import JavaBean.BlogBean;
 import JavaBean.BlogsBean;
 import Model.News.Blog;
-import Model.Webshop.BeanGenerator;
+import Model.HelperClasses.JavaBeanGenerator;
 import SessionBean.BlogFacade;
 import java.io.IOException;
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class ShowBlogs extends HttpServlet {
         try
         {
             List<Blog> allBlogs = blogSessionFacade.findAll();
-            BlogsBean bean = BeanGenerator.getBlogsBean(allBlogs);
+            BlogsBean bean = JavaBeanGenerator.getBlogsBean(allBlogs);
             sendData(bean, request, response);
         }
         catch(Exception ex)

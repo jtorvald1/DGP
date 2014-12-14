@@ -3,7 +3,7 @@ package WebServlet;
 
 import JavaBean.ItemsBean;
 import JavaBean.ProductsBean;
-import Model.Webshop.BeanGenerator;
+import Model.HelperClasses.JavaBeanGenerator;
 import Model.Webshop.Product;
 import SessionBean.ProductFacade;
 import java.io.IOException;
@@ -16,15 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-/**
- *
- * @author Nicole
- */
+
 @WebServlet(name = "AdminProductSearch", urlPatterns = {"/AdminProductSearch"})
 public class AdminProductSearch extends HttpServlet {
 
     @EJB
-    private ProductFacade productSessionFacade;
+    private ProductFacade productFacade;
  
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -33,25 +30,25 @@ public class AdminProductSearch extends HttpServlet {
         {
             String searchBy = request.getParameter("searchBy");
             String value = request.getParameter("value");
-                                   
+            
             Collection<Product> products;
             
-            switch(searchBy) 
+            switch(searchBy)
             {
-                case "ID": 
-                    Product product = productSessionFacade.find(Long.parseLong(value));
-                    products = new ArrayList<>();
-                    if(product != null)
-                        products.add(product);                
-                    break;
-                case "brand": products = productSessionFacade.findByBrand(value); break;
-                case "color": products = productSessionFacade.findByColor(value); break;
-                case "size": products = productSessionFacade.findBySize(value); break;
-                default: products = productSessionFacade.findAll(); break;
+                case "productId": 
+                    Product product = productFacade.find(Long.parseLong(value));
+                    products = addToList(product, request); break;
+                case "category": products = productFacade.findByCategory(value); break;
+                case "brand": products = productFacade.findByBrand(value); break;
+                case "color": products = productFacade.findByColor(value); break;
+                case "size": products = productFacade.findBySize(value); break;
+                case "price": products = productFacade.findByPrice(Double.parseDouble(value)); break;
+                case "weight": products = productFacade.findByWeight(Double.parseDouble(value)); break;
+                default: products = productFacade.findAll(); break;
             }
 
-            ProductsBean productsBean = BeanGenerator.getProductsBean(products);
-            ItemsBean itemsBean = BeanGenerator.getItemsBean(products);
+            ProductsBean productsBean = JavaBeanGenerator.getProductsBean(products);
+            ItemsBean itemsBean = JavaBeanGenerator.getItemsBean(products);
 
             request.setAttribute("products", productsBean);
             request.setAttribute("items", itemsBean);
@@ -63,19 +60,26 @@ public class AdminProductSearch extends HttpServlet {
             System.out.println(ex);
         }
     }
+    
+    private ArrayList<Product> addToList(Product product, HttpServletRequest request) 
+    {
+        ArrayList<Product> products = new ArrayList<>();
+        if(product != null) {
+            products.add(product);
+            request.setAttribute("lastSearchedProduct", JavaBeanGenerator.getProductBean(product)); 
+        }
+             
+        
+        return products;
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

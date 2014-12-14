@@ -1,39 +1,21 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Produkt</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
+<style>
+    #selectColor, #selectSize, option {width: 100px;}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>
-    function removeDublicates()
-    {
-        var found = [];
-        $("select option").each(function() {
-            if($.inArray(this.value, found) !== -1) $(this).remove();
-                found.push(this.value);
-});
-
-    }
-    function addToCart()
-    {
-        document.location.href="AddToCart";
-    }
-    
-    function updateProduct()
-    {
-        var size = $("#selectSize option:selected").text();
-        var color = $("#selectColor option:selected").text();
-        
-        document.location.href="RefineSearch?size=" + size + "&color=" + color;
-    }
-</script>
+<script src="Js/Webshop.js"></script>
 </head>
 
-<body onload="removeDublicates()">
+<body onload="removeDuplicates()">
 
 <header>
 <div id="top_image">
@@ -108,7 +90,7 @@
 <!---------CART START----------------->
   <div id="web_cart_box">
   	<div id="cart_text">
-            <a href="ShoppingCart.jsp">Gå til kurv</a>
+            <a href="payment.jsp">Gå til kurv</a>
             <br>
             Ønskeliste
   	</div>
@@ -132,7 +114,7 @@
     <img src="data:image/jpg;base64,${productToShow.getImage()}" width="216" height="258" class="pro_item">
     <div class="pro_item_text">
     	<div class="pro_item_headline">${productToShow.getCategory()}</div>
-    	<div class="pro_item_describtion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 		eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 	ullamco laboris nisi ut aliquip ex.</div> 
+    	<div class="pro_item_describtion">${productToShow.getDescription()}</div> 
     </div>
 <!-------------- BOX 1.5 START --------------->
 <div class="pro_item_decision">
@@ -141,7 +123,6 @@
             <td width="14%">Størrelse</td>
             <td width="39%">
         <select id="selectSize">
-            <option selected="selected">Vælg størrelse</option>
             <c:forEach items="${searchResult.getAllProducts()}" var="product">
             <option value="${product.getSize()}">${product.getSize()}</option>
             </c:forEach>
@@ -151,7 +132,6 @@
         <td>Farve</td>
         <td>
         <select id="selectColor">
-            <option selected="selected">Vælg farve</option>
             <c:forEach items="${searchResult.getAllProducts()}" var="product">
             <option value="${product.getColor()}">${product.getColor()}</option>
             </c:forEach>

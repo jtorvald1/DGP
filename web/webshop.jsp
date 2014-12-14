@@ -9,16 +9,10 @@
 <title>Webshop</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>
-    function goToProductDetails(brand)
-    {
-        document.location.href="Search?searchBy=brand&value=" + brand;
-    }
-</script>
+<script src="Js/Webshop.js"></script>
 </head>
-
 <body>
-
+    
 <header>
 <div id="top_image">
 <!---------MENU START--------------->
@@ -92,7 +86,7 @@
 <!---------CART START----------------->
   <div id="web_cart_box">
   	<div id="cart_text">
-            <a href="ShoppingCart.jsp">Gå til kurv</a>
+            <a href="payment.jsp">Gå til kurv</a>
             <br>
             Ønskeliste
   	</div>
@@ -122,7 +116,7 @@
                     <div class="web_describtion">${product.getDescription()}</div>
                 </div>
                 <div class="web_price">${product.getPrice()},-</div>
-                <input onclick="goToProductDetails('Bulls')" type="button" class="web_more_button" value="More">
+                <input onclick="goToProductDetails('${product.getBrand()}')" type="button" class="web_more_button" value="More">
             </div>
         </c:forEach>
         <!-------------- ITEM END --------------->   

@@ -8,7 +8,7 @@ package WebServlet;
 
 import JavaBean.UserBean;
 import JavaBean.UsersBean;
-import Model.Webshop.BeanGenerator;
+import Model.HelperClasses.JavaBeanGenerator;
 import Model.Webshop.Customer;
 import SessionBean.CustomerFacade;
 import java.io.IOException;
@@ -41,13 +41,13 @@ public class AllUsersList extends HttpServlet {
             if (userId == null) {
             
                 List<Customer> allUsers = customerSessionFacade.findAll();
-                UsersBean bean = BeanGenerator.getUsersBean(allUsers);
+                UsersBean bean = JavaBeanGenerator.getUsersBean(allUsers);
                 sendData(bean, request, response);
             }
             
             else {
                 Customer find = customerSessionFacade.find(userId);
-                UserBean bean = BeanGenerator.getUserBean(find);
+                UserBean bean = JavaBeanGenerator.getUserBean(find);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("memberInfo.jsp");
                 request.setAttribute("user", bean);
                 dispatcher.forward(request, response);
