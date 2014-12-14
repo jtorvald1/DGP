@@ -9,16 +9,10 @@
 <title>Webshop</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>
-    function goToProductDetails(brand)
-    {
-        document.location.href="Search?searchBy=brand&value=" + brand;
-    }
-</script>
+<script src="Js/Webshop.js"></script>
 </head>
-
 <body>
-
+    
 <header>
 <div id="top_image">
 <!---------MENU START--------------->

@@ -5,15 +5,10 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="iso-8859-1">
+<meta charset="utf-8">
 <title>Payment</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
-<script>
-    function checkOut()
-    {
-        document.location.href="CheckOut";
-    }
-</script>
+<script src="Js/Webshop.js"></script>
 </head>
 <body>
 <header>
@@ -77,7 +72,7 @@
   <tr>
     <td width="33%">&nbsp;</td>
     <td width="33%">&nbsp;</td>
-    <td><input type="search" name="search" id="search" value="search" width="227px" style="float:right; margin-right:15px;"></td>
+    <td><input type="search" name="search" id="search" value="search" style="float:right; margin-right:15px;"></td>
   </tr>
   <tr>
     <td>&lt; Tilbage</td>

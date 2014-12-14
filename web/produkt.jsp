@@ -1,6 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html>
 <head>
@@ -11,32 +12,10 @@
     #selectColor, #selectSize, option {width: 100px;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>
-    function removeDublicates()
-    {
-        var found = [];
-        $("select option").each(function() {
-            if($.inArray(this.value, found) !== -1) $(this).remove();
-                found.push(this.value);
-});
-
-    }
-    function addToCart()
-    {
-        document.location.href="AddToCart";
-    }
-    
-    function updateProduct()
-    {
-        var size = $("#selectSize option:selected").text();
-        var color = $("#selectColor option:selected").text();
-        
-        document.location.href="RefineSearch?size=" + size + "&color=" + color;
-    }
-</script>
+<script src="Js/Webshop.js"></script>
 </head>
 
-<body onload="removeDublicates()">
+<body onload="removeDuplicates()">
 
 <header>
 <div id="top_image">

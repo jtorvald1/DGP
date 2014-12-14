@@ -7,13 +7,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Product administration</title>
         <style type="text/css">
+            body{font-family:Arial, sans-serif; font-size:14px;}
             .tg  {border-collapse:collapse;border-spacing:0;}
-            .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-            .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-            .content {float: left}
+            .tg td{padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg th{font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .content {float: left; margin-left: 20px; margin-right: 20px;}
             #description {height: 150px;}
-            .fields {width: 400px;}
-            #container {margin-left: auto; margin-right: auto; width: 1100px;}
+            .fields {width: 300px;}
+            #container {margin-left: auto; margin-right: auto; width: 1200px;}
         </style>
         <script src="Js/alertify.min.js"></script>
         <link rel="stylesheet" href="Css/alertify.min.css" />
@@ -70,9 +71,7 @@
                     </c:forEach>
                 </table>
             </div>
-            <br>
-            <br>
-            <div id="content">
+            <div class="content">
                 <form method="post" action="AdminProductEdit" enctype="multipart/form-data" onsubmit="return confirmForm(this)">
                     <table>
                         <tr>
