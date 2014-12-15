@@ -8,13 +8,14 @@
         <title>Product administration</title>
         <style type="text/css">
             body{font-family:Arial, sans-serif; font-size:14px;}
-            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;background-color:#e8edff}
             .tg td{padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-            .tg th{font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg th{font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;color:#039;background-color:#b9c9fe}
             .content {float: left; margin-left: 20px; margin-right: 20px;}
             #description {height: 150px;}
             .fields {width: 300px;}
             #container {margin-left: auto; margin-right: auto; width: 1200px;}
+            body{color:#669;}
         </style>
         <script src="Js/alertify.min.js"></script>
         <link rel="stylesheet" href="Css/alertify.min.css" />
@@ -27,6 +28,9 @@
         <div id="container">
             <div class="content">
                 <table class="tg">
+                    <tr>
+                        <th colspan="7">Products</th>
+                    </tr>
                     <tr>
                         <td>Product ID</td>
                         <td>Product category</td>
@@ -52,10 +56,13 @@
                 <br>
                 <table class="tg">
                     <tr>
+                        <th colspan="4">Items</th>
+                    </tr>
+                    <tr>
                         <td>Item ID</td>
-                        <td>Product</td>
+                        <td>Product ID</td>
                         <td>Stock</td>
-                        <td>Order</td>
+                        <td>Order ID</td>
                     </tr>
                     <c:forEach items="${items.getItems()}" var="item" >
                         <tr>

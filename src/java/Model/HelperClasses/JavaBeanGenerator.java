@@ -7,6 +7,8 @@ import JavaBean.BlogBean;
 import JavaBean.BlogsBean;
 import JavaBean.ItemBean;
 import JavaBean.ItemsBean;
+import JavaBean.OrderBean;
+import JavaBean.OrdersBean;
 import JavaBean.ProductBean;
 import JavaBean.ProductsBean;
 import JavaBean.UserBean;
@@ -14,6 +16,7 @@ import JavaBean.UsersBean;
 import Model.News.Article;
 import Model.News.Blog;
 import Model.Webshop.Customer;
+import Model.Webshop.CustomerOrder;
 import Model.Webshop.Item;
 import Model.Webshop.Product;
 import java.util.ArrayList;
@@ -132,19 +135,19 @@ public class JavaBeanGenerator {
         return blogBean;  
     }
 
-    public static ItemsBean getItemsBean(Collection<Product> products) 
+    public static ItemsBean getItemsBeanByProjects(Collection<Product> products) 
     {
         ItemsBean itemsBean = new ItemsBean();
         
         for(Product product: products)
         {
-            ArrayList<ItemBean> itemBeans = getItemBeans(product);
+            ArrayList<ItemBean> itemBeans = getItemBeansByProject(product);
             itemsBean.getItems().addAll(itemBeans);
         }
         return itemsBean;
     }
 
-    private static ArrayList<ItemBean> getItemBeans(Product product) 
+    private static ArrayList<ItemBean> getItemBeansByProject(Product product) 
     {
         Collection<Item> items = product.getItems();
         ArrayList<ItemBean> itemBeans = new ArrayList<>();
@@ -161,5 +164,60 @@ public class JavaBeanGenerator {
             itemBeans.add(itemBean);
         }
         return itemBeans;
+    }
+    
+    public static ItemsBean getItemsBeanByOrders(Collection<CustomerOrder> orders) 
+    {
+        ItemsBean itemsBean = new ItemsBean();
+        
+        for(CustomerOrder order: orders)
+        {
+            ArrayList<ItemBean> itemBeans = getItemBeansByOrder(order);
+            itemsBean.getItems().addAll(itemBeans);
+        }
+        return itemsBean;
+    }
+
+    private static ArrayList<ItemBean> getItemBeansByOrder(CustomerOrder order) 
+    {
+        Collection<Item> items = order.getItems();
+        ArrayList<ItemBean> itemBeans = new ArrayList<>();
+        
+        for(Item item: items)
+        {
+            ItemBean itemBean = new ItemBean();
+            itemBean.setItemId(item.getItemId());
+            itemBean.setProductId(item.getProduct().getProductId());
+            itemBean.setStockId(new Long(1));
+            itemBean.setOrderId(order.getOrderId());
+            
+            itemBeans.add(itemBean);
+        }
+        return itemBeans;
+    }
+    
+    public static OrdersBean getOrdersBean(Collection<CustomerOrder> orders)
+    {
+        OrdersBean bean = new OrdersBean();
+        
+        for(CustomerOrder order : orders) {          
+
+            OrderBean orderBean = getOrderBean(order);
+                        
+            bean.getOrders().add(orderBean);
+        }
+        return bean;
+    }
+
+    public static OrderBean getOrderBean(CustomerOrder order) 
+    {
+        OrderBean orderBean = new OrderBean();
+        orderBean.setOrderId(order.getOrderId());
+        orderBean.setOrderDate(order.getDateTime());
+        orderBean.setCustomerId(order.getCustomer().getCustomerId());
+        orderBean.setFirstName(order.getCustomer().getFirstName());
+        orderBean.setLastName(order.getCustomer().getLastName());
+        
+        return orderBean;
     }
 }
