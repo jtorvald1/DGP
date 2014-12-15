@@ -8,6 +8,7 @@
 <meta charset="utf-8">
 <title>Webshop</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
+<script src="Js/index_javascript.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="Js/Webshop.js"></script>
 </head>
