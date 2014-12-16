@@ -57,7 +57,7 @@
 
                 </ul>
             </c:when>
-            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span></c:when>
+            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span> <a href="LogOffUser">Logout</a></c:when>
         </c:choose>
             <script>
             function test(userid) {
@@ -171,8 +171,17 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
           <li><a href="#">Brugte Varer</a></li>
           <li><a href="#">Registrer</a></li>
 		</ul>
+         
     </div> 
 <!---------MENU END----------------->
+
+<!---------ADMIN LOGIN-------------->
+
+<div class="admin_login">
+    <ul><li><a href="AdminMenu.jsp">Administrator-Login</a></li></ul>
+</div>
+
+<!---------ADMIN LOGIN END---------->
 
 <div id="social_meadia">
 	<a href="#"><img src="Images/facebook.jpg"></a>

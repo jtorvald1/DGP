@@ -93,6 +93,8 @@
             <br>
             <a href="AllUsersList.html">Edit User</a>
             <br>
+            <p><a href="LogOffUser">Logout</a></p>
+            <br>
         </div>
         </div>
         <script>
