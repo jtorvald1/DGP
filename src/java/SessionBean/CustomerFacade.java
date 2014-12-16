@@ -7,6 +7,7 @@
 package SessionBean;
 
 import Model.Webshop.Customer;
+import jBCrypt.BCrypt;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
