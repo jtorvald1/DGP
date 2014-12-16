@@ -4,6 +4,7 @@ package WebServlet;
 import Model.Webshop.CustomerOrder;
 import Model.Webshop.Item;
 import SessionBean.CustomerOrderFacade;
+import SessionBean.ItemFacade;
 import java.io.IOException;
 import java.util.Collection;
 import javax.annotation.Resource;
@@ -25,6 +26,8 @@ public class AdminOrderEdit extends HttpServlet {
     
     @EJB
     private CustomerOrderFacade customerOrderFacade;
+    @EJB
+    private ItemFacade itemFacade;
     
     @Resource
     private UserTransaction utx;
@@ -39,22 +42,33 @@ public class AdminOrderEdit extends HttpServlet {
         
             if(order != null)
             {
-                resetItems(order);
-
                 utx.begin();
-
+                
+                resetItems(order);
                 customerOrderFacade.remove(order);
 
                 utx.commit();
             }
+            response.sendRedirect("AdminOrders.jsp");
         }
         catch(Exception ex)
         {
             System.out.println(ex);
-            //utx.rollback();
+            utx.rollback();
         }
     }
 
+    private void resetItems(CustomerOrder order)
+    {
+        Collection<Item> items = order.getItems();
+        
+        for(Item item: items)
+        {
+            item.setOrder(null);
+            itemFacade.edit(item);
+        }
+    }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -85,14 +99,4 @@ public class AdminOrderEdit extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void resetItems(CustomerOrder order)
-    {
-        Collection<Item> items = order.getItems();
-        
-        for(Item item: items)
-        {
-            item.setOrder(null);
-        }
-    }
 }
