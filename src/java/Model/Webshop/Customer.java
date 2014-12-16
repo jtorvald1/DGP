@@ -26,8 +26,13 @@ import javax.persistence.OneToMany;
 @Entity(name = "CUSTOMERS")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NamedQueries({
-    @NamedQuery(name = "Customer.findByPassword", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email AND u.password = :password"),
+    @NamedQuery(name = "Customer.findForLogin", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email AND u.password = :password"),
     @NamedQuery(name = "Customer.findByUserName", query = "SELECT u FROM CUSTOMERS u WHERE u.userName = :username"),
+    @NamedQuery(name = "Customer.findByPassword", query = "SELECT u FROM CUSTOMERS u WHERE u.password = :password"),
+    @NamedQuery(name = "Customer.findByFirstName", query = "SELECT u FROM CUSTOMERS u WHERE u.firstName = :firstName"),
+    @NamedQuery(name = "Customer.findByLastName", query = "SELECT u FROM CUSTOMERS u WHERE u.lastName = :lastName"),
+    @NamedQuery(name = "Customer.findByAddress", query = "SELECT u FROM CUSTOMERS u WHERE u.address = :address"),
+    @NamedQuery(name = "Customer.findByEmail", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email"),
     @NamedQuery(name = "Customer.findAllUsers", query = "SELECT u FROM CUSTOMERS u"),
 })
 public abstract class Customer implements Serializable {
