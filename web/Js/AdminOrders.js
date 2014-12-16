@@ -33,7 +33,7 @@ function validateLastName(value)
 }
 
 
-function search()
+function searchOrder()
 {
     var searchBy = $("#searchFor option:selected").val();
     var value;
@@ -63,7 +63,6 @@ function deleteOrder()
         if(validationResult !== "")
             alertify.alert(validationResult);
         else
-            //document.location.href="AdminProductEdit?operation=delete&productId=" + productId;
-                alert("go to servlet");
+            document.location.href="AdminOrderEdit?orderId=" + orderId;
     }
 }
