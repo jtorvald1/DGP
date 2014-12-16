@@ -33,7 +33,7 @@ public class CustomerFacade extends AbstractFacade<Customer> {
     
         public Object findForLogin(String email, String password)
     {
-        Query query = em.createNamedQuery("Customer.findByPassword");
+        Query query = em.createNamedQuery("Customer.findForLogin");
         query.setParameter("email", email);
         query.setParameter("password", password);
         Object customer = query.getSingleResult();
