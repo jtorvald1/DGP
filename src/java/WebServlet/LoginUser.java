@@ -41,7 +41,7 @@ public class LoginUser extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             
-            Customer user = (Customer) customerFacade.findByPassword(email, password);
+            Customer user = (Customer) customerFacade.findForLogin(email, password);
             UserBean userBean = getUserBean(user);
             
             if(user != null)

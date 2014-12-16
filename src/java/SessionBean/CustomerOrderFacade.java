@@ -6,9 +6,12 @@
 package SessionBean;
 
 import Model.Webshop.CustomerOrder;
+import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +30,28 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
     public CustomerOrderFacade() {
         super(CustomerOrder.class);
     }
-    
+
+    public Collection<CustomerOrder> findByCustomerId(Long customerId) {
+        Query query = em.createNamedQuery("CustomerOrder.findByCustomerId");
+        query.setParameter("customerId", customerId);
+        List resultList = query.getResultList();
+        
+        return resultList;
+    }
+
+    public Collection<CustomerOrder> findByFirstName(String firstName) {
+        Query query = em.createNamedQuery("CustomerOrder.findByFirstName");
+        query.setParameter("firstName", firstName);
+        List resultList = query.getResultList();
+        
+        return resultList;
+    }
+
+    public Collection<CustomerOrder> findByLastName(String lastName) {
+        Query query = em.createNamedQuery("CustomerOrder.findByLastName");
+        query.setParameter("lastName", lastName);
+        List resultList = query.getResultList();
+        
+        return resultList;
+    }
 }

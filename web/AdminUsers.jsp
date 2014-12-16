@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Product administration</title>
+        <title>User administration</title>
         <style type="text/css">
             body{font-family:Arial, sans-serif; font-size:14px;}
             .tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;background-color:#e8edff}
@@ -21,34 +21,36 @@
         <link rel="stylesheet" href="Css/alertify.min.css" />
         <link rel="stylesheet" href="Css/default.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script src="Js/AdminProducts.js"></script>
+        <script src="Js/AdminUsers.js"></script>
     </head>
     <body>
-        <center><h1>Product Administration</h1></center>
+        <center><h1>User Administration</h1></center>
         <div id="container">
             <div class="content">
                 <table class="tg">
                     <tr>
-                        <th colspan="7">Products</th>
+                        <th colspan="7">Users</th>
                     </tr>
                     <tr>
-                        <td>Product ID</td>
-                        <td>Product category</td>
-                        <td>Brand</td>
-                        <td>Color</td>
-                        <td>Size</td>
-                        <td>Price</td>
-                        <td>Weight</td>
+                        <td>User ID</td>
+                        <td>Username</td>
+                        <td>Password</td>
+                        <td>First name</td>
+                        <td>Last name</td>
+                        <td>Address</td>
+                        <td>Email</td>
+                        <td>Membership fee</td>
+                        <td>Membership period</td>
                     </tr>
-                    <c:forEach items="${products.getAllProducts()}" var="product" >
+                    <c:forEach items="${users.getUsers()}" var="user" >
                         <tr>
-                            <td>${product.getProductId()}</td>
-                            <td>${product.getCategory()}</td>
-                            <td>${product.getBrand()}</td>
-                            <td>${product.getColor()}</td>
-                            <td>${product.getSize()}</td>
-                            <td>${product.getPrice()}</td>
-                            <td>${product.getWeight()}</td>
+                            <td>${user.getUserId()}</td>
+                            <td>${user.getUserName()}</td>
+                            <td>${user.getPassword()}</td>
+                            <td>${user.getFirstName()}</td>
+                            <td>${user.getLastName()}</td>
+                            <td>${user.getAddress()}</td>
+                            <td>${user.getEmail()}</td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -82,60 +84,44 @@
                 <form method="post" action="AdminProductEdit" enctype="multipart/form-data" onsubmit="return confirmForm(this)">
                     <table>
                         <tr>
-                            <td>Product ID: </td>
-                            <td><input type="text" class="fields" id="productId" name="productId" value="${lastSearchedProduct.getProductId()}"></td>
+                            <td>User ID: </td>
+                            <td><input type="text" class="fields" id="userId" name="userId" value="${lastSearchedUser.getUserId()}"></td>
                             <td>
                                 <select id="searchFor">
-                                    <option value="productId">Product ID</option>
-                                    <option value="category">Category</option>
-                                    <option value="brand">Brand</option>
-                                    <option value="color">Color</option>
-                                    <option value="size">Size</option>
-                                    <option value="price">Price</option>
-                                    <option value="weight">Weight</option>
-                                    <option value="all">All products</option>
+                                    <option value="userId">User ID</option>
+                                    <option value="username">Username</option>
+                                    <option value="password">Password</option>
+                                    <option value="firstName">First Name</option>
+                                    <option value="lastName">Last Name</option>
+                                    <option value="address">Address</option>
+                                    <option value="email">Email</option>
+                                    <option value="all">All Users</option>
                                 </select>
                             <td>
                         </tr>
                         <tr>
-                            <td>Category: </td>
-                            <td><input type="text" class="fields" id="category" name="category" value="${lastSearchedProduct.getCategory()}"></td>
+                            <td>Username: </td>
+                            <td><input type="text" class="fields" id="username" name="username" value="${lastSearchedUser.getUserName()}"></td>
                         </tr>
                         <tr>
-                            <td>Brand: </td>
-                            <td><input type="text" class="fields" id="brand" name="brand" value="${lastSearchedProduct.getBrand()}"></td>
+                            <td>Password: </td>
+                            <td><input type="text" class="fields" id="password" name="password" value="${lastSearchedUser.getPassword()}"></td>
                         </tr>
                         <tr>
-                            <td>Color: </td>
-                            <td><input type="text" class="fields" id="color" name="color" value="${lastSearchedProduct.getColor()}"></td>
+                            <td>First Name: </td>
+                            <td><input type="text" class="fields" id="firstName" name="firstName" value="${lastSearchedUser.getFirstName()}"></td>
                         </tr>
                         <tr>
-                            <td>Size: </td>
-                            <td><input type="text" class="fields" id="size" name="size" value="${lastSearchedProduct.getSize()}"></td>
+                            <td>Last Name: </td>
+                            <td><input type="text" class="fields" id="lastName" name="lastName" value="${lastSearchedUser.getLastName()}"></td>
                         </tr>
                         <tr>
-                            <td>Price: </td>
-                            <td><input type="text" class="fields" id="price" name="price" value="${lastSearchedProduct.getPrice()}"></td>
+                            <td>Address: </td>
+                            <td><input type="text" class="fields" id="address" name="address" value="${lastSearchedUser.getAddress()}"></td>
                         </tr>
                         <tr>
-                            <td>Weight: </td>
-                            <td><input type="text" class="fields" id="weight" name="weight" value="${lastSearchedProduct.getWeight()}"></td>
-                        </tr>
-                        <tr>
-                            <td>Number of items to create:</td>
-                            <td><input type="text" class="fields" id="items" name="items"></td>
-                        </tr>
-                        <tr>
-                            <td>Description: </td>
-                            <td><textarea class="fields" id="description" name="description">${lastSearchedProduct.getDescription()}</textarea></td>
-                        </tr>
-                        <tr>
-                            <td>Image: </td>
-                            <td><img alt="" class="fields" src="data:image/jpg;base64, ${lastSearchedProduct.getImage()}"></td>
-                        </tr>
-                        <tr>
-                            <td>New image: </td>
-                             <td><input type="file" name="image"></td>
+                            <td>Email: </td>
+                            <td><input type="text" class="fields" id="email" name="email" value="${lastSearchedUser.getEmail()}"></td>
                         </tr>
                         <tr>
                             <td><input type="button" onclick="search()" value="Search"></td>

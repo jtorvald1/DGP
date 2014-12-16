@@ -12,10 +12,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity(name = "CUSTOMER_ORDERS")
+@NamedQueries({
+    @NamedQuery(name = "CustomerOrder.findByCustomerId", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE c.customer.customerId = :customerId"),
+    @NamedQuery(name = "CustomerOrder.findByFirstName", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE UPPER(c.customer.firstName) = UPPER(:firstName)"),
+    @NamedQuery(name = "CustomerOrder.findByLastName", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE UPPER(c.customer.lastName) = UPPER(:lastName)")
+})
 public class CustomerOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

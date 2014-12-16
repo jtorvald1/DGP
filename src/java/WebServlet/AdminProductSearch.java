@@ -48,7 +48,7 @@ public class AdminProductSearch extends HttpServlet {
             }
 
             ProductsBean productsBean = JavaBeanGenerator.getProductsBean(products);
-            ItemsBean itemsBean = JavaBeanGenerator.getItemsBean(products);
+            ItemsBean itemsBean = JavaBeanGenerator.getItemsBeanByProjects(products);
 
             request.setAttribute("products", productsBean);
             request.setAttribute("items", itemsBean);
