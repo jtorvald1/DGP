@@ -61,6 +61,7 @@ public class EditPayingMember extends HttpServlet {
                 payingCustomer.setEmail(email);
                 payingCustomer.setUserName(userName);
                 payingCustomer.setPassword(password);
+                payingCustomer.setIsPayingMember(true);
                 payingCustomer.setMembershipFee(Double.parseDouble(membershipFee));
                 payingCustomer.setMembershipPeriod(membershipPeriod);
                 
@@ -90,6 +91,7 @@ public class EditPayingMember extends HttpServlet {
                 payingCustomer.setEmail(email);
                 payingCustomer.setUserName(userName);
                 payingCustomer.setPassword(password);
+                payingCustomer.setIsPayingMember(true);
                 payingCustomer.setMembershipFee(Double.parseDouble(membershipFee));
                 payingCustomer.setMembershipPeriod(membershipPeriod);
             

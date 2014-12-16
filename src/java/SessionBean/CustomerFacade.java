@@ -94,6 +94,15 @@ public class CustomerFacade extends AbstractFacade<Customer> {
             return customers;
         }
         
+        public Collection<Customer> findByIsPayingMember(String isPayingMember)
+        {
+            Query query = em.createNamedQuery("Customer.findByIsPayingMember");
+            query.setParameter("isPayingMember", isPayingMember);
+            Collection<Customer> customers = query.getResultList();
+
+            return customers;
+        }
+        
         public Collection<Customer> findAllUsers()
         {
         Query query = em.createNamedQuery("Customer.findAllUsers");

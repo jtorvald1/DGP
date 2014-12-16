@@ -19,13 +19,15 @@ public class UserBean {
     private String address;
     
     private String password;
+    
+    private boolean isPayingMember;
 
     private Collection<CustomerOrder> orders;
     
     public UserBean() {
     }
 
-    public UserBean(Long userId, String firstName, String lastName, String userName, String email, String address, String password, Collection orders) {
+    public UserBean(Long userId, String firstName, String lastName, String userName, String email, String address, String password, boolean isPayingMember, Collection orders) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +36,7 @@ public class UserBean {
         this.address = address;
         this.password = password;
         this.orders = orders;
+        this.isPayingMember = isPayingMember;
         
     }
 
@@ -93,6 +96,14 @@ public class UserBean {
         this.password = password;
     }
     
+    public boolean getIsPayingMember(){
+        return isPayingMember;
+    }
+    
+    public void setIsPayingMember(boolean isPayingMember){
+            this.isPayingMember = isPayingMember;
+    }
+    
     public Collection getOrders(){
         return orders;
     }
@@ -103,7 +114,7 @@ public class UserBean {
 
     @Override
     public String toString() {
-        return "UserBean{" + "userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", email=" + email + ", address=" + address + ", password=" + password + ", orders=" + orders + '}';
+        return "UserBean{" + "userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", email=" + email + ", address=" + address + ", password=" + password + ", is a paying member=" + isPayingMember + ", orders=" + orders + '}';
     }
 
 }

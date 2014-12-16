@@ -39,6 +39,7 @@
                         <td>Last name</td>
                         <td>Address</td>
                         <td>Email</td>
+                        <td>Is paying-member</td>
                         <td>Membership fee</td>
                         <td>Membership period</td>
                     </tr>
@@ -51,6 +52,7 @@
                             <td>${user.getLastName()}</td>
                             <td>${user.getAddress()}</td>
                             <td>${user.getEmail()}</td>
+                            <td>${user.getIsPayingMember()}</td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -124,7 +126,12 @@
                             <td><input type="text" class="fields" id="email" name="email" value="${lastSearchedUser.getEmail()}"></td>
                         </tr>
                         <tr>
+                            <td>Is paying-member: </td>
+                            <td><input type="checkbox" class="fields" id="payingMember" name="isPayingMember" value="${lastSearchedUser.getIsPayingMember()}"></td>
+                        </tr>
+                        <tr>
                             <td><input type="button" onclick="search()" value="Search"></td>
+                            <td><input type="button" onclick="$lastSearchedUser.getIsPayingMember()}" value="isPaying?"></td>
                             <td><input type="button" onclick="deleteProduct()" value="Delete product"></td>
                         </tr>
                         <tr>

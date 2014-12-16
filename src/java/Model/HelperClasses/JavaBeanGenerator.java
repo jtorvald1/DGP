@@ -80,6 +80,7 @@ public class JavaBeanGenerator {
         userBean.setUserName(user.getUserName());
         userBean.setEmail(user.getEmail());
         userBean.setAddress(user.getAddress());
+        userBean.setIsPayingMember(user.getIsPayingMember());
         userBean.setOrders(user.getOrders());
         
         return userBean;  

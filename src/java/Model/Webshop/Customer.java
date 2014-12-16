@@ -33,6 +33,7 @@ import javax.persistence.OneToMany;
     @NamedQuery(name = "Customer.findByLastName", query = "SELECT u FROM CUSTOMERS u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "Customer.findByAddress", query = "SELECT u FROM CUSTOMERS u WHERE u.address = :address"),
     @NamedQuery(name = "Customer.findByEmail", query = "SELECT u FROM CUSTOMERS u WHERE u.email = :email"),
+    @NamedQuery(name = "Customer.findByIsPayingMember", query = "SELECT u FROM CUSTOMERS u WHERE u.isPayingMember = :isPayingMember"),
     @NamedQuery(name = "Customer.findAllUsers", query = "SELECT u FROM CUSTOMERS u"),
 })
 public abstract class Customer implements Serializable {
@@ -59,6 +60,9 @@ public abstract class Customer implements Serializable {
     
     @Column(name = "PASSWORD", length = 200, nullable = false)
     private String password;
+    
+    @Column(name = "PAYING_MEMBER")
+    private boolean isPayingMember;
 
     @OneToMany(mappedBy = "customer", targetEntity = CustomerOrder.class, fetch = FetchType.EAGER)
     private Collection<CustomerOrder> orders;
@@ -130,8 +134,16 @@ public abstract class Customer implements Serializable {
         this.password = password;
     }
     
+    public boolean getIsPayingMember(){
+        return isPayingMember;
+    }
+    
+    public void setIsPayingMember(boolean isPayingMember){
+        this.isPayingMember = isPayingMember;
+    }
+    
     @Override
     public String toString() {
-        return "Customer{" + "customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + "username=" + userName + ", address=" + address + '}';
+        return "Customer{" + "customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + "username=" + userName + ", address=" + address + ", is paying member" + isPayingMember +'}';
     }
 }

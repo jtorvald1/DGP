@@ -59,6 +59,7 @@ public class EditRegisteredCustomer extends HttpServlet {
                     nonpayingCustomer.setEmail(email);
                     nonpayingCustomer.setUserName(userName);
                     nonpayingCustomer.setPassword(password);
+                    nonpayingCustomer.setIsPayingMember(false);
                 
             utx.begin();
             
@@ -86,6 +87,7 @@ public class EditRegisteredCustomer extends HttpServlet {
                     nonpayingCustomer.setEmail(email);
                     nonpayingCustomer.setUserName(userName);
                     nonpayingCustomer.setPassword(password);
+                    nonpayingCustomer.setIsPayingMember(false);
             
             utx.begin();
             

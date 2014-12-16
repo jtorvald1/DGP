@@ -75,7 +75,8 @@ function search()
         case "lastName": value = $("#lastName").val(); validationResult = validateSize(value); break;
         case "address": value = $("#address").val(); validationResult = validatePrice(value); break;
         case "email": value = $("#email").val(); validationResult = validateWeight(value); break;
-        default: value = "all"; validationResult = ""; break;
+        case "isPayingMember": value = $("#isPayingMember").val(); alert(value); validationResult = validateWeight(value); break;
+        default: value = "all"; validationResult = "";  break;
     }
     //if(validationResult !== "")
         //alertify.alert(validationResult);

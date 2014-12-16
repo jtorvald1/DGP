@@ -56,6 +56,7 @@ public class CreateRegisteredCustomer extends HttpServlet {
             nonpayingCustomer.setEmail(email);
             nonpayingCustomer.setUserName(userName);
             nonpayingCustomer.setPassword(password);
+            nonpayingCustomer.setIsPayingMember(false);
             
             utx.begin();
             
