@@ -20,24 +20,24 @@
      <a href="index.jsp"><img src="Images/JJ_logo.png" id="logo"></a><!--------LOGO: height and width 100 px ---------->
      <nav>
     	<ul>
-          <li><a href="blog.jsp">Blog</a></li>
-          <li><a href="webshop.jsp">Webshop</a></li>
+          <li><a href="News">Blog</a></li>
+          <li><a href="WebshopController">Webshop</a></li>
           <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
-          <li><a href="registrer.jsp">Registrer</a></li>
+          <li><a href="registrer.jsp">Medlemskab</a></li>
 		</ul>
     </nav> 
     <div id="log_ind" >
         <c:choose>
             <c:when test="${empty user}">         
-                <ul>
+               <ul>
                     <li id="login">
-                        <a id="login-trigger" href="#">
-                            Log in <span>&#x25BC;</span>
-                        </a>
+                         
+                        <ul><li <a id="login-trigger" href="#"> Log in <span>&#x25BC;</span></a>
                         <div id="login-content">
                             <div id="login_triangle"></div>
-
+                            
                             <form method="post" action="LoginUser">
+                                
 
                                 <div id="login_box">
 
@@ -50,15 +50,21 @@
                                     <div id="opret"><a href="registrer.jsp">Opret ny bruger</a></div>
                                     <div><input id="login_button" type="submit" value="Login"></div>
                                 </div>
-
+                                
                             </form>
-                        </div>                     
+                        </div>
+                        </li>
+                      </ul>
                     </li>
-
                 </ul>
             </c:when>
-            <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
+            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span> <a href="LogOffUser">Logout</a></c:when>
         </c:choose>
+            <script>
+            function test(userid) {
+                document.location.href = "memberInfo.jsp?user=" + userid;
+            }
+            </script>
     </div>
     
     <div id="title"><b>Webshop</b></div>
@@ -132,10 +138,10 @@
 <!---------MENU START--------------->
      <div class="footer_menu">
     	<ul>
-          <li><a href="blog.jsp">Blog</a></li>
-          <li><a href="webshop.jsp">Webshop</a></li>
+          <li><a href="News">Blog</a></li>
+          <li><a href="WebshopController">Webshop</a></li>
           <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
-          <li><a href="registrer.jsp">Registrer</a></li>
+          <li><a href="registrer.jsp">Medlemskab</a></li>
 		</ul>
     </div> 
 <!---------MENU END----------------->
