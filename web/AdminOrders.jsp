@@ -98,7 +98,7 @@
                         <td><input type="text" class="fields" id="lastName" name="lastName" value="${lastSearchedOrder.getLastName()}"></td>
                     </tr>
                     <tr>
-                        <td><input type="button" onclick="search()" value="Search"></td>
+                        <td><input type="button" onclick="searchOrder()" value="Search"></td>
                         <td><input type="button" onclick="deleteOrder()" value="Delete order"></td>
                     </tr>
                 </table>

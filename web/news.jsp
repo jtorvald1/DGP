@@ -9,8 +9,6 @@
 <script src="Js/index_javascript.js"></script>
 <script type="text/javascript" 
         src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-<script type="text/javascript" 
-        src="easy-comment/jquery.easy-comment.min.js"></script>
 <meta charset="utf-8">
 <title>News</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
@@ -139,16 +137,6 @@
                 document.location.href = "News?cat=" + category;
             }
         </script>
-        <!-- Comments code if we decide to use it
-        <div id="comments" style="width:512px;height:400px;"></div>
-        <script>
-                $("#comments").EasyComment({
-                path:"/easy-comment/",
-                moderate:false,
-                maxReply:5
-                    });       
-        </script>
-        ---->
         
 <!-------------- BOX 1 END --------------->
 

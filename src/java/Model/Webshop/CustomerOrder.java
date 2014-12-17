@@ -20,8 +20,8 @@ import javax.persistence.OneToOne;
 @Entity(name = "CUSTOMER_ORDERS")
 @NamedQueries({
     @NamedQuery(name = "CustomerOrder.findByCustomerId", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE c.customer.customerId = :customerId"),
-    @NamedQuery(name = "CustomerOrder.findByFirstName", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE UPPER(c.customer.firstName) = UPPER(:firstName)"),
-    @NamedQuery(name = "CustomerOrder.findByLastName", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE UPPER(c.customer.lastName) = UPPER(:lastName)")
+    @NamedQuery(name = "CustomerOrder.findByFirstName", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE c.customer.firstName = :firstName"),
+    @NamedQuery(name = "CustomerOrder.findByLastName", query = "SELECT c FROM CUSTOMER_ORDERS c WHERE c.customer.lastName = :lastName")
 })
 public class CustomerOrder implements Serializable {
     private static final long serialVersionUID = 1L;
