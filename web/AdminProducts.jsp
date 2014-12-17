@@ -149,5 +149,19 @@
                 </form>
             </div>
         </div>
+        <div class="column_text">
+            <a href="NewArticle.jsp">New article</a>
+            <br>
+            <a href="NewBlog.jsp">New blog</a>
+            <br>
+            <a href="AdminProducts.jsp">Edit product</a>
+            <br>
+            <a href="AdminOrders.jsp">Edit orders</a>
+            <br>
+            <a href="AdminUsers.jsp">Edit Users</a>
+            <br>
+            <a href="LogOffUser">Logout</a>
+            <br>
+        </div>
     </body>
 </html>

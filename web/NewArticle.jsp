@@ -25,51 +25,10 @@
      <a href="#"><img src="Images/JJ_logo.png" id="logo"></a><!--------LOGO: height and width 100 px ---------->
      <nav>
     	<ul>
-          <li><a href="News">Blog</a></li>
-          <li><a href="WebshopController">Webshop</a></li>
-          <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
-          <li><a href="registrer.jsp">Registrer</a></li>
-		</ul>
+
+	</ul>
     </nav> 
-    <div id="log_ind" >
-        <c:choose>
-            <c:when test="${empty user}">         
-                <ul>
-                    <li id="login">
-                        <a id="login-trigger" href="#">
-                            Log in <span>&#x25BC;</span>
-                        </a>
-                        <div id="login-content">
-                            <div id="login_triangle"></div>
-
-                            <form method="post" action="LoginUser">
-
-                                <div id="login_box">
-
-                                    <div><label for="name" id="login_text">Brugernavn: </label><br><input type="text" name="email" id="username" class="login_field"/></div>  
-                                    <div class="glemt"><a href="#">Glemt brugernavn?</a></div><br>
-
-                                    <div><label for="surname" id="login_text">Kode: </label><br><br><input type="password" name="password" id="password" class="login_field"/></div>
-                                    <div class="glemt"><a href="#">Glemt adgangskode?</a></div><br>
-
-                                    <div id="opret"><a href="registrer.jsp">Opret ny bruger</a></div>
-                                    <div><input id="login_button" type="submit" value="Login"></div>
-                                </div>
-
-                            </form>
-                        </div>                     
-                    </li>
-
-                </ul>
-            </c:when>
-            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</a></c:when>
-        </c:choose>
-            <script>
-            function test(userid) {
-                document.location.href = "memberInfo.jsp?user=" + userid;
-            }
-            </script>
-    </div>
+    
 <!---------MENU END----------------->
 </div>
 </header>
@@ -86,11 +45,13 @@
             <br>
             <a href="NewBlog.jsp">New blog</a>
             <br>
-            <a href="AdminProducts.jsp">New product</a>
+            <a href="AdminProducts.jsp">Edit product</a>
             <br>
-            Edit product
+            <a href="AdminOrders.jsp">Edit orders</a>
             <br>
-            Edit user
+            <a href="AdminUsers.jsp">Edit Users</a>
+            <br>
+            <a href="LogOffUser">Logout</a>
             <br>
         </div>
         </div>
@@ -159,11 +120,8 @@
 <!---------MENU START--------------->
      <div class="footer_menu">
     	<ul>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Webshop</a></li>
-          <li><a href="#">Brugte Varer</a></li>
-          <li><a href="#">Registrer</a></li>
-		</ul>
+
+	</ul>
     </div> 
 <!---------MENU END----------------->
 
