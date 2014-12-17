@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="iso-8859-1">
-<title>Medlemsside</title>
+<title>registrér</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 </head>
 
@@ -17,24 +17,24 @@
      <a href="index.jsp"><img src="Images/JJ_logo.png" id="logo"></a><!--------LOGO: height and width 100 px ---------->
      <nav>
     	<ul>
-          <li><a href="News">Blog</a></li>
-          <li><a href="WebshopController">Webshop</a></li>
+          <li><a href="blog.jsp">Blog</a></li>
+          <li><a href="webshop.jsp">Webshop</a></li>
           <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
-          <li><a href="registrer.jsp">Medlemskab</a></li>
+          <li><a href="registrer.jsp">Registrér</a></li>
 		</ul>
     </nav> 
     <div id="log_ind" >
         <c:choose>
             <c:when test="${empty user}">         
-               <ul>
+                <ul>
                     <li id="login">
-                         
-                        <ul><li <a id="login-trigger" href="#"> Log in <span>&#x25BC;</span></a>
+                        <a id="login-trigger" href="#">
+                            Log in <span>&#x25BC;</span>
+                        </a>
                         <div id="login-content">
                             <div id="login_triangle"></div>
-                            
+
                             <form method="post" action="LoginUser">
-                                
 
                                 <div id="login_box">
 
@@ -47,12 +47,11 @@
                                     <div id="opret"><a href="registrer.jsp">Opret ny bruger</a></div>
                                     <div><input id="login_button" type="submit" value="Login"></div>
                                 </div>
-                                
+
                             </form>
-                        </div>
-                        </li>
-                      </ul>
+                        </div>                     
                     </li>
+
                 </ul>
             </c:when>
             <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
@@ -175,15 +174,11 @@
             <script>
             function validateForNavn(field) {
             if (field == "") return "Ugyldigt fornavn.\n"
-                else if (!(field.indexOf (/[^0-9.@_-]/.test(field))))
-                    return "Navnet er ugyldigt.\n"
             return ""
             }
 
             function validateEfterNavn(field) {
             if (field == "") return "Ugyldigt efternavn.\n"
-                else if (!(field.indexOf (/[^0-9.@_-]/.test(field))))
-                    return "Navnet er ugyldigt.\n"
             return ""
             }
             
@@ -230,7 +225,7 @@
             else if (! /[a-å]/.test(field) ||
 			 ! /[A-Å]/.test(field) ||
 		     ! /[0-9]/.test(field))
-		return "Passwords kræver mindst én af hver følgende karakter a-å, A-Å og mindst ét tal mellem 0-9.\n"
+		return "Passwords kræver mindst én af hver følgende karakter a-å, A-Å og et tal mellem 0-9.\n"
             return ""
             }
             function validateGentagPassword(field) {
@@ -256,7 +251,7 @@
                  }
                }
             </script>
-        	<form onsubmit="return validate(this)" method="post" action="" name="register">
+        	<form onsubmit="select();" method="post" action="" name="register">
                     <div><label for="name">Navn: </label><br><input name="firstName" type="text" id="name" class="reg_field"/></div><br>        
                     <div><label for="surname">Efternavn: </label><br><input name="lastName" type="text" id="surname" class="reg_field"/></div><br>
                     <div><label for="email">Email: </label><br><input name="email" type="email" id="email" class="reg_field"/></div><br>
@@ -295,10 +290,10 @@
 <!---------MENU START--------------->
      <div class="footer_menu">
     	<ul>
-          <li><a href="blog.jsp">Blog</a></li>
-          <li><a href="webshop.jsp">Webshop</a></li>
-          <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
-          <li><a href="registrer.jsp">Medlemskab</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Webshop</a></li>
+          <li><a href="#">Brugte Varer</a></li>
+          <li><a href="#">Registrér</a></li>
 		</ul>
     </div> 
 <!---------MENU END----------------->
