@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import jBCrypt.BCrypt;
 
 /**
  *
@@ -37,7 +36,6 @@ public class CreatePayingMember extends HttpServlet {
             String email = request.getParameter("email");
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
-            String pw_hash = BCrypt.hashpw(password, BCrypt.gensalt());
             String membershipPeriod = "03-10-2014";
             String membershipFee = "300";
             
@@ -47,7 +45,7 @@ public class CreatePayingMember extends HttpServlet {
             payingCustomer.setAddress(address);
             payingCustomer.setEmail(email);
             payingCustomer.setUserName(userName);
-            payingCustomer.setPassword(pw_hash);
+            payingCustomer.setPassword(password);
             payingCustomer.setIsPayingMember(true);
             payingCustomer.setMembershipFee(Double.parseDouble(membershipFee));
             payingCustomer.setMembershipPeriod(membershipPeriod);

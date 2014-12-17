@@ -29,7 +29,7 @@
             <div class="content">
                 <table class="tg">
                     <tr>
-                        <th colspan="7">Users</th>
+                        <th colspan="8">Users</th>
                     </tr>
                     <tr>
                         <td>User ID</td>
@@ -40,8 +40,6 @@
                         <td>Address</td>
                         <td>Email</td>
                         <td>Is paying-member</td>
-                        <td>Membership fee</td>
-                        <td>Membership period</td>
                     </tr>
                     <c:forEach items="${users.getUsers()}" var="user" >
                         <tr>
@@ -58,32 +56,10 @@
                 </table>
                 <br>
                 <br>
-                <table class="tg">
-                    <tr>
-                        <th colspan="4">Items</th>
-                    </tr>
-                    <tr>
-                        <td>Item ID</td>
-                        <td>Product ID</td>
-                        <td>Stock</td>
-                        <td>Order ID</td>
-                    </tr>
-                    <c:forEach items="${items.getItems()}" var="item" >
-                        <tr>
-                            <td>${item.getItemId()}</td>
-                            <td>${item.getProductId()}</td>
-                            <td>${item.getStockId()}</td>
-                            <td><c:choose>
-                                    <c:when test="${empty item.getOrderId()}">(Not sold yet)</c:when>
-                                    <c:otherwise>${item.getOrderId()}</c:otherwise>
-                                </c:choose>    
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
+                
             </div>
             <div class="content">
-                <form method="post" action="AdminProductEdit" enctype="multipart/form-data" onsubmit="return confirmForm(this)">
+                <form method="post" action="AdminCustomerEdit" enctype="multipart/form-data" onsubmit="return confirmForm(this)">
                     <table>
                         <tr>
                             <td>User ID: </td>
@@ -127,16 +103,23 @@
                         </tr>
                         <tr>
                             <td>Is paying-member: </td>
-                            <td><input type="checkbox" class="fields" id="payingMember" name="isPayingMember" value="${lastSearchedUser.getIsPayingMember()}"></td>
+                            <c:choose>
+                                <c:when test = "${lastSearchedUser.getIsPayingMember() == true}">
+                                    <td><input type="checkbox" class="fields" id="isPayingMember" name="isPayingMember" checked="true"></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><input type="checkbox" class="fields" id="isPayingMember" name="isPayingMember" ></td>
+                                </c:otherwise>
+                            </c:choose>
+                            
                         </tr>
                         <tr>
                             <td><input type="button" onclick="search()" value="Search"></td>
-                            <td><input type="button" onclick="$lastSearchedUser.getIsPayingMember()}" value="isPaying?"></td>
-                            <td><input type="button" onclick="deleteProduct()" value="Delete product"></td>
+                            <td><input type="button" onclick="deleteUser()" value="Delete customer"></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" name="operation" value="Edit product"></td>
-                            <td><input type="submit" name="operation" value="Create new product"></td>
+                            <td><input type="submit" name="operation" value="Edit customer"></td>
+                            <td><input type="submit" name="operation" value="Create new customer"></td>
                         </tr>
                     </table>
                 </form>

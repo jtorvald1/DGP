@@ -46,7 +46,6 @@ public class AdminUserSearch extends HttpServlet {
                 case "lastName": customers = customerFacade.findByLastName(value); break;
                 case "address": customers = customerFacade.findByAddress(value); break;
                 case "email": customers = customerFacade.findByEmail(value); break;
-                case "isPayingMember": customers = customerFacade.findByIsPayingMember(value); break;
                 default: customers = customerFacade.findAll(); break;
             }
 

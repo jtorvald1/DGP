@@ -1,63 +1,71 @@
-function validateProductID(value) 
+function validateUserID(value) 
 {
     if(value === "") 
-        return "Input product ID.\n";
+        return "Input User ID.\n";
     else 
         if(!(value % 1 === 0))
-            return "Input a number in Product ID.\n";
+            return "Input a number in User ID.\n";
     return "";
 }
 
-function validateCategory(value) 
+function validateUsername(value) 
 {
     if(value === "") 
-        return "Input category.\n";
+        return "Input username.\n";
     return "";
 }
 
-function validateBrand(value) 
+function validatePassword(value) 
 {
     if (value === "")
-        return "Input brand.\n";
+        return "Input password.\n";
     return "";
 }
 
-function validateSize(field) {
+function validateFirstName(field) {
     if (field === "") 
-        return "Input size.\n";
+        return "Input first name.\n";
     return "";
 }
 
-function validateColor(field) {
+function validateLastName(field) {
     if (field === "") 
-        return "Input color.\n";
+        return "Input last name.\n";
     return "";
 }
 
-function validateDescription(field) {
+function validateAddress(field) {
     if (field === "") 
-        return "Input description.\n";
+        return "Input address.\n";
     return "";
 }
 
-function validatePrice(value) 
+function validateEmail(field) 
 {
-    if(value === "") 
-        return "Input price.\n";
-    else 
-        if(isNaN(value))
-            return "Input a number in Price.\n";
+    if(field === "") 
+        return "Input email.\n";
     return "";
 }
 
-function validateWeight(value) 
+function validateIsPayingMember() 
 {
-    if(value === "") 
-        return "Input weight.\n";
-    else 
-        if(isNaN(value))
-            return "Input a number in Weight.\n";
-    return "";
+    var ele = document.getElementById("isPayingMember");
+    if(ele.checked){
+        var confirmed = confirm("Are you sure you this member to be a paying member?");
+
+                if(confirmed) {
+                    return "";
+                }
+                return "Make desired changes and try again.\n";
+            }
+    else{
+        var confirmed = confirm("Are you sure you this member to be a free member?");
+
+                if(confirmed) {
+                    return "";
+                }
+                return "Make desired changes and try again.\n";
+            }
 }
 
 function search()
@@ -68,33 +76,32 @@ function search()
     
     switch(searchBy)
     {
-        case "userId": value = $("#userId").val(); validationResult = validateProductID(value); break;
-        case "username": value = $("#username").val(); validationResult = validateCategory(value); break;
-        case "password": value = $("#password").val(); validationResult = validateBrand(value); break;
-        case "firstName": value = $("#firstName").val(); validationResult = validateColor(value); break;
-        case "lastName": value = $("#lastName").val(); validationResult = validateSize(value); break;
-        case "address": value = $("#address").val(); validationResult = validatePrice(value); break;
-        case "email": value = $("#email").val(); validationResult = validateWeight(value); break;
-        case "isPayingMember": value = $("#isPayingMember").val(); alert(value); validationResult = validateWeight(value); break;
+        case "userId": value = $("#userId").val(); validationResult = validateUserID(value); break;
+        case "username": value = $("#username").val(); validationResult = validateUsername(value); break;
+        case "password": value = $("#password").val(); validationResult = validatePassword(value); break;
+        case "firstName": value = $("#firstName").val(); validationResult = validateFirstName(value); break;
+        case "lastName": value = $("#lastName").val(); validationResult = validateLastName(value); break;
+        case "address": value = $("#address").val(); validationResult = validateAddress(value); break;
+        case "email": value = $("#email").val(); validationResult = validateEmail(value); break;
         default: value = "all"; validationResult = "";  break;
     }
-    //if(validationResult !== "")
-        //alertify.alert(validationResult);
-    //else
+    if(validationResult !== "")
+        alertify.alert(validationResult);
+    else
         document.location.href="AdminUserSearch?searchBy=" + searchBy +"&value=" + value;
 }
 
-function deleteProduct()
+function deleteUser()
 {
-    var productId = $("#productId").val();
-    var confirmed = confirm("Are you sure you want to delete product number " + productId + "?");
+    var userId = $("#userId").val();
+    var confirmed = confirm("Are you sure you want to delete user number " + userId + "?");
     
     if(confirmed) {
-        var validationResult = validateProductID(productId);
+        var validationResult = validateUserID(userId);
         if(validationResult !== "")
             alertify.alert(validationResult);
         else
-            document.location.href="AdminProductEdit?operation=delete&productId=" + productId;
+            document.location.href="AdminCustomerEdit?operation=delete&userId=" + userId;
     }
 }
 
@@ -114,14 +121,14 @@ function validateForm(form)
 {
     var fail = "";
     
-    fail = validateProductID(form.productId.value);
-    fail += validateCategory(form.category.value);
-    fail += validateBrand(form.brand.value);
-    fail += validateColor(form.color.value);
-    fail += validateSize(form.size.value);
-    fail += validatePrice(form.price.value);
-    fail += validateWeight(form.weight.value);
-    fail += validateDescription(form.description.value);
+    fail = validateUserID(form.userId.value);
+    fail += validateUsername(form.username.value);
+    fail += validatePassword(form.password.value);
+    fail += validateFirstName(form.firstName.value);
+    fail += validateLastName(form.lastName.value);
+    fail += validateAddress(form.address.value);
+    fail += validateEmail(form.email.value);
+    fail += validateIsPayingMember(form.isPayingMember.value);
     
     if(fail !== "")
     {
