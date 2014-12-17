@@ -25,59 +25,10 @@
      <a href="index.jsp"><img src="Images/JJ_logo.png" id="logo"></a><!--------LOGO: height and width 100 px ---------->
      <nav>
     	<ul>
-<<<<<<< HEAD
 
 	</ul>
-    </nav> 
-    
-=======
-          <li><a href="News">Blog</a></li>
-          <li><a href="WebshopController">Webshop</a></li>
-          <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
-          <li><a href="registrer.jsp">Bliv Medlem</a></li>
-		</ul>
-    </nav> 
-    <div id="log_ind" >
-        <c:choose>
-            <c:when test="${empty user}">         
-               <ul>
-                    <li id="login">
-                         
-                        <ul><li <a id="login-trigger" href="#"> Log in <span>&#x25BC;</span></a>
-                        <div id="login-content">
-                            <div id="login_triangle"></div>
-                            
-                            <form method="post" action="LoginUser">
-                                
-
-                                <div id="login_box">
-
-                                    <div><label for="name" id="login_text">Brugernavn: </label><br><input type="text" name="email" id="username" class="login_field"/></div>  
-                                    <div class="glemt"><a href="#">Glemt brugernavn?</a></div><br>
-
-                                    <div><label for="surname" id="login_text">Kode: </label><br><br><input type="password" name="password" id="password" class="login_field"/></div>
-                                    <div class="glemt"><a href="#">Glemt adgangskode?</a></div><br>
-
-                                    <div id="opret"><a href="registrer.jsp">Opret ny bruger</a></div>
-                                    <div><input id="login_button" type="submit" value="Login"></div>
-                                </div>
-                                
-                            </form>
-                        </div>
-                        </li>
-                      </ul>
-                    </li>
-                </ul>
-            </c:when>
-            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()} <a href="LogOffUser">Logout</a></c:when>
-        </c:choose>
-            <script>
-            function test(userid) {
-                document.location.href = "memberInfo.jsp?user=" + userid;
-            }
-            </script>
-    </div>
->>>>>>> 44904d589de8cfd8ee7d6199a0413c511ae291b2
+     
+     </nav>
 <!---------MENU END----------------->
 </div>
 </header>
@@ -169,16 +120,15 @@
 <!---------MENU START--------------->
      <div class="footer_menu">
     	<ul>
-<<<<<<< HEAD
 
 	</ul>
-=======
+
           <li><a href="News">Blog</a></li>
           <li><a href="WebshopController">Webshop</a></li>
           <li><a href="brugtevarer.jsp">Brugte Varer</a></li>
           <li><a href="registrer.jsp">Medlemskab</a></li>
 		</ul>
->>>>>>> 44904d589de8cfd8ee7d6199a0413c511ae291b2
+
     </div> 
 <!---------MENU END----------------->
 
