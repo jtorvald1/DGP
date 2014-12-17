@@ -75,6 +75,7 @@ public class JavaBeanGenerator {
     public static UserBean getUserBean(Customer user) {
         UserBean userBean = new UserBean();
         userBean.setUserId(user.getCustomerId());
+        userBean.setPassword(user.getPassword());
         userBean.setFirstName(user.getFirstName());
         userBean.setlastName(user.getLastName());
         userBean.setUserName(user.getUserName());
