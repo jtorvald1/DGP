@@ -58,8 +58,13 @@
                     </li>
                 </ul>
             </c:when>
-            <c:when test="${not empty user}">Logget ind som: ${user.getFirstName()}</c:when>
+            <c:when test="${not empty user}">Logget ind som: <span id="id" onClick='javascript:test("${user.getUserId()}");'>${user.getFirstName()}</span> <a href="LogOffUser">Logout</a></c:when>
         </c:choose>
+            <script>
+            function test(userid) {
+                document.location.href = "memberInfo.jsp?user=" + userid;
+            }
+            </script>
     </div>
     
     <div id="title"><b>Webshop</b></div>

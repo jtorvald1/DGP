@@ -19,7 +19,7 @@
 <header>
 <div id="index_image">
 <!---------MENU START--------------->
-     <a href="#"><img src="Images/JJ_logo.png" id="logo"></a><!--------LOGO: height and width 100 px ---------->
+     <a href="index.jsp"><img src="Images/JJ_logo.png" id="logo"></a><!--------LOGO: height and width 100 px ---------->
      <nav>
     	<ul>
           <li><a href="News">Blog</a></li>
