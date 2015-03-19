@@ -15,17 +15,18 @@ function validateCategory(value)
     return "";
 }
 
-function validateBrand(value) 
+function validateBrand(value)
 {
     if (value === "")
         return "Input brand.\n";
     return "";
 }
 
-function validateSize(field) {
-    if (field === "") 
-        return "Input size.\n";
+function validateSize(value) {
+    if (value === "S" || value === "M" || value === "L" || value === "OneSize")
     return "";
+return "Check Size field";
+    
 }
 
 function validateColor(field) {
@@ -45,8 +46,8 @@ function validatePrice(value)
     if(value === "") 
         return "Input price.\n";
     else 
-        if(isNaN(value))
-            return "Input a number in Price.\n";
+        if(isNaN(value) || value < 0)
+            return "Input a right price.\n";
     return "";
 }
 
@@ -55,8 +56,8 @@ function validateWeight(value)
     if(value === "") 
         return "Input weight.\n";
     else 
-        if(isNaN(value))
-            return "Input a number in Weight.\n";
+        if(isNaN(value) || value > 31500 || value < 0)
+            return "Check Weight value\n";
     return "";
 }
 
