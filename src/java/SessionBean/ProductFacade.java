@@ -67,10 +67,10 @@ public class ProductFacade extends AbstractFacade<Product> {
         return products;
     }
     
-    public Collection<Product> findByPrice(double price)
+    public Collection<Product> findByDescription(String description)
     {
-        Query query = em.createNamedQuery("Product.findByPrice");
-        query.setParameter("price", price);
+        Query query = em.createNamedQuery("Product.findByDescription");
+        query.setParameter("description", description);
         Collection<Product> products = query.getResultList();
         
         return products;

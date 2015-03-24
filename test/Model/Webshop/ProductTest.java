@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
@@ -163,7 +164,7 @@ public class ProductTest {
     
     @Test
     public void testChangeImage() throws IOException {
-        System.out.println("testChangeDescription");
+        System.out.println("testChangeImage");
         
         File file = new File("Image1.jpg");
         byte[] fileContent = Files.readAllBytes(file.toPath());
@@ -236,5 +237,116 @@ public class ProductTest {
         String newBrand = "Adidas";
         instance.setBrand("Adidas");
         assertEquals(newBrand, instance.getBrand());
+    }
+    
+    @Test
+    public void testAddToProduct() {
+        System.out.println("testAddToProduct");
+        Product instance = new Product("T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Collection<Item> stock = new ArrayList<>();
+        for(int i = 0; i < 10; i++)
+        {
+            stock = instance.getItems();
+            stock.add(new Item());
+        }
+        int expStockSize = 10;
+        assertEquals(expStockSize, stock.size());
+    }
+    
+        @Test
+    public void testDeleteStockProduct() {
+        System.out.println("testDeleteStockProduct");
+        Product instance = new Product("T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Collection<Item> stock = new ArrayList<>();
+        for(int i = 0; i < 10; i++)
+        {
+            stock = instance.getItems();
+            stock.add(new Item());
+        }
+        stock.clear();
+        int expStockSize = 0;
+        assertEquals(expStockSize, stock.size());
+
+    }
+    
+    @Test
+    public void testDeleteSingleProduct() {
+        System.out.println("testDeleteStockProduct");
+        Product instance = new Product("T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Collection<Item> stock = new ArrayList<>();
+        for(int i = 0; i < 10; i++)
+        {
+            stock = instance.getItems();
+            stock.add(new Item());
+        }
+        stock.remove(new Item());
+        int expStockSize = 9;
+        assertEquals(expStockSize, stock.size());
+    }
+    
+    @Test
+    public void testSearchCategory() {
+        System.out.println("testSearchCategory");
+        Product instance = new Product("T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Product instance2 = new Product("T-shirt", "Nike", "Blue", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Product instance3 = new Product("Ball", "Nike", "Red", "OneSize", 79.95, 200, "item", new ArrayList<Item>(), new Image());
+        ArrayList<Product> prods = new ArrayList<>();
+        prods.add(instance);
+        prods.add(instance2);
+        prods.add(instance3);
+        ArrayList<Product> result = new ArrayList<>();
+        for (Product product: prods)
+        {
+            if (product.getCategory().equals("cloth"))
+            {
+                result.add(product);
+            }
+        }
+        int expSize = 2;
+        assertEquals(expSize, result.size());
+    }
+    
+    @Test
+    public void testSearchBrand() {
+        System.out.println("testSearchBrand");
+        Product instance = new Product("T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Product instance2 = new Product("T-shirt", "Adidas", "Blue", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Product instance3 = new Product("Ball", "Nike", "Red", "OneSize", 79.95, 200, "item", new ArrayList<Item>(), new Image());
+        ArrayList<Product> prods = new ArrayList<>();
+        prods.add(instance);
+        prods.add(instance2);
+        prods.add(instance3);
+        ArrayList<Product> result = new ArrayList<>();
+        for (Product product: prods)
+        {
+            if (product.getBrand().equals("Adidas"))
+            {
+                result.add(product);
+            }
+        }
+        int expSize = 1;
+        assertEquals(expSize, result.size());
+    }
+    
+    @Test
+    public void testSearchDescription() {
+        System.out.println("testSearchDescription");
+        Product instance = new Product("T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Product instance2 = new Product("T-shirt", "Adidas", "Blue", "OneSize", 79.95, 200, "cloth", new ArrayList<Item>(), new Image());
+        Product instance3 = new Product("Ball", "Nike", "Red", "OneSize", 79.95, 200, "item", new ArrayList<Item>(), new Image());
+        ArrayList<Product> prods = new ArrayList<>();
+        prods.add(instance);
+        prods.add(instance2);
+        prods.add(instance3);
+        ArrayList<Product> result = new ArrayList<>();
+        for (Product product: prods)
+        {
+            if (product.getDescription().equals("Ball"))
+            {
+                result.add(product);
+            }
+        }
+        int expSize = 1;
+        assertEquals(expSize, result.size());
     }
 }

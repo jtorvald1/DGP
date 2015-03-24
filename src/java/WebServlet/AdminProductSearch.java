@@ -42,7 +42,7 @@ public class AdminProductSearch extends HttpServlet {
                 case "brand": products = productFacade.findByBrand(value); break;
                 case "color": products = productFacade.findByColor(value); break;
                 case "size": products = productFacade.findBySize(value); break;
-                case "price": products = productFacade.findByPrice(Double.parseDouble(value)); break;
+                case "description": products = productFacade.findByDescription(value); break;
                 case "weight": products = productFacade.findByWeight(Double.parseDouble(value)); break;
                 default: products = productFacade.findAll(); break;
             }

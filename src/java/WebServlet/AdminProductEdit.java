@@ -9,6 +9,7 @@ import SessionBean.ProductFacade;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Iterator;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -116,7 +117,7 @@ public class AdminProductEdit extends HttpServlet {
         }
         catch(Exception ex)
         {
-            utx.rollback();
+            //utx.rollback();
             System.out.println(ex);
         }
     }
@@ -159,6 +160,9 @@ public class AdminProductEdit extends HttpServlet {
         String price = request.getParameter("price");
         String weight = request.getParameter("weight");
         String description = request.getParameter("description");
+        String quantityString = request.getParameter("items");
+        
+        int quantity = Integer.parseInt(quantityString);
         
         product.setCategory(category);
         product.setBrand(brand);
@@ -167,6 +171,7 @@ public class AdminProductEdit extends HttpServlet {
         product.setPrice(Double.parseDouble(price));
         product.setWeight(Double.parseDouble(weight));
         product.setDescription(description);
+        changeItems(quantity, product);
         
         return product;
     }
@@ -248,7 +253,31 @@ public class AdminProductEdit extends HttpServlet {
             System.out.println(ex);
         }
     }
-
+    
+    private void changeItems(int quantity, Product product) {
+        Collection<Item> items = product.getItems();
+        if(quantity > 0)
+            for(int i = 0; i < quantity; i++)
+            {
+                items.add(new Item());
+            }
+        else
+            for(int i = 0; i < -quantity; i++)
+            {
+            Item lastElement = (Item) getLastElement(items);
+            items.remove(lastElement);   
+            }
+    }
+    
+    private Object getLastElement(final Collection c) {
+        final Iterator itr = c.iterator();
+        Object lastElement = itr.next();
+        while(itr.hasNext()) {
+            lastElement=itr.next();
+        }
+            return lastElement;
+        }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

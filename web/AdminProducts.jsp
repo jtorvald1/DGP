@@ -91,7 +91,7 @@
                                     <option value="brand">Brand</option>
                                     <option value="color">Color</option>
                                     <option value="size">Size</option>
-                                    <option value="price">Price</option>
+                                    <option value="description">Description</option>
                                     <option value="weight">Weight</option>
                                     <option value="all">All products</option>
                                 </select>

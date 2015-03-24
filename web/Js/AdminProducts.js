@@ -74,7 +74,7 @@ function search()
         case "brand": value = $("#brand").val(); validationResult = validateBrand(value); break;
         case "color": value = $("#color").val(); validationResult = validateColor(value); break;
         case "size": value = $("#size").val(); validationResult = validateSize(value); break;
-        case "price": value = $("#price").val(); validationResult = validatePrice(value); break;
+        case "description": value = $("#description").val(); validationResult = validateDescription(value); break;
         case "weight": value = $("#weight").val(); validationResult = validateWeight(value); break;
         default: value = "all"; validationResult = ""; break;
     }

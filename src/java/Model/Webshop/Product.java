@@ -26,7 +26,7 @@ import javax.persistence.OneToOne;
     @NamedQuery(name = "Product.findByBrand", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.brand) = UPPER(:brand)"),
     @NamedQuery(name = "Product.findByColor", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.color) = UPPER(:color)"),
     @NamedQuery(name = "Product.findBySize", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.size) = UPPER(:size)"),
-    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM PRODUCTS p WHERE p.price = :price"),
+    @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM PRODUCTS p WHERE UPPER(p.description) LIKE UPPER(:description)"),
     @NamedQuery(name = "Product.findByWeight", query = "SELECT p FROM PRODUCTS p WHERE p.weight = :weight")
 })
 
