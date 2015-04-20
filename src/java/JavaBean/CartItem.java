@@ -15,6 +15,11 @@ public class CartItem {
         quantity++;
     }
     
+    public void minusQuantity()
+    {
+        quantity--;
+    }
+    
     public ProductBean getProduct() {
         return product;
     }

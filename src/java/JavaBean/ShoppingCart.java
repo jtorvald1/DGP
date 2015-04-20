@@ -2,6 +2,7 @@
 package JavaBean;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ShoppingCart {
     
@@ -59,5 +60,33 @@ public class ShoppingCart {
     @Override
     public String toString() {
         return "ShoppingCart{" + "items=" + items + ", numberOfItems=" + numberOfItems + ", totalPrice=" + totalPrice + '}';
+    }
+
+    public void subtractNumberOfItems() {
+        numberOfItems--;
+    }
+
+    public void minusItem(ProductBean productToAdd) {
+        Iterator<CartItem> it = items.iterator();
+        while(it.hasNext()) 
+        {
+            CartItem cartItem = it.next();
+            if (cartItem.getProduct().getProductId() == productToAdd.getProductId())
+            {
+               cartItem.minusQuantity(); 
+               if (cartItem.getQuantity() < 1)
+               {
+                   it.remove();
+               }
+            }
+        }
+    }
+
+    public void plusItem(ProductBean productToAdd) {
+        for(CartItem cartItem: items)
+            if (cartItem.getProduct().getProductId() == productToAdd.getProductId())
+            {
+               cartItem.incrementQuantity(); 
+            }
     }
 }

@@ -9,6 +9,7 @@
 <title>Betaling</title>
 <link rel="stylesheet" type="text/css" href="Css/index_css.css">
 <script src="Js/Webshop.js"></script>
+<script src="Js/payment.js"></script>
 </head>
 <body>
 <header>
@@ -126,7 +127,9 @@
             <img src="data:image/jpg;base64, ${cartItem.getProduct().getImage()}" width="93" height="111" class="web_item">
             <div class="web_itemtext">
             	<div class="web_headline">${cartItem.getProduct().getCategory()}</div>
-            	<div class="web_describtion">Antal <input name="" value="${cartItem.getQuantity()}" type="text" style="width:73px;"> <img src="Images/negativ.png"> <img src="Images/plus.png"></div>
+            	<div class="web_describtion">Antal <input name="" value="${cartItem.getQuantity()}" type="text" style="width:73px;"> <img onclick="subtractFromQuantity(${cart.getItems().get(0)})" src="Images/negativ.png"> <img onclick="addToQuantity(${cart.getItems().get(0)})" src="Images/plus.png"></div>
+                <input type="button" onclick="subtractFromQuantity(2)" value="Minus">
+                <input type="button" onclick="addToQuantity(${cart.getItems().get(0)})" value="Plus">
             </div>
             <div class="web_price">${cartItem.getProduct().getPrice()},-</div>
         </div>

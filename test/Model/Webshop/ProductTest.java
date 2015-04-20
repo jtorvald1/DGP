@@ -5,12 +5,16 @@
  */
 package Model.Webshop;
 
+import JavaBean.CartItem;
+import JavaBean.ProductBean;
+import JavaBean.ShoppingCart;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -348,5 +352,87 @@ public class ProductTest {
         }
         int expSize = 1;
         assertEquals(expSize, result.size());
+    }
+    
+    @Test
+    public void testEditCart() {     
+        System.out.println("testEditCart");
+        ShoppingCart cart = new ShoppingCart();
+        ProductBean productToAdd = new ProductBean(new Long(1), "T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", "Image");
+        CartItem newCartItem = new CartItem();
+        newCartItem.setProduct(productToAdd);
+        cart.getItems().add(newCartItem);
+
+        cart.updateTotalPrice();
+        cart.incrementNumberOfItems();
+        double expTotalPrice = 79.95;
+        int expAmount = 1;
+        
+        assertEquals(expTotalPrice, cart.getTotalPrice(), 0.1);
+        assertEquals(expAmount, cart.getNumberOfItems());
+        
+        expTotalPrice = 2 * 79.95;
+        expAmount = 2;
+        
+        cart.plusItem(productToAdd);
+        cart.updateTotalPrice();
+        cart.incrementNumberOfItems();
+        assertEquals(expTotalPrice, cart.getTotalPrice(), 0.1);
+        assertEquals(expAmount, cart.getNumberOfItems());
+        
+        expTotalPrice = 79.95;
+        expAmount = 1;
+        
+        cart.minusItem(productToAdd);
+        cart.updateTotalPrice();
+        cart.subtractNumberOfItems();
+        assertEquals(expTotalPrice, cart.getTotalPrice(), 0.1);
+        assertEquals(expAmount, cart.getNumberOfItems());
+                        
+        expTotalPrice = 0;
+        expAmount = 0;
+        
+        cart.minusItem(productToAdd);
+        cart.updateTotalPrice();
+        cart.subtractNumberOfItems();
+        assertEquals(expTotalPrice, cart.getTotalPrice(), 0.1);
+        assertEquals(expAmount, cart.getNumberOfItems());
+    }
+    
+    @Test
+    public void testDeleteOrder() {     
+        System.out.println("testDeleteOrder");
+    
+        Customer customer = new RegisteredCustomer();
+        customer.setAddress("address");
+        customer.setCustomerId(new Long(1));
+        customer.setEmail("email");
+        customer.setFirstName("firstName");
+        customer.setIsPayingMember(false);
+        customer.setLastName("lastName");
+        customer.setPassword("password");
+        customer.setUserName("username");
+        CustomerOrder order = new CustomerOrder();
+        order.setDateTime(new Date().toString());
+        order.setCustomer(customer);
+
+        Product product = new Product("T-shirt", "Nike", "Red", "L", 79.95, 200, "cloth", null, new Image());
+        Item item = new Item();
+        item.setProduct(product);
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(item);
+        
+            
+        for(Item itemInOrder: items) {
+            item.setOrder(order);
+        }
+        
+        String firstname = "firstName";
+        
+        
+        assertEquals(firstname, order.getCustomer().getFirstName());
+        
+        order.delete(self);
+
     }
 }
