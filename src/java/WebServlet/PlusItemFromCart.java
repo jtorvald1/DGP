@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jakelhamselv
  */
-@WebServlet(name = "EditCart", urlPatterns = {"/EditCart"})
+@WebServlet(name = "PlusItemFromCart", urlPatterns = {"/PlusItemFromCart"})
 public class PlusItemFromCart extends HttpServlet {
 
     /**

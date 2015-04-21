@@ -1,12 +1,12 @@
 function subtractFromQuantity(poop)
 {
-    alert();
-    document.location.href="MinusItemFromCart";
+    alert(poop);
+    document.location.href="MinusItemFromCart?productToRemove=" + poop;
 }
 
 function addToQuantity(poop)
 {
-    document.location.href="PlusItemFromCart";
+    document.location.href="PlusItemFromCart?productToAdd=" + poop;
 }
 
 

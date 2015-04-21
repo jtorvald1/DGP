@@ -128,8 +128,8 @@
             <div class="web_itemtext">
             	<div class="web_headline">${cartItem.getProduct().getCategory()}</div>
             	<div class="web_describtion">Antal <input name="" value="${cartItem.getQuantity()}" type="text" style="width:73px;"> <img onclick="subtractFromQuantity(${cart.getItems().get(0)})" src="Images/negativ.png"> <img onclick="addToQuantity(${cart.getItems().get(0)})" src="Images/plus.png"></div>
-                <input type="button" onclick="subtractFromQuantity(2)" value="Minus">
-                <input type="button" onclick="addToQuantity(${cart.getItems().get(0)})" value="Plus">
+                <input type="button" onclick="subtractFromQuantity('${cartItem.getProduct().getProductId().toString()}')" value="Minus">
+                <input type="button" onclick='javascript:addToQuantity("${cartItem.getProduct().getProductId()}");' value="Plus">
             </div>
             <div class="web_price">${cartItem.getProduct().getPrice()},-</div>
         </div>

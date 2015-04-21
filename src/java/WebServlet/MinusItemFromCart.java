@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jakelhamselv
  */
-@WebServlet(name = "EditCart", urlPatterns = {"/EditCart"})
+@WebServlet(name = "MinusItemFromCart", urlPatterns = {"/MinusItemFromCart"})
 public class MinusItemFromCart extends HttpServlet {
 
     /**
@@ -39,7 +39,10 @@ public class MinusItemFromCart extends HttpServlet {
             HttpSession shoppingSession = request.getSession();
             ShoppingCart cart = (ShoppingCart)shoppingSession.getAttribute("cart");
 
-            ProductBean productToRemove = (ProductBean) shoppingSession.getAttribute("productToRemove");
+            String productToRemoveString = request.getParameter("productToRemove");
+            System.out.println(productToRemoveString);
+            Long productToRemoveLong = new Long(productToRemoveString);
+            ProductBean productToRemove = new ProductBean(productToRemoveLong, null, null, null, null, 0, 0, null, null);
 
             cart.minusItem(productToRemove);           
             cart.subtractNumberOfItems();
