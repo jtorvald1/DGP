@@ -39,4 +39,14 @@ public class ItemFacade extends AbstractFacade<Item> {
         
         return items;
     }
+    
+    public List<Item> findAvailableForShipping(Long productId, int quantity)
+    {
+        Query query = em.createNamedQuery("Item.findAvailableForShipping");
+        query.setParameter("productId", productId);
+        query.setMaxResults(quantity);
+        List<Item> items = query.getResultList();
+        
+        return items;
+    }
 }

@@ -19,7 +19,8 @@ import javax.persistence.NamedQuery;
  */
 @Entity(name = "ITEMS")
 @NamedQueries({
-    @NamedQuery(name = "Item.findAvailable", query = "SELECT i FROM ITEMS i WHERE i.order IS NULL AND i.product.productId = :productId")
+    @NamedQuery(name = "Item.findAvailable", query = "SELECT i FROM ITEMS i WHERE i.order IS NULL AND i.product.productId = :productId"),    
+    @NamedQuery(name = "Item.findAvailableForShipping", query = "SELECT i FROM ITEMS i WHERE i.product.productId = :productId")
 })
 public class Item implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -65,7 +65,7 @@ public class AdminOrderEdit extends HttpServlet {
         for(Item item: items)
         {
             item.setOrder(null);
-            itemFacade.edit(item);
+            itemFacade.create(item);
         }
     }
     

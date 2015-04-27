@@ -6,10 +6,15 @@ import JavaBean.OrdersBean;
 import JavaBean.ProductsBean;
 import Model.HelperClasses.JavaBeanGenerator;
 import Model.Webshop.CustomerOrder;
+import Model.Webshop.Item;
 import SessionBean.CustomerOrderFacade;
+import SessionBean.ItemFacade;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,6 +28,8 @@ public class AdminOrderSearch extends HttpServlet {
 
     @EJB
     private CustomerOrderFacade orderFacade;
+    @EJB
+    private ItemFacade itemFacade;
  
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -43,6 +50,27 @@ public class AdminOrderSearch extends HttpServlet {
                 case "firstName": orders = orderFacade.findByFirstName(value);break;
                 case "lastName": orders = orderFacade.findByLastName(value); break;
                 default: orders = orderFacade.findAll(); break;
+            }
+
+            HashMap<Long, Integer> productCount = new HashMap<>();
+            for(CustomerOrder order: orders)
+            {
+                
+                Collection<Item> items = order.getItems();
+
+                for(Item item: items)
+                {
+                    Long productId = item.getProduct().getProductId();
+                    Integer get = productCount.get(productId);
+                    if(get == null)
+                        get = 1;
+                    else
+                        get++;
+                    
+                    productCount.put(productId, get);
+                    checkIfAvailable(productCount);
+                }
+                productCount = new HashMap<>();
             }
 
             OrdersBean ordersBean = JavaBeanGenerator.getOrdersBean(orders);
@@ -78,5 +106,16 @@ public class AdminOrderSearch extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    private void checkIfAvailable(HashMap<Long, Integer> productCount) {
+        Iterator it = productCount.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            Long id = Long.parseLong(pair.getKey().toString());
+            int quantity = Integer.parseInt(pair.getValue().toString());
+            System.out.println(itemFacade.findAvailableForShipping(id, quantity));
+            it.remove(); // avoids a ConcurrentModificationException
+        }
     }
 }
