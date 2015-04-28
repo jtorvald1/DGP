@@ -47,8 +47,19 @@ public class CustomerOrder implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "SHIPPING_ID")
     private Shipping shipping;
+    
+    @Column(name = "SHIPPED")
+    private boolean shipped;
 
     public CustomerOrder() {
+    }
+    
+    public boolean getShipped() {
+        return shipped;
+    }
+
+    public void setShipped(boolean isShipped) {
+        this.shipped = true;
     }
 
     public Long getOrderId() {

@@ -8,8 +8,17 @@ public class OrderBean {
     private Long customerId;
     private String firstName;
     private String lastName;
+    private boolean available;
 
     public OrderBean() {
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public Long getOrderId() {

@@ -29,7 +29,7 @@
             <div class="content">
                 <table class="tg">
                     <tr>
-                        <th colspan="5">Orders</th>
+                        <th colspan="6">Orders</th>
                     </tr>
                     <tr>
                         <td>Order ID</td>
@@ -37,6 +37,8 @@
                         <td>Customer ID</td>
                         <td>First name</td>
                         <td>Last name</td>
+                        <td>Ready for ship</td>
+                        <td>Button</td>
                     </tr>
                     <c:forEach items="${orders.getOrders()}" var="order" >
                         <tr>
@@ -45,6 +47,10 @@
                             <td>${order.getCustomerId()}</td>
                             <td>${order.getFirstName()}</td>
                             <td>${order.getLastName()}</td>
+                            <td>${order.isAvailable()}</td>
+                            <td><input type="radio" name="checkbox" id="radio1" checked="false"></td>
+                            <td><input type="button" onclick="setShipped()" value="Update"></td>
+
                         </tr>
                     </c:forEach>
                 </table>

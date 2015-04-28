@@ -2,6 +2,7 @@
 package WebServlet;
 
 import JavaBean.ItemsBean;
+import JavaBean.OrderBean;
 import JavaBean.OrdersBean;
 import JavaBean.ProductsBean;
 import Model.HelperClasses.JavaBeanGenerator;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -52,10 +54,11 @@ public class AdminOrderSearch extends HttpServlet {
                 default: orders = orderFacade.findAll(); break;
             }
 
+            OrdersBean ordersBean = JavaBeanGenerator.getOrdersBean(orders);
+            
             HashMap<Long, Integer> productCount = new HashMap<>();
             for(CustomerOrder order: orders)
-            {
-                
+            {     
                 Collection<Item> items = order.getItems();
 
                 for(Item item: items)
@@ -68,12 +71,15 @@ public class AdminOrderSearch extends HttpServlet {
                         get++;
                     
                     productCount.put(productId, get);
-                    checkIfAvailable(productCount);
+
+                    ArrayList<OrderBean> cheeseburgers = ordersBean.getOrders();
+                    for(OrderBean orderBean: cheeseburgers)
+                        if (orderBean.getOrderId().equals(order.getOrderId()))
+                             orderBean.setAvailable(checkIfAvailable(productCount));
                 }
                 productCount = new HashMap<>();
             }
-
-            OrdersBean ordersBean = JavaBeanGenerator.getOrdersBean(orders);
+            
             ItemsBean itemsBean = JavaBeanGenerator.getItemsBeanByOrders(orders);
 
             request.setAttribute("orders", ordersBean);
@@ -108,14 +114,15 @@ public class AdminOrderSearch extends HttpServlet {
         return "Short description";
     }
 
-    private void checkIfAvailable(HashMap<Long, Integer> productCount) {
+    private boolean checkIfAvailable(HashMap<Long, Integer> productCount) {
         Iterator it = productCount.entrySet().iterator();
+        List<Item> findAvailableForShipping = new ArrayList<>();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             Long id = Long.parseLong(pair.getKey().toString());
             int quantity = Integer.parseInt(pair.getValue().toString());
-            System.out.println(itemFacade.findAvailableForShipping(id, quantity));
-            it.remove(); // avoids a ConcurrentModificationException
+            findAvailableForShipping = itemFacade.findAvailableForShipping(id, quantity);           
         }
+        return !findAvailableForShipping.isEmpty();
     }
 }

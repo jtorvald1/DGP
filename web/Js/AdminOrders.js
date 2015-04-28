@@ -66,3 +66,8 @@ function deleteOrder()
             document.location.href="AdminOrderEdit?orderId=" + orderId;
     }
 }
+
+function setShipped()
+{
+            document.location.href="AdminOrderShipment";
+}
